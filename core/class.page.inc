@@ -152,7 +152,7 @@ class Page {
      */
     private function generateBreadcrumbHTML($coreUrlObj, $page = false) {
         $breadcrumb = '<nav class="breadcrumb">
-                            <a href="https://' . $coreUrlObj->host . '/">Главная</a>';
+                            <a href="'.$GLOBALS['protocol'].'://' . $coreUrlObj->host . '/">Главная</a>';
 
         switch ($coreUrlObj->module) {
             case 'services':
@@ -226,6 +226,7 @@ class Page {
         Core::getSmarty()->assign('version', $this->version);
         Core::getSmarty()->assign('year', $this->year);
         Core::getSmarty()->assign('date_Y_m_d', date('Y-m-d'));
+        Core::getSmarty()->assign('protocol', $GLOBALS['protocol']);
         Core::getSmarty()->assign('HTTP_HOST', Core::getUrl()->host);
         Core::getSmarty()->assign('REQUEST_URI', Core::getUrl()->urlPath);
 

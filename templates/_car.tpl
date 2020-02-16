@@ -1,5 +1,5 @@
 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 car">
-    <a href="https://{$HTTP_HOST}{$car->cpu_path}">
+    <a href="{$protocol}://{$HTTP_HOST}{$car->cpu_path}">
         {$car->name}
         <img src="{$car->small_img}" alt="{$car->name}" title="{$car->name}"/>
     </a>

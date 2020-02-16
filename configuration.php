@@ -1,29 +1,38 @@
 <?php
 /* ---------- Конфигурация ------------- */
+/** LOCAL **/
 
-//$db_server = 'localhost';
-//$db_login = 'root';
-//$db_password = 'root';
-//$db_name = 'dp';
+$protocol = 'http';
 
 $db_server = 'localhost';
-$db_login = 'u0339017_default';
-$db_password = '6d3!K8jk';
-$db_name = 'u0339017_default';
+$db_login = 'root';
+$db_password = 'root';
+$db_name = 'dp';
+
+$databaseConfig = (object)array(
+    'server' => 'localhost',
+    'name' => 'dp',
+    'login' => 'root',
+    'password' => 'root'
+);
+
+
+/** PRODUCTION **/
+
+//$protocol = 'https';
+//
+//$db_server = 'localhost';
+//$db_login = 'u0339017_default';
+//$db_password = '6d3!K8jk';
+//$db_name = 'u0339017_default';
 //
 //$databaseConfig = (object)array(
 //    'server' => 'localhost',
-//    'name' => 'dp',
-//    'login' => 'root',
-//    'password' => 'root'
+//    'name' => 'u0339017_default',
+//    'login' => 'u0339017_default',
+//    'password' => '6d3!K8jk'
 //);
-//
-$databaseConfig = (object)array(
-    'server' => 'localhost',
-    'name' => 'u0339017_default',
-    'login' => 'u0339017_default',
-    'password' => '6d3!K8jk'
-);
+
 
 
 // Отправка зявкок

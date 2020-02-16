@@ -4,7 +4,7 @@
 <div class="bl pohojie_uslugi">
     <ul class="bl uslugi-ul">
         {foreach from=$painTable key=k item=$pain}
-            <li><a href="https://{$HTTP_HOST}/otzyvy/{$k}/">{$pain}</a></li>
+            <li><a href="{$protocol}://{$HTTP_HOST}/otzyvy/{$k}/">{$pain}</a></li>
         {/foreach}
     </ul>
 </div>

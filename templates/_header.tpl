@@ -36,9 +36,9 @@
     <meta property="og:locale" content="ru_RU"/>
     <meta property="og:title" content="{$metaTitle}"/>
     <meta property="og:description" content="{$metaDescription}"/>
-    <meta property="og:image" content="https://{$HTTP_HOST}/frontend/template/images/logo-social-min.png"/>
+    <meta property="og:image" content="{$protocol}://{$HTTP_HOST}/frontend/template/images/logo-social-min.png"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://{$HTTP_HOST}{$REQUEST_URI}"/>
+    <meta property="og:url" content="{$protocol}://{$HTTP_HOST}{$REQUEST_URI}"/>
 
     <meta name='wmail-verification' content='a796c46b5b63d653ab65e39615833d18'/>
     <meta name="msvalidate.01" content="54DEBF8186036894BED2A0919DAB6ADF"/>
@@ -51,8 +51,8 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="{$protocol}://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="{$protocol}://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -294,22 +294,22 @@
             <nav>
                 <ul class="menu">
                     <li class="active">
-                        <a href="https://{$HTTP_HOST}/">Главная</a>
+                        <a href="{$protocol}://{$HTTP_HOST}/">Главная</a>
                     </li>
                     {foreach $generalMenu as $item}
-                        <li><a href="https://{$HTTP_HOST}{$item->link}">{$item->name}</a></li>
+                        <li><a href="{$protocol}://{$HTTP_HOST}{$item->link}">{$item->name}</a></li>
                     {/foreach}
                     <li>
-                        <a href="https://{$HTTP_HOST}/otzyvy/">Отзывы</a>
+                        <a href="{$protocol}://{$HTTP_HOST}/otzyvy/">Отзывы</a>
                     </li>
                     <li>
-                        <a href="https://{$HTTP_HOST}/moskva/">Москва</a>
+                        <a href="{$protocol}://{$HTTP_HOST}/moskva/">Москва</a>
                         <ul class="sub-menu">
                             {$subMenuMoskva}
                         </ul>
                     </li>
                     <li>
-                        <a href="https://{$HTTP_HOST}/moskovskaya-oblast/">Московская область</a>
+                        <a href="{$protocol}://{$HTTP_HOST}/moskovskaya-oblast/">Московская область</a>
                         <ul class="sub-menu">
                             {$subMenuMoskovskayaOblast}
                         </ul>
