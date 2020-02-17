@@ -55,6 +55,7 @@ switch (Core::getUrl()->module) {
         break;
     case 'moskovskaya-oblast':
     case 'moskva':
+        require $root . '/constants/common.php';
         require $root . '/core/class.cars.inc';
         require $root . '/core/class.photogallery.inc';
         require $root . '/core/class.pageMskServices.inc';

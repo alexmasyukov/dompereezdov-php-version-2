@@ -174,8 +174,15 @@ class Page {
                         $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
                     }
 
-                    if (!empty($lastName))
-                        $breadcrumb .= ' » ' . $lastName;
+
+                    if (empty($page->russianName)) {
+                        if (!empty($lastName)) {
+                            $breadcrumb .= ' » ' . $lastName;
+                        }
+                    } else {
+                        $breadcrumb .= ' » ' . $page->russianName;
+                    }
+
                 }
                 break;
             case 'otzyvy':
