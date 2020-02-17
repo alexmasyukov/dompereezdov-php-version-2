@@ -20,7 +20,8 @@ class PageMskServices extends Page {
             'titleGallery' => 'Фото машин из нашего парка',
             'titleMap' => 'Расчет стоимости перевозки в #нас-пункт-пп#',
             'reviewsServiceTitle' => 'Грузоперевозки',
-            'adminPanelReviewsFormInput_usluga' => 'Грузоперевозки'
+            'adminPanelReviewsFormInput_usluga' => 'Грузоперевозки',
+            'template' => 'mskServicesPage__service.tpl'
         ),
         'vyvoz-mebeli' => array(
             'pageType' => 'service',
@@ -34,7 +35,8 @@ class PageMskServices extends Page {
             'titleGallery' => 'Фото вывоза мебели',
             'titleMap' => '',
             'reviewsServiceTitle' => 'Вывоз мебели',
-            'adminPanelReviewsFormInput_usluga' => 'Вывоз мебели'
+            'adminPanelReviewsFormInput_usluga' => 'Вывоз мебели',
+            'template' => 'mskServicesPage__service.tpl'
         ),
 
         // Вот эту услугу выключаем даже на готовых данных, вместо нее ниже !!!
@@ -159,6 +161,8 @@ class PageMskServices extends Page {
         ),
     );
 
+    public static $services = array();
+
 
     /**
      * PageServices constructor.
@@ -172,12 +176,53 @@ class PageMskServices extends Page {
             }
         }
 
+        echo 'getServices';
+        self::$services = self::getServices();
+    }
+
+
+    public function getServices() {
+        $services = array(
+            'gruzoperevozki' => array(
+                'pageType' => 'service',
+                'cpu' => 'gruzoperevozki',
+                'galleryCategoryID' => 91,
+                'russianName' => 'Грузоперевозки',
+                'metaTitle' => 'Дешевые грузоперевозки в #нас-пункт-пп#, перевозка и доставка грузов, заказ газели недорого',
+                'metaDescription' => 'Грузовые перевозки в #нас-пункт-пп# срочно и дешево с &amp;quot;ДомПереездов&amp;quot;. Для перевозки мебели и мелких грузов незаменимым станет заказ газели с грузчиками недорого.',
+                'h1' => 'Грузоперевозки в #нас-пункт-пп#, заказ газели с грузчиками недорого',
+                'titlePrice' => 'Цены на грузоперевозки',
+                'titleGallery' => 'Фото машин из нашего парка',
+                'titleMap' => 'Расчет стоимости перевозки в #нас-пункт-пп#',
+                'reviewsServiceTitle' => 'Грузоперевозки',
+                'adminPanelReviewsFormInput_usluga' => 'Грузоперевозки',
+                'template' => 'mskServicesPage__service.tpl'
+            ),
+            'vyvoz-mebeli' => array(
+                'pageType' => 'service',
+                'cpu' => 'vyvoz-mebeli',
+                'galleryCategoryID' => 92,
+                'russianName' => 'Вывоз мебели',
+                'metaTitle' => 'Вывоз мебели и техники на утилизацию в #нас-пункт-пп# недорого, вывоз и утилизация строительного мусора',
+                'metaDescription' => 'Вывоз, утилизация мебели и техники в #нас-пункт-пп# избавит от ненужного мусора в квартире. "ДомПереездов" качественно организует демонтаж, разборку-сборку мебели, вывоз строительного мусора',
+                'h1' => 'Вывоз и утилизация мебели и техники в #нас-пункт-пп# недорого',
+                'titlePrice' => 'Цены на грузоперевозки',
+                'titleGallery' => 'Фото вывоза мебели',
+                'titleMap' => '',
+                'reviewsServiceTitle' => 'Вывоз мебели',
+                'adminPanelReviewsFormInput_usluga' => 'Вывоз мебели',
+                'template' => 'mskServicesPage__service.tpl'
+            )
+        );
+
         // Конвертируем таблицу услуг в объект для удобства
         // Без этого половина работать не будет
-        self::$servicesTable = (object)self::$servicesTable;
-        foreach (self::$servicesTable as &$service) {
+        $services = (object)$services;
+        foreach ($services as &$service) {
             $service = (object)$service;
         }
+
+        return $services;
     }
 
 
@@ -202,7 +247,7 @@ class PageMskServices extends Page {
 
 
     /**
-     * Заменяет некоторые словосочетания на ссылки
+     * Заменяет некоторые словосочетания на ссылки в текстах страниц
      * @param $page
      * @return string
      */
@@ -256,8 +301,8 @@ class PageMskServices extends Page {
         // он - это ключ массива в self::$servicesTable
         $serviceInUrl = Core::getUrl()->uriParts[count(Core::getUrl()->uriParts) - 1];
 
-        foreach (self::$servicesTable as $service => $serviceData) {
-            if ($serviceInUrl == trim($service)) {
+        foreach (self::$servicesTable as $serviceKey => $serviceData) {
+            if ($serviceInUrl == trim($serviceKey)) {
                 return $serviceData;
             }
         }
@@ -594,7 +639,8 @@ class PageMskServices extends Page {
         $page = (object)array_merge((array)$page, (array)$texts);
         $page = (object)array_merge((array)$page, (array)$additionalFilelds);
 
-        Core::getSmarty()->assign('carsForMap', Cars::getCarsJsonForYandexMap());
+        // Выключаем, так как убрали карту
+//        Core::getSmarty()->assign('carsForMap', Cars::getCarsJsonForYandexMap());
 
         if (!empty($page->galleryCategoryID)) {
             Core::getSmarty()->assign('photogallery', Photogallery::getImages($page->galleryCategoryID));

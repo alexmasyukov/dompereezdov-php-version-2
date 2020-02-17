@@ -31,7 +31,7 @@ require $root . '/frontend/libs/smarty/libs/Smarty.class.php';
 $core = new Core();
 
 // start html compressed
-ob_start('compressHtml');
+//ob_start('compressHtml');
 
 
 switch (Core::getUrl()->module) {
