@@ -12,156 +12,143 @@ class PageMskServices extends Page {
             'pageType' => 'service',
             'cpu' => 'gruzoperevozki',
             'galleryCategoryID' => 91,
-            'russianName' => 'Грузоперевозки',
-            'metaTitle' => 'Дешевые грузоперевозки в #нас-пункт-пп#, перевозка и доставка грузов, заказ газели недорого',
-            'metaDescription' => 'Грузовые перевозки в #нас-пункт-пп# срочно и дешево с &amp;quot;ДомПереездов&amp;quot;. Для перевозки мебели и мелких грузов незаменимым станет заказ газели с грузчиками недорого.',
-            'h1' => 'Грузоперевозки в #нас-пункт-пп#, заказ газели с грузчиками недорого',
-            'titlePrice' => 'Цены на грузоперевозки',
-            'titleGallery' => 'Фото машин из нашего парка',
-            'titleMap' => 'Расчет стоимости перевозки в #нас-пункт-пп#',
-            'reviewsServiceTitle' => 'Грузоперевозки',
-            'adminPanelReviewsFormInput_usluga' => 'Грузоперевозки',
-            'template' => 'mskServicesPage__service.tpl'
+            'russianName' => Constants::GRUZOPEREVOZKI,
+            'metaTitle' => '! Дешевые грузоперевозки в #нас-пункт-пп#, перевозка и доставка грузов, заказ газели недорого',
+            'metaDescription' => '! Грузовые перевозки в #нас-пункт-пп# срочно и дешево с &amp;quot;ДомПереездов&amp;quot;. Для перевозки мебели и мелких грузов незаменимым станет заказ газели с грузчиками недорого.',
+            'h1' => ' ! Грузоперевозки в #нас-пункт-пп#, заказ газели с грузчиками недорого',
+            'titlePrice' => Constants::TITLE_PRICE_1,
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
+            'titleGallery' => Constants::TITLE_GALLERY_1,
+            'titleMap' => '! Расчет стоимости перевозки в #нас-пункт-пп#',
+            'reviewsServiceTitle' => Constants::GRUZOPEREVOZKI,
+            'adminPanelReviewsFormInput_usluga' => Constants::GRUZOPEREVOZKI
         ),
         'vyvoz-mebeli' => array(
             'pageType' => 'service',
             'cpu' => 'vyvoz-mebeli',
             'galleryCategoryID' => 92,
-            'russianName' => 'Вывоз мебели',
+            'russianName' => Constants::VIVOZ_MEBELI,
             'metaTitle' => 'Вывоз мебели и техники на утилизацию в #нас-пункт-пп# недорого, вывоз и утилизация строительного мусора',
             'metaDescription' => 'Вывоз, утилизация мебели и техники в #нас-пункт-пп# избавит от ненужного мусора в квартире. "ДомПереездов" качественно организует демонтаж, разборку-сборку мебели, вывоз строительного мусора',
             'h1' => 'Вывоз и утилизация мебели и техники в #нас-пункт-пп# недорого',
-            'titlePrice' => 'Цены на грузоперевозки',
+            'titlePrice' => Constants::TITLE_PRICE_1,
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото вывоза мебели',
             'titleMap' => '',
-            'reviewsServiceTitle' => 'Вывоз мебели',
-            'adminPanelReviewsFormInput_usluga' => 'Вывоз мебели',
-            'template' => 'mskServicesPage__service.tpl'
+            'reviewsServiceTitle' => Constants::VIVOZ_MEBELI,
+            'adminPanelReviewsFormInput_usluga' => Constants::VIVOZ_MEBELI
         ),
-
-        // Вот эту услугу выключаем даже на готовых данных, вместо нее ниже !!!
-
-        //    array(
-        //        'pageType' => 'service',
-        //        'cpu' => 'pereezd',
-        //        'galleryCategoryID' => 96,
-        //        'russianName' => 'Переезды',
-        //        'metaTitle' => 'Переезд квартиры, офиса в #нас-пункт-пп#, газель с грузчиками недорого, перевозка мебели',
-        //        'metaDescription' => 'Компания &amp;quot;ДомПереездов&amp;quot; организует квартирные, офисные, дачные переезды в #нас-пункт-пп# недорого. Опытные грузчики помогут с перевозкой мебели и техники, позаботятся о сохранности вещей.',
-        //        'h1' => 'Квартирные, офисные, дачные переезды в #нас-пункт-пп# недорого',
-        //        'titlePrice' => 'Цены на грузоперевозки',
-        //        'titleGallery' => 'Фото машин из нашего парка',
-        //        'titleMap' => 'Расчет стоимости переезда в #нас-пункт-пп#',
-        //        'reviewsServiceTitle' => 'Переезды'
-        //    ),
-
-
         'gruzovoe-taksi' => array(
             'pageType' => 'service',
             'cpu' => 'gruzovoe-taksi',
             'galleryCategoryID' => 91,
-            'russianName' => 'Грузовое такси',
+            'russianName' => Constants::GRUZOVOE_TAKSI,
             'metaTitle' => 'Грузовое такси в #нас-пункт-пп# дешево, заказать грузотакси с грузчиками',
             'metaDescription' => 'Заказ грузового такси в #нас-пункт-пп# срочно и дешево. Доставка на грузовом такси с "ДомПереездов" экономично и надежно!',
             'h1' => 'Грузовое такси в #нас-пункт-пп#, заказать с грузчиками недорого',
             'titlePrice' => 'Цены на грузовое такси',
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин из нашего автопарка',
             'titleMap' => 'Расчет стоимости грузового такси в #нас-пункт-пп#',
-            'reviewsServiceTitle' => 'Грузовое такси',
+            'reviewsServiceTitle' => Constants::GRUZOVOE_TAKSI,
             'isNewService' => true,
-            'adminPanelReviewsFormInput_usluga' => 'Грузовое такси'
+            'adminPanelReviewsFormInput_usluga' => Constants::GRUZOVOE_TAKSI
         ),
         'kvartirnyj-pereezd' => array(
             'pageType' => 'service',
             'cpu' => 'kvartirnyj-pereezd',
             'galleryCategoryID' => 96,
-            'russianName' => 'Квартирный переезд',
+            'russianName' => Constants::KVARTIRNII_PEREEZD,
             'metaTitle' => 'Квартирный переезд в #нас-пункт-пп# с грузчиками недорого',
             'metaDescription' => 'Компания "ДомПереездов" организует квартирный переезд в #нас-пункт-пп# с грузчиками недорого. Сборка, разборка и упаковка вещей качественно.',
             'h1' => 'Квартирный переезд в #нас-пункт-пп# с грузчиками дешево',
-            'titlePrice' => 'Цены на переезд',
+            'titlePrice' => Constants::TITLE_PRICE_2,
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин для квартирного переезда',
             'titleMap' => 'Расчет стоимости переезда квартиры в #нас-пункт-пп#',
-            'reviewsServiceTitle' => 'Квартирный переезд',
+            'reviewsServiceTitle' => Constants::KVARTIRNII_PEREEZD,
             'isNewService' => true,
-            'adminPanelReviewsFormInput_usluga' => 'Переезды'
+            'adminPanelReviewsFormInput_usluga' => Constants::PEREEZDI
         ),
         'dachnyj-pereezd' => array(
             'pageType' => 'service',
             'cpu' => 'dachnyj-pereezd',
             'galleryCategoryID' => 91,
-            'russianName' => 'Дачный переезд',
+            'russianName' => Constants::DACHNII_PEREEZD,
             'metaTitle' => 'Дачный переезд в #нас-пункт-пп# недорого с грузчиками. Перевозка мебели на дачу.',
             'metaDescription' => 'Осуществим дачный переезд в #нас-пункт-пп# с грузчиками недорого и аккуратно. Переезд на дачу с "ДомПереездов" выгодно и вежливо.',
             'h1' => 'Дачный переезд в #нас-пункт-пп#, перевозка вещей на дачу недорого',
-            'titlePrice' => 'Цены на переезд',
+            'titlePrice' => Constants::TITLE_PRICE_2,
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин для дачного переезда',
             'titleMap' => 'Расчет стоимости переезда на дачу в #нас-пункт-пп#',
-            'reviewsServiceTitle' => 'Дачный переезд',
+            'reviewsServiceTitle' => Constants::DACHNII_PEREEZD,
             'isNewService' => true,
-            'adminPanelReviewsFormInput_usluga' => 'Переезды'
+            'adminPanelReviewsFormInput_usluga' => Constants::PEREEZDI
         ),
         'ofisnyj-pereezd' => array(
             'pageType' => 'service',
             'cpu' => 'ofisnyj-pereezd',
             'galleryCategoryID' => 96,
-            'russianName' => 'Офисный переезд',
+            'russianName' => Constants::OFISNII_PEREEZD,
             'metaTitle' => 'Переезд офиса в #нас-пункт-пп# с грузчиками недорого. Перевозка офисной мебели.',
             'metaDescription' => 'Профессионально организуем офисный переезд в #нас-пункт-пп#. Сборка, разборка, качественная упаковка от мувинговой компании "ДомПереездов!',
             'h1' => 'Офисный переезд в #нас-пункт-пп# с грузчиками недорого',
-            'titlePrice' => 'Цены на переезд',
+            'titlePrice' => Constants::TITLE_PRICE_2,
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин для офисного переезда',
             'titleMap' => 'Расчет стоимости переезда офиса в #нас-пункт-пп#',
-            'reviewsServiceTitle' => 'Офисный переезд',
+            'reviewsServiceTitle' => Constants::OFISNII_PEREEZD,
             'isNewService' => true,
-            'adminPanelReviewsFormInput_usluga' => 'Переезды'
+            'adminPanelReviewsFormInput_usluga' => Constants::PEREEZDI
         ),
         'perevozka-mebeli' => array(
             'pageType' => 'service',
             'cpu' => 'perevozka-mebeli',
             'galleryCategoryID' => 91,
-            'russianName' => 'Перевозка мебели',
+            'russianName' => Constants::PEREVOZKA_MEBELI,
             'metaTitle' => 'Перевозка мебели в #нас-пункт-пп# с грузчиками недорого. Разборка, сборка.',
             'metaDescription' => 'Перевозка мебели в #нас-пункт-пп# c "ДомПереездов" недорого и аккуратно. Профессиональная разборка, сборка и упаковка мебели.',
             'h1' => 'Перевозка мебели в #нас-пункт-пп# с грузчиками недорого.',
             'titlePrice' => 'Цены на перевозку мебели',
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин для перевозки мебели',
             'titleMap' => 'Расчет стоимости перевозки мебели в #нас-пункт-пп#',
-            'reviewsServiceTitle' => 'Перевозка мебели',
+            'reviewsServiceTitle' => Constants::PEREVOZKA_MEBELI,
             'isNewService' => true,
-            'adminPanelReviewsFormInput_usluga' => 'Перевозка мебели'
+            'adminPanelReviewsFormInput_usluga' => Constants::PEREVOZKA_MEBELI
         ),
         'perevozka-pianino' => array(
             'pageType' => 'service',
             'cpu' => 'perevozka-pianino',
             'galleryCategoryID' => 93,
-            'russianName' => 'Перевозка пианино',
+            'russianName' => Constants::PEREVOZKA_PIANINO,
             'metaTitle' => 'Перевозка пианино в #нас-пункт-пп# дешево, грузчики для перевозки пианино недорого',
             'metaDescription' => 'Профессиональная перевозка пианино, фортепиано, рояля в #нас-пункт-пп# обойдется дешево с "ДомПереездов". Грузчики для перевозки пианино помогут недорого перевести музыкальный инструмент.',
             'h1' => 'Перевозка пианино и роялей в #нас-пункт-пп# недорого',
-            'titlePrice' => 'Цены на грузоперевозки',
+            'titlePrice' => Constants::TITLE_PRICE_1,
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото перевозки пианино',
             'titleMap' => 'Расчет стоимости перевозки пианино в #нас-пункт-пп#',
-            'reviewsServiceTitle' => 'Перевозка пианино',
-            'adminPanelReviewsFormInput_usluga' => 'Перевозка пианино'
+            'reviewsServiceTitle' => Constants::PEREVOZKA_PIANINO,
+            'adminPanelReviewsFormInput_usluga' => Constants::PEREVOZKA_PIANINO
         ),
         'default' => array(
             'pageType' => 'town',
             'cpu' => '', // автогенерация
             'galleryCategoryID' => 98,
             'russianName' => '', // автозаполнение
-            'metaTitle' => 'Недорогие грузоперевозки, переезды квартир, офисов и дач, вывоз мебели и техники на утилизацию, перевозка пианино в #нас-пункт-пп#',
-            'metaDescription' => 'Компания &amp;quot;ДомПереездов&amp;quot; предлагает недорогие, но при этом качественные транспортные услуги в #нас-пункт-пп#. Кроме того к Вашим услугам бригады опытных грузчиков и такелажников.',
-            'h1' => 'Недорогие транспортные услуги в #нас-пункт-пп#',
+            'metaTitle' => '! Недорогие грузоперевозки, переезды квартир, офисов и дач, вывоз мебели и техники на утилизацию, перевозка пианино в #нас-пункт-пп#',
+            'metaDescription' => '! Компания &amp;quot;ДомПереездов&amp;quot; предлагает недорогие, но при этом качественные транспортные услуги в #нас-пункт-пп#. Кроме того к Вашим услугам бригады опытных грузчиков и такелажников.',
+            'h1' => '! Недорогие транспортные услуги в #нас-пункт-пп#',
             'titlePrice' => '',
-            'titleGallery' => 'Фото машин из нашего парка',
+            'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
+            'titleGallery' => Constants::TITLE_GALLERY_1,
             'titleMap' => 'Расчет стоимости перевозки по #нас-пункт-пд#',
-            'reviewsServiceTitle' => 'Транспортные услуги',
-            'adminPanelReviewsFormInput_usluga' => 'Транспортные услуги'
+            'reviewsServiceTitle' => Constants::TRANSPORTNIE_USLUGI,
+            'adminPanelReviewsFormInput_usluga' => Constants::TRANSPORTNIE_USLUGI
         ),
     );
-
-    public static $services = array();
 
 
     /**
@@ -176,53 +163,12 @@ class PageMskServices extends Page {
             }
         }
 
-        echo 'getServices';
-        self::$services = self::getServices();
-    }
-
-
-    public function getServices() {
-        $services = array(
-            'gruzoperevozki' => array(
-                'pageType' => 'service',
-                'cpu' => 'gruzoperevozki',
-                'galleryCategoryID' => 91,
-                'russianName' => 'Грузоперевозки',
-                'metaTitle' => 'Дешевые грузоперевозки в #нас-пункт-пп#, перевозка и доставка грузов, заказ газели недорого',
-                'metaDescription' => 'Грузовые перевозки в #нас-пункт-пп# срочно и дешево с &amp;quot;ДомПереездов&amp;quot;. Для перевозки мебели и мелких грузов незаменимым станет заказ газели с грузчиками недорого.',
-                'h1' => 'Грузоперевозки в #нас-пункт-пп#, заказ газели с грузчиками недорого',
-                'titlePrice' => 'Цены на грузоперевозки',
-                'titleGallery' => 'Фото машин из нашего парка',
-                'titleMap' => 'Расчет стоимости перевозки в #нас-пункт-пп#',
-                'reviewsServiceTitle' => 'Грузоперевозки',
-                'adminPanelReviewsFormInput_usluga' => 'Грузоперевозки',
-                'template' => 'mskServicesPage__service.tpl'
-            ),
-            'vyvoz-mebeli' => array(
-                'pageType' => 'service',
-                'cpu' => 'vyvoz-mebeli',
-                'galleryCategoryID' => 92,
-                'russianName' => 'Вывоз мебели',
-                'metaTitle' => 'Вывоз мебели и техники на утилизацию в #нас-пункт-пп# недорого, вывоз и утилизация строительного мусора',
-                'metaDescription' => 'Вывоз, утилизация мебели и техники в #нас-пункт-пп# избавит от ненужного мусора в квартире. "ДомПереездов" качественно организует демонтаж, разборку-сборку мебели, вывоз строительного мусора',
-                'h1' => 'Вывоз и утилизация мебели и техники в #нас-пункт-пп# недорого',
-                'titlePrice' => 'Цены на грузоперевозки',
-                'titleGallery' => 'Фото вывоза мебели',
-                'titleMap' => '',
-                'reviewsServiceTitle' => 'Вывоз мебели',
-                'adminPanelReviewsFormInput_usluga' => 'Вывоз мебели',
-                'template' => 'mskServicesPage__service.tpl'
-            )
-        );
-
         // Конвертируем таблицу услуг в объект для удобства
         // Без этого половина работать не будет
-        $services = (object)$services;
-        foreach ($services as &$service) {
+        self::$servicesTable = (object)self::$servicesTable;
+        foreach (self::$servicesTable as &$service) {
             $service = (object)$service;
         }
-
-        return $services;
     }
 
 
@@ -247,7 +193,7 @@ class PageMskServices extends Page {
 
 
     /**
-     * Заменяет некоторые словосочетания на ссылки в текстах страниц
+     * Заменяет некоторые словосочетания на ссылки
      * @param $page
      * @return string
      */
@@ -299,10 +245,11 @@ class PageMskServices extends Page {
         // Получаем самый последний элемент в ссылке
         // https://dp.local/moskovskaya-oblast/pavlovo-posadskiy-rayon/pavlovskiy-posad/perevozka-pianino/
         // он - это ключ массива в self::$servicesTable
-        $serviceInUrl = Core::getUrl()->uriParts[count(Core::getUrl()->uriParts) - 1];
+        //        $serviceInUrl = Core::getUrl()->uriParts[count(Core::getUrl()->uriParts) - 1];
+        $serviceInUrl = end(Core::getUrl()->uriParts);
 
-        foreach (self::$servicesTable as $serviceKey => $serviceData) {
-            if ($serviceInUrl == trim($serviceKey)) {
+        foreach (self::$servicesTable as $service => $serviceData) {
+            if ($serviceInUrl == trim($service)) {
                 return $serviceData;
             }
         }
@@ -331,8 +278,20 @@ class PageMskServices extends Page {
         if ($services->rowCount > 0) {
             foreach ($services->result as &$service) {
                 $service = (object)$service;
-                $service->title = mb_ucfirst(str_replace([' ', ' '], ' ', $service->name));
                 $service->link = $service->cpu_path;
+
+                // OLD получает из БД
+                //                $service->title = mb_ucfirst(str_replace([' ', ' '], ' ', $service->name));
+
+
+                // Получаем русское название услуги из self::$servicesTable
+                $uriParths = explode('/', $service->link);
+                // удаляем последний слеш / (он будет всегда! Так настроен .htaccess)
+                array_pop($uriParths);
+                // Получаем cpu услуги
+                $serviceKey = end($uriParths);
+                $service->title = self::$servicesTable->$serviceKey->russianName;
+
             }
             return $services->result;
         } else {
@@ -487,14 +446,14 @@ class PageMskServices extends Page {
                         case 'raion':
                             $this->buildReviewsOnLeftBlock(array(
                                 'townId' => 10000,
-                                'service' => 'Транспортные услуги'
+                                'service' => Constants::TRANSPORTNIE_USLUGI
                             ));
                             break;
                         // ДЛЯ ГОРОДОВ (4 штуки)
                         case 'town':
                             $this->buildReviewsOnLeftBlock(array(
                                 'townId' => $page->id,
-                                'service' => 'Транспортные услуги'
+                                'service' => Constants::TRANSPORTNIE_USLUGI
                             ));
                             break;
                     }
@@ -504,7 +463,7 @@ class PageMskServices extends Page {
                 if ($page->id < 10000) {
                     $this->buildReviewsOnLeftBlock(array(
                         'townId' => $page->id,
-                        'service' => 'Транспортные услуги'
+                        'service' => Constants::TRANSPORTNIE_USLUGI
                     ));
                 }
                 break;
@@ -518,7 +477,7 @@ class PageMskServices extends Page {
                 // Если выбран район МО - то на его страницу connected
                 $this->buildReviewsOnLeftBlock(array(
                     'townId' => $page->id,
-                    'service' => 'Транспортные услуги'
+                    'service' => Constants::TRANSPORTNIE_USLUGI
                 ));
                 break;
 
@@ -550,7 +509,7 @@ class PageMskServices extends Page {
                         // Если выбран район МО - то на его страницу
                         $this->buildReviewsOnLeftBlock(array(
                             'townId' => $townId, // (+)
-                            'service' => 'Грузоперевозки'
+                            'service' => Constants::GRUZOPEREVOZKI
                         ));
                         break;
 
@@ -567,7 +526,7 @@ class PageMskServices extends Page {
                         //  Если выбран район МО - то на его страницу
                         $this->buildReviewsOnLeftBlock(array(
                             'townId' => $townId, // (+ на всех районах и округах Москвы)
-                            'service' => 'Переезды'
+                            'service' => Constants::PEREEZDI
                         ));
                         break;
 
@@ -579,7 +538,7 @@ class PageMskServices extends Page {
                         //  Если выбран район МО - то на его страницу
                         $this->buildReviewsOnLeftBlock(array(
                             'townId' => $townId, // (+ на всех районах и округах Москвы)
-                            'service' => 'Вывоз мебели'
+                            'service' => Constants::VIVOZ_MEBELI
                         ));
                         break;
 
@@ -591,7 +550,7 @@ class PageMskServices extends Page {
                         //  Если выбран район МО - то на его страницу
                         $this->buildReviewsOnLeftBlock(array(
                             'townId' => $townId, // (+ на всех районах и округах Москвы)
-                            'service' => 'Перевозка пианино'
+                            'service' => Constants::PEREVOZKA_PIANINO
                         ));
                         break;
 
@@ -602,7 +561,7 @@ class PageMskServices extends Page {
                         //  Если выбран район МО - то на его страницу
                         $this->buildReviewsOnLeftBlock(array(
                             'townId' => $townId, // (+ на всех районах и округах Москвы)
-                            'service' => 'Грузовое такси'
+                            'service' => Constants::GRUZOVOE_TAKSI
                         ));
                         break;
 
@@ -614,7 +573,7 @@ class PageMskServices extends Page {
                         //  Если выбран район МО - то на его страницу
                         $this->buildReviewsOnLeftBlock(array(
                             'townId' => $townId, // (+ на всех районах и округах Москвы)
-                            'service' => 'Перевозка мебели'
+                            'service' => Constants::PEREVOZKA_MEBELI
                         ));
                         break;
                 }
@@ -639,8 +598,7 @@ class PageMskServices extends Page {
         $page = (object)array_merge((array)$page, (array)$texts);
         $page = (object)array_merge((array)$page, (array)$additionalFilelds);
 
-        // Выключаем, так как убрали карту
-//        Core::getSmarty()->assign('carsForMap', Cars::getCarsJsonForYandexMap());
+        Core::getSmarty()->assign('carsForMap', Cars::getCarsJsonForYandexMap());
 
         if (!empty($page->galleryCategoryID)) {
             Core::getSmarty()->assign('photogallery', Photogallery::getImages($page->galleryCategoryID));
@@ -682,7 +640,8 @@ class PageMskServices extends Page {
         // Формируем отзывы слева в блоке
         $this->setReviewsOnLeftBlock($page);
 
-        Core::getSmarty()->assign('mapPath', str_replace('*', ',', $page->breadcrumb_names));
+        // Карты отключили навсегда
+        //        Core::getSmarty()->assign('mapPath', str_replace('*', ',', $page->breadcrumb_names));
 
         // Эти свойства в шаблоне берутся из $page напрямую
         $page->breadcrumb_names = explode('*', $page->breadcrumb_names);
@@ -690,10 +649,12 @@ class PageMskServices extends Page {
         array_pop($page->breadcrumb_names);
         array_pop($page->breadcrumb_paths);
 
+
         Core::getSmarty()->assign('page', $page);
-        Core::getSmarty()->assign('metaTitle', $page->meta_title);
-        Core::getSmarty()->assign('metaDescription', $page->meta_description);
-        Core::getSmarty()->assign('metaKeywords', $page->meta_keywords);
+        // Все meta берутся из массива $servicesTable (заменяются из $additionalFilelds)
+        Core::getSmarty()->assign('metaTitle', $page->metaTitle);
+        Core::getSmarty()->assign('metaDescription', $page->metaDescription);
+        Core::getSmarty()->assign('metaKeywords', $page->metaKeywords);
         // end Middleware
 
         switch ($page->page_type) {
