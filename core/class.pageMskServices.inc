@@ -16,7 +16,7 @@ class PageMskServices extends Page {
             'metaTitle' => '! Дешевые грузоперевозки в #нас-пункт-пп#, перевозка и доставка грузов, заказ газели недорого',
             'metaDescription' => '! Грузовые перевозки в #нас-пункт-пп# срочно и дешево с &amp;quot;ДомПереездов&amp;quot;. Для перевозки мебели и мелких грузов незаменимым станет заказ газели с грузчиками недорого.',
             'h1' => ' ! Грузоперевозки в #нас-пункт-пп#, заказ газели с грузчиками недорого',
-            'titlePrice' => Constants::TITLE_PRICE_1,
+            'titlePrice' => '! Цены на грузоперевозки в #нас-пункт-пп#', // Constants::TITLE_PRICE_1,
             'titleSimilarServices' => Constants::TITLE_SIMILAR_SERVICES_1,
             'titleGallery' => Constants::TITLE_GALLERY_1,
             'titleMap' => '! Расчет стоимости перевозки в #нас-пункт-пп#',
@@ -133,6 +133,22 @@ class PageMskServices extends Page {
             'reviewsServiceTitle' => Constants::PEREVOZKA_PIANINO,
             'adminPanelReviewsFormInput_usluga' => Constants::PEREVOZKA_PIANINO
         ),
+        // НОВЫЕ УСЛУГИ 19.02.2020
+        'perevozka-pianino' => array(
+            'pageType' => 'service',
+            'cpu' => Constants::SERVICE_DEMONTAZHNYE_RABOTY,
+            'galleryCategoryID' => 90, // todo: change
+            'russianName' => 'Демонтажные работы',
+            'metaTitle' => '',
+            'metaDescription' => '',
+            'h1' => '',
+            'titlePrice' => '',
+            'titleSimilarServices' => '',
+            'titleGallery' => '',
+            'reviewsServiceTitle' => Constants::SERVICE_DEMONTAZHNYE_RABOTY,
+            'adminPanelReviewsFormInput_usluga' => ''
+        ),
+
         'default' => array(
             'pageType' => 'town',
             'cpu' => '', // автогенерация

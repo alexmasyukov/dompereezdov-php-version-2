@@ -349,18 +349,6 @@ $(document).ready(function () {
         ;
     };
 
-    function tblink_comments_sender(n, name) {
-        if (n) {
-            var obj = $(name);
-            (obj.css('opacity') == '0') ? obj.stop(true).animate({opacity: '1'}, 50) : obj.animate({opacity: '0'}, 50)
-            setTimeout(function () {
-                n--;
-                tblink_comments_sender(n, $(name));
-            }, 150);
-        }
-        ;
-    };
-
     function declOfNum(number, titles) {
         cases = [2, 0, 1, 1, 1, 2];
         return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
@@ -451,4 +439,3 @@ $(document).ready(function () {
 function myFunction(x) {
     x.classList.toggle("change");
 }
-

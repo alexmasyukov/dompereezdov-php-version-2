@@ -11,12 +11,13 @@ var path = require('path'),
     pngquant = require('imagemin-pngquant'),
     cache = require('gulp-cache'),
     autoprefixer = require('gulp-autoprefixer'),
-    plumber = require('gulp-plumber'),
-    ftp = require('gulp-ftp'),
-    sftp = require('gulp-sftp'),
-    gutil = require('gulp-util'),
     del = require('del');
+    // plumber = require('gulp-plumber'),
+    // ftp = require('gulp-ftp'),
+    // sftp = require('gulp-sftp'),
+    // gutil = require('gulp-util'),
 
+// todo: 19.02.20 пересжать все JS. Отключил chosen и удалил кучу библиотек лишних из libs
 
 
 gulp.task('sass', function() {
@@ -48,10 +49,7 @@ gulp.task('scripts-min-libs', function() {
             './frontend/libs/jquery.inputmask/dist/min/inputmask/inputmask.extensions.min.js',
             './frontend/libs/jquery.inputmask/dist/min/inputmask/inputmask.numeric.extensions.min.js',
             './frontend/libs/jquery.inputmask/dist/min/inputmask/jquery.inputmask.min.js',
-            './cms/plugins/chosen-jquery/chosen.jquery.js',
-            //        './frontend/libs/fotorama/fotorama.js',
-            // './frontend/libs/jquery.cookie/jquery.cookie.js',
-            // './frontend/libs/accounting/accounting.min.js',
+            // './cms/plugins/chosen-jquery/chosen.jquery.js',
             './frontend/modules/callme/callme.js'
         ])
         .pipe(concat('libs.min.js')) // Собираем все подключенные библиотеки в один файл

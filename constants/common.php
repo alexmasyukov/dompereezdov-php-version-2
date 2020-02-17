@@ -19,4 +19,7 @@ class Constants {
 
     const PEREEZDI = 'Переезды';
     const TRANSPORTNIE_USLUGI = 'Транспортные услуги';
+
+    // Новые услуги 19.02.2020
+    const SERVICE_DEMONTAZHNYE_RABOTY = 'Демонтажные работы';
 }
