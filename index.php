@@ -31,7 +31,7 @@ require $root . '/frontend/libs/smarty/libs/Smarty.class.php';
 $core = new Core();
 
 // start html compressed
-ob_start('compressHtml');
+//ob_start('compressHtml');
 
 
 switch (Core::getUrl()->module) {
@@ -55,6 +55,7 @@ switch (Core::getUrl()->module) {
         break;
     case 'moskovskaya-oblast':
     case 'moskva':
+        require $root . '/constants/common.php';
         require $root . '/core/class.cars.inc';
         require $root . '/core/class.photogallery.inc';
         require $root . '/core/class.pageMskServices.inc';

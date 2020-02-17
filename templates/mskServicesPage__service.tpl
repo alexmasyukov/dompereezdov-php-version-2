@@ -15,7 +15,7 @@
                         </div>
 
                         <div class="bl cars">
-                            <h2>Цены на грузоперевозки</h2>
+                            <h2>{$page->titlePrice}</h2>
                             {include '_carsPage__all_cars_page.tpl'}
                         </div>
 
@@ -25,7 +25,7 @@
 
                         {if $similarServices}
                             <div class="bl similar-uslugi pohojie_uslugi">
-                                <h3>Похожие услуги</h3>
+                                <h3>{$page->titleSimilarServices}</h3>
                                 <div class="bl uslugi-list">
                                     <ul class="uslugi-ul">
                                         {foreach $similarServices as $service}
