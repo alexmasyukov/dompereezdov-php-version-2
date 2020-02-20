@@ -1,14 +1,17 @@
 <?php
 $root = realpath($_SERVER['DOCUMENT_ROOT']);
 
+include_once $root . "/frontend/system/base_connect.php";
 
-include_once $root . '/cms/system/base_connect.php';
+//подключение ОБЩИХ ФУНКЦИЙ
+//include_once $root . '/cms/system/functions.php';
+
 //
 // Авторизация.
 //
 $auth_errors = '';
 
-function Login($username, $password, $remember) {
+function Login($username, $password, $remember, $db) {
     global $auth_errors; //Для того что-бы использовать вышеобъявленную переменную в массиве
     // Имя не должно быть пустой строкой.
     if ($username == "") {
@@ -16,9 +19,9 @@ function Login($username, $password, $remember) {
         return false;
     } else {
         // Проверяем пользователя в MySQL
-        $user_true = mysql_query("select * from users WHERE login='" . $username . "' and pass='" . md5($password) . "'");
+        $user_true = $db->query("select * from users WHERE login='" . $username . "' and pass='" . md5($password) . "'");
 
-        while ($row = mysql_fetch_assoc($user_true)) { //Получаем результаты запроса
+        while ($row = $user_true->fetch(PDO::FETCH_ASSOC)) { //Получаем результаты запроса
             $id = $row['id'];
             $name = $row['name'];
         }
@@ -60,7 +63,7 @@ $enter_site = false;
 Logout();
 // Если массив POST не пуст, значит, обрабатываем отправку формы.
 if (count($_POST) > 0)
-    $enter_site = Login($_POST["username"], $_POST["password"], $_POST["remember"]);
+    $enter_site = Login($_POST["username"], $_POST["password"], $_POST["remember"], $db);
 // Переадресуем авторизованного пользователя на одну из страниц сайта.
 if ($enter_site) {
     header("Location: /cms/admin.php?link=admin");

@@ -12,7 +12,7 @@ $param_json = '
 				    "edit_link": "yes"
 				},
 				"f3":{
-				    "name": "h1"
+				    "name": "public"
 				}, 
 				"f4":{
 				    "name": "cpu_path"

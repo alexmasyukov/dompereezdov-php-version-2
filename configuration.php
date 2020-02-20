@@ -2,7 +2,7 @@
 /* ---------- Конфигурация ------------- */
 /** LOCAL **/
 
-$protocol = 'http';
+$protocol = 'https';
 
 $db_server = 'localhost';
 $db_login = 'root';

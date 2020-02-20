@@ -184,33 +184,33 @@ $close_onclick = "
                                         <?php
                                     };
                                     ?>
-                                    <li>
-                                        <a href="#tab_meta" data-toggle="tab">
-                                            Метаданные
-                                        </a>
-                                    </li>
+<!--                                    <li>-->
+<!--                                        <a href="#tab_meta" data-toggle="tab">-->
+<!--                                            Метаданные-->
+<!--                                        </a>-->
+<!--                                    </li>-->
                                 </ul>
                                 <div class="tab-content no-space">
                                     <div class="tab-pane active" id="tab_general">
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label class="col-md-1 control-label">Заголовок:
-                                                    <span class="required">*</span>
-                                                </label>
-                                                <div class="col-md-5">
-                                                    <textarea
-                                                            type="text"
-                                                            class="form-control"
-                                                            data-massive-element-type="textarea"
-                                                            data-default-value=""
-                                                            data-necessarily="true"
-                                                            data-table-field="h1"
-                                                            id="h1"
-                                                            placeholder=""
-                                                            rows=1
-                                                            tabindex="1"
-                                                    ></textarea>
-                                                </div>
+<!--                                                <label class="col-md-1 control-label">Заголовок:-->
+<!--                                                    <span class="required">*</span>-->
+<!--                                                </label>-->
+<!--                                                <div class="col-md-5">-->
+<!--                                                    <textarea-->
+<!--                                                            type="text"-->
+<!--                                                            class="form-control"-->
+<!--                                                            data-massive-element-type="textarea"-->
+<!--                                                            data-default-value=""-->
+<!--                                                            data-necessarily="true"-->
+<!--                                                            data-table-field="h1"-->
+<!--                                                            id="h1"-->
+<!--                                                            placeholder=""-->
+<!--                                                            rows=1-->
+<!--                                                            tabindex="1"-->
+<!--                                                    ></textarea>-->
+<!--                                                </div>-->
 
                                                 <label class="col-md-1 control-label">Имя в БД:
                                                 </label>
@@ -416,69 +416,69 @@ $close_onclick = "
                                         </div>
                                     <?php }; ?>
 
-                                    <div class="tab-pane" id="tab_meta">
-                                        <div class="form-body">
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label">Мета заголовок:</label>
-                                                <div class="col-md-10">
-                                                    <input
-                                                            type="text"
-                                                            class="form-control maxlength-handler"
-                                                            data-massive-element-type="input"
-                                                            data-default-value=""
-                                                            data-necessarily=""
-                                                            data-table-field="meta_title"
-                                                            id="meta_title"
-
-                                                            placeholder=""
-                                                    >
-                                                    <span class="help-block">
-                                                        Максимум 100 символов
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label">Мета <br/>ключевые слова:</label>
-                                                <div class="col-md-10">
-                                                    <textarea
-                                                            type="textarea"
-                                                            class="form-control maxlength-handler"
-                                                            data-massive-element-type="textarea"
-                                                            data-default-value=""
-                                                            data-necessarily=""
-                                                            data-table-field="meta_keywords"
-                                                            id="meta_keywords"
-
-                                                            placeholder=""
-                                                            rows="8"
-                                                    ></textarea>
-                                                    <span class="help-block">
-                                                        Максимум 1000 символов
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label">Мета описание:</label>
-                                                <div class="col-md-10">
-                                                    <textarea
-                                                            type="textarea"
-                                                            class="form-control maxlength-handler"
-                                                            data-massive-element-type="textarea"
-                                                            data-default-value=""
-                                                            data-necessarily=""
-                                                            data-table-field="meta_description"
-                                                            id="meta_description"
-
-                                                            placeholder=""
-                                                            rows="8"
-                                                    ></textarea>
-                                                    <span class="help-block">
-                                                        Максимум 255 символов
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                    <div class="tab-pane" id="tab_meta">-->
+<!--                                        <div class="form-body">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label class="col-md-2 control-label">Мета заголовок:</label>-->
+<!--                                                <div class="col-md-10">-->
+<!--                                                    <input-->
+<!--                                                            type="text"-->
+<!--                                                            class="form-control maxlength-handler"-->
+<!--                                                            data-massive-element-type="input"-->
+<!--                                                            data-default-value=""-->
+<!--                                                            data-necessarily=""-->
+<!--                                                            data-table-field="meta_title"-->
+<!--                                                            id="meta_title"-->
+<!---->
+<!--                                                            placeholder=""-->
+<!--                                                    >-->
+<!--                                                    <span class="help-block">-->
+<!--                                                        Максимум 100 символов-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label class="col-md-2 control-label">Мета <br/>ключевые слова:</label>-->
+<!--                                                <div class="col-md-10">-->
+<!--                                                    <textarea-->
+<!--                                                            type="textarea"-->
+<!--                                                            class="form-control maxlength-handler"-->
+<!--                                                            data-massive-element-type="textarea"-->
+<!--                                                            data-default-value=""-->
+<!--                                                            data-necessarily=""-->
+<!--                                                            data-table-field="meta_keywords"-->
+<!--                                                            id="meta_keywords"-->
+<!---->
+<!--                                                            placeholder=""-->
+<!--                                                            rows="8"-->
+<!--                                                    ></textarea>-->
+<!--                                                    <span class="help-block">-->
+<!--                                                        Максимум 1000 символов-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label class="col-md-2 control-label">Мета описание:</label>-->
+<!--                                                <div class="col-md-10">-->
+<!--                                                    <textarea-->
+<!--                                                            type="textarea"-->
+<!--                                                            class="form-control maxlength-handler"-->
+<!--                                                            data-massive-element-type="textarea"-->
+<!--                                                            data-default-value=""-->
+<!--                                                            data-necessarily=""-->
+<!--                                                            data-table-field="meta_description"-->
+<!--                                                            id="meta_description"-->
+<!---->
+<!--                                                            placeholder=""-->
+<!--                                                            rows="8"-->
+<!--                                                    ></textarea>-->
+<!--                                                    <span class="help-block">-->
+<!--                                                        Максимум 255 символов-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
                                     <?php if ($show_load_images == true) { ?>
                                         <div class="tab-pane" id="tab_images">
