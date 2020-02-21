@@ -16,7 +16,37 @@
 
                         <div class="bl cars">
                             <h2>{$page->titlePrice}</h2>
-                            {include '_carsPage__all_cars_page.tpl'}
+                            {if $page->priceId}
+                                {$price->content}
+                            {else}
+                                {if $page->cars_onlyId}
+                                    {foreach $cars as $car}
+                                        <div class="text">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4 col-sm-3">
+                                                    <img src="{$car->big_img}" alt="{$car->name}"
+                                                         title="{$car->name}"
+                                                         class="img-responsive"/>
+                                                </div>
+                                                <div class="col-lg-9 col-md-8 col-sm-9">
+                                                    <p style="font-size: 16px">{$car->name|upper}</p>
+                                                    {$car->description}
+                                                </div>
+                                            </div>
+                                            <table>
+                                                {foreach $car->attributes as $attribute}
+                                                    <tr>
+                                                        <td class="td_left">{$attribute->title}</td>
+                                                        <td class="td_right">{$attribute->value}</td>
+                                                    </tr>
+                                                {/foreach}
+                                            </table>
+                                        </div>
+                                    {/foreach}
+                                {else}
+                                    {include '_carsPage__all_cars_page.tpl'}
+                                {/if}
+                            {/if}
                         </div>
 
                         {if $photogallery}
@@ -55,7 +85,7 @@
                         {/if}
 
                         {*{if $page->cpu != 'vyvoz-mebeli'}*}
-                            {*{include '_mskServicesPage__map.tpl'}*}
+                        {*{include '_mskServicesPage__map.tpl'}*}
                         {*{/if}*}
                     </div>
                 </div>
@@ -68,5 +98,27 @@
     </div>
 </div>
 
+<style>
+    .td_left {
+        text-align: center;
+        width: 30%;
+        border: 10px solid #fff !important;
+        border-left: 0px solid #fff !important;
+        background: #EBEBEB !important;
+
+    }
+
+    .td_right {
+        background: #F2FDFF !important;
+        border: 10px solid #fff !important;
+        font-weight: 600;
+        font-family: "Open Sans Bold";
+    }
+
+    .td_right span {
+        font-family: 'Open Sans';
+        font-weight: 400 !important
+    }
+</style>
 
 {include '_footer.tpl'}

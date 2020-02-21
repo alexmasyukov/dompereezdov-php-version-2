@@ -18,9 +18,7 @@
                                  style="max-width: 264px; float:left;
                                          padding: 4px 20px 0px 0;"
                             />
-
                             {$page->top_text}
-
                             <div class="clear"></div>
                         </div>
 
@@ -34,7 +32,6 @@
                                     </tr>
                                 {/foreach}
                             </table>
-
                         </div>
 
                         <div class="bl cars">
