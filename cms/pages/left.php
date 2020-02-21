@@ -76,6 +76,16 @@ include_once $root . '/configuration.php';
             </li>
 
 
+            <li class="start" id="prices"> <!-- online_order_form_name_user -->
+                <a href="admin.php?link=prices">
+                    <i class="glyphicons glyphicons-show_big_thumbnails"></i>
+                    <span class="title">
+                        Таблицы прайсов
+                    </span>
+                </a>
+            </li>
+
+
             <li id="menu_menu_cat" style="display: none;">  <!--style=""-->
                 <a href="javascript:;">
                     <i class="glyphicons glyphicons-show_big_thumbnails"></i>
@@ -271,7 +281,7 @@ include_once $root . '/configuration.php';
                 </a>
             </li>
 
-            <li class="start" id="car"> <!-- online_order_form_name_user -->
+            <li class="start" id="my_works"> <!-- online_order_form_name_user -->
                 <a href="admin.php?link=my_works">
                     <i class="fa fa-briefcase"></i>
                     <span class="title">
@@ -279,8 +289,6 @@ include_once $root . '/configuration.php';
                     </span>
                 </a>
             </li>
-
-
 
 
             <li class="" id="textImport"> <!-- online_order_form_name_user -->

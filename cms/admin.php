@@ -16,6 +16,9 @@ $links_array["admin"]                           = $root . '/cms/pages/feedback/f
 
 $links_array["textImport"]                           = $root . '/cms/pages/textImport/index.php';
 
+$links_array["prices"]                           = $root . '/cms/pages/prices/index.php';
+$links_array["price_edit_form"]                  = $root . '/cms/forms/price/price_edit_form.php';
+
 // Статистика
 $links_array["dashboard"]                       = $root . '/cms/pages/dashboard/dashboard.php';
 

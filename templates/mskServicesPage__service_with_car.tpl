@@ -19,11 +19,9 @@
                                          padding: 4px 20px 0px 0;"
                             />
 
-                            <div class="clear"></div>
+                            {$page->top_text}
 
-                            <div class="bl text text-top">
-                                {$page->top_text}
-                            </div>
+                            <div class="clear"></div>
                         </div>
 
                         <div class="bl text">
