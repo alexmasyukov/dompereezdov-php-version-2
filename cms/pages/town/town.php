@@ -95,12 +95,12 @@ $module_info = array(
                                 <th>
                                     ID
                                 </th>
-                                <th class="hidden-xs">
-                                    Название
-                                </th>
-                                <th>
-                                    Заголовок
-                                </th>
+<!--                                <th class="hidden-xs">-->
+<!--                                    Название-->
+<!--                                </th>-->
+<!--                                <th>-->
+<!--                                    Заголовок-->
+<!--                                </th>-->
                                 <th>
                                     Ссылка
                                 </th>

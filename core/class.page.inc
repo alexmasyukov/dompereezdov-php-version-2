@@ -152,7 +152,7 @@ class Page {
      */
     private function generateBreadcrumbHTML($coreUrlObj, $page = false) {
         $breadcrumb = '<nav class="breadcrumb">
-                            <a href="'.$GLOBALS['protocol'].'://' . $coreUrlObj->host . '/">Главная</a>';
+                            <a href="' . $GLOBALS['protocol'] . '://' . $coreUrlObj->host . '/">Главная</a>';
 
         switch ($coreUrlObj->module) {
             case 'services':
@@ -160,29 +160,46 @@ class Page {
                 break;
             case 'moskovskaya-oblast':
             case 'moskva':
-                if (!empty($page->breadcrumb_names)) {
-                    $names = explode('*', $page->breadcrumb_names);
-                    $paths = explode('*', $page->breadcrumb_paths);
+                if (empty($page->breadcrumb_names)) break;
 
-                    if (count($names) == 1) {
-                        $lastName = $names[0];
+//                $names = explode('*', $page->breadcrumb_names);
+//                $paths = explode('*', $page->breadcrumb_paths);
+
+                $names = $page->breadcrumb_names;
+                $paths = breadcrumb_paths;
+
+//                core::log($names);
+//                core::log($paths);
+//
+//                if (count($names) == 1) {
+//                    $lastName = $names[0];
+//                }
+//
+//                if (count($names) > 1) {
+//                    $lastName = array_pop($names);
+//                    $middleTitle = implode(', ', $names);
+//                    $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
+//                }
+
+            $lastName = end($names);
+            $middleTitle = implode(', ', $names);
+            $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
+
+            //                        $lastName = array_pop($names);
+
+
+//
+//                core::log($lastName);
+//                core::log($middleTitle);
+//                core::log($breadcrumb);
+//                core::log($page->russianName);
+
+                if (empty($page->russianName)) {
+                    if (!empty($lastName)) {
+                        $breadcrumb .= ' » ' . $lastName;
                     }
-
-                    if (count($names) > 1) {
-                        $lastName = array_pop($names);
-                        $middleTitle = implode(', ', $names);
-                        $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
-                    }
-
-
-                    if (empty($page->russianName)) {
-                        if (!empty($lastName)) {
-                            $breadcrumb .= ' » ' . $lastName;
-                        }
-                    } else {
-                        $breadcrumb .= ' » ' . $page->russianName;
-                    }
-
+                } else {
+                    $breadcrumb .= ' » ' . $page->russianName;
                 }
                 break;
             case 'otzyvy':

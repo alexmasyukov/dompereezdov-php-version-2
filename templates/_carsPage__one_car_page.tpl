@@ -11,7 +11,6 @@
             {$generalCar->description}
         </div>
     </div>
-
 </div>
 
 <div class="bl text">

@@ -476,9 +476,19 @@ function save_data(id_form, id, sql_table_name, sql_images_table_name, sql_image
             } // for
         } // if
 
-        console.log(documents_matrix)
-        console.log(sql_fields)
-        console.log(features_matrix);
+        console.log('SQL_TABLE_NAME: ', sql_table_name)
+        console.log('ID: ', id)
+
+        console.log('SQL_FIELDS: ', sql_fields)
+        console.log('SQL_VALUES: ', sql_values)
+
+        console.log('SQL_FEATURES_TABLE_NAME: ', sql_features_table_name);
+        console.log('SQL_FEATURES_TABLE_ID_TITLE: ', sql_features_table_id_title);
+        console.log('FEATURES_MATRIX: ', features_matrix);
+
+        console.log('SQL_IMAGES_TABLE_NAME: ', sql_images_table_name);
+        console.log('SQL_IMAGES_TABLE_ID_TITLE: ', sql_images_table_id_title);
+        console.log('IMAGES_MATRIX: ', images_matrix);
 
 
         $.ajax({
@@ -499,7 +509,7 @@ function save_data(id_form, id, sql_table_name, sql_images_table_name, sql_image
                 id: id
             },
             success: function (json) {
-                // console.log(json);
+                console.log(json);
                 //
                 // console.log(images_matrix);
                 // console.log(sql_images_table_name);

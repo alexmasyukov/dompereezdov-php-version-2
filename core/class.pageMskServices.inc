@@ -20,8 +20,8 @@ class PageMskServices extends Page {
             'titlePrice' => '! Цены на грузоперевозки в #нас-пункт-пп#',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => Constants::TITLE_GALLERY_1,
-            'titleMap' => '! Расчет стоимости перевозки в #нас-пункт-пп#',
-            'galleryCategoryID' => 91,
+            //            'titleMap' => '! Расчет стоимости перевозки в #нас-пункт-пп#',
+            'galleryId' => 59,
         ),
         Constants::VIVOZ_MEBELI_CPU => array(
             'pageType' => 'service',
@@ -35,8 +35,8 @@ class PageMskServices extends Page {
             'titlePrice' => Constants::TITLE_PRICE_1,
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото вывоза мебели',
-            'titleMap' => '',
-            'galleryCategoryID' => 92,
+            //            'titleMap' => '',
+            'galleryId' => 60,
         ),
         Constants::GRUZOVOE_TAKSI_CPU => array(
             'pageType' => 'service',
@@ -50,9 +50,9 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на грузовое такси',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин из нашего автопарка',
-            'titleMap' => 'Расчет стоимости грузового такси в #нас-пункт-пп#',
+            //            'titleMap' => 'Расчет стоимости грузового такси в #нас-пункт-пп#',
             'isNewService' => true,
-            'galleryCategoryID' => 91,
+            'galleryId' => 59,
         ),
         Constants::KVARTIRNII_PEREEZD_CPU => array(
             'pageType' => 'service',
@@ -66,9 +66,9 @@ class PageMskServices extends Page {
             'titlePrice' => Constants::TITLE_PRICE_2,
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин для квартирного переезда',
-            'titleMap' => 'Расчет стоимости переезда квартиры в #нас-пункт-пп#',
+            //            'titleMap' => 'Расчет стоимости переезда квартиры в #нас-пункт-пп#',
             'isNewService' => true,
-            'galleryCategoryID' => 96,
+            'galleryId' => 63,
         ),
         Constants::DACHNII_PEREEZD_CPU => array(
             'pageType' => 'service',
@@ -82,9 +82,9 @@ class PageMskServices extends Page {
             'titlePrice' => Constants::TITLE_PRICE_2,
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин для дачного переезда',
-            'titleMap' => 'Расчет стоимости переезда на дачу в #нас-пункт-пп#',
+            //            'titleMap' => 'Расчет стоимости переезда на дачу в #нас-пункт-пп#',
             'isNewService' => true,
-            'galleryCategoryID' => 91,
+            'galleryId' => 59,
         ),
         Constants::OFISNII_PEREEZD_CPU => array(
             'pageType' => 'service',
@@ -98,9 +98,9 @@ class PageMskServices extends Page {
             'titlePrice' => Constants::TITLE_PRICE_2,
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин для офисного переезда',
-            'titleMap' => 'Расчет стоимости переезда офиса в #нас-пункт-пп#',
+            //            'titleMap' => 'Расчет стоимости переезда офиса в #нас-пункт-пп#',
             'isNewService' => true,
-            'galleryCategoryID' => 96,
+            'galleryId' => 63,
         ),
         Constants::PEREVOZKA_MEBELI_CPU => array(
             'pageType' => 'service',
@@ -114,9 +114,9 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на перевозку мебели',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото машин для перевозки мебели',
-            'titleMap' => 'Расчет стоимости перевозки мебели в #нас-пункт-пп#',
+            //            'titleMap' => 'Расчет стоимости перевозки мебели в #нас-пункт-пп#',
             'isNewService' => true,
-            'galleryCategoryID' => 91,
+            'galleryId' => 59,
         ),
         Constants::PEREVOZKA_PIANINO_CPU => array(
             'pageType' => 'service',
@@ -130,11 +130,14 @@ class PageMskServices extends Page {
             'titlePrice' => Constants::TITLE_PRICE_1,
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => 'Фото перевозки пианино',
-            'titleMap' => 'Расчет стоимости перевозки пианино в #нас-пункт-пп#',
-            'galleryCategoryID' => 93,
+            //            'titleMap' => 'Расчет стоимости перевозки пианино в #нас-пункт-пп#',
+            'galleryId' => 61,
         ),
 
-        // НОВЫЕ УСЛУГИ 19.02.2020
+        /** ----------------------- **/
+        /** НОВЫЕ УСЛУГИ 19.02.2020 **/
+        /** ----------------------- **/
+
         Constants::VYVOZ_MUSORA_CPU => array(
             'pageType' => 'service',
             'russianName' => Constants::VYVOZ_MUSORA,
@@ -147,7 +150,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на вывоз мусора в #нас-пункт-пп#',
             'titleGallery' => 'Фото вывоза мусора',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 65
         ),
         Constants::ZAKAZAT_GAZEL_CPU => array(
             'pageType' => 'service',
@@ -161,7 +164,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на заказ Газели в #нас-пункт-пп#',
             'titleGallery' => 'Фото Газелей для перевозки',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 66
         ),
         Constants::GRUZCHIKI_CPU => array(
             'pageType' => 'service',
@@ -175,7 +178,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на услуги грузчиков в #нас-пункт-пп#',
             'titleGallery' => 'Фото грузчиков',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 67
         ),
         Constants::DEMONTAZHNYE_RABOTY_CPU => array(
             'pageType' => 'service',
@@ -189,7 +192,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтажные работы в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажных работ',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 68
         ),
         Constants::DEMONTAZH_POLOV_CPU => array(
             'pageType' => 'service',
@@ -203,7 +206,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтаж полов в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажа полов',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 69
         ),
         Constants::DEMONTAZH_KVARTIRY_CPU => array(
             'pageType' => 'service',
@@ -217,7 +220,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтаж квартиры в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажа квартиры',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 70
         ),
         Constants::DEMONTAZH_DOMA_CPU => array(
             'pageType' => 'service',
@@ -231,7 +234,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтаж дома в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажа дома',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 71
         ),
         Constants::DEMONTAZH_DVEREY_CPU => array(
             'pageType' => 'service',
@@ -245,7 +248,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтаж дверей в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажа дверей',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 72
         ),
         Constants::DEMONTAZH_STEN_CPU => array(
             'pageType' => 'service',
@@ -259,7 +262,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтаж стен в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажа стен',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 73
         ),
         Constants::DEMONTAZH_VANNOY_CPU => array(
             'pageType' => 'service',
@@ -273,7 +276,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтаж ванной в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажа ванной',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 74
         ),
         Constants::DEMONTAZH_SANTEHKABINY_CPU => array(
             'pageType' => 'service',
@@ -287,7 +290,7 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтаж сантехкабины в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажа сантехкабины',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 75
         ),
         Constants::DEMONTAZH_MEBELI_CPU => array(
             'pageType' => 'service',
@@ -301,10 +304,10 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на демонтаж мебели в #нас-пункт-пп#',
             'titleGallery' => 'Фото демонтажа мебели',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 76
         ),
         Constants::HYUNDAI_PORTER_CPU => array(
-            'pageType' => 'service',
+            'pageType' => 'service_with_car',
             'russianName' => Constants::HYUNDAI_PORTER,
             'reviewsServiceTitle' => Constants::HYUNDAI_PORTER,
             'adminPanelReviewsFormInput_usluga' => Constants::HYUNDAI_PORTER,
@@ -315,10 +318,11 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на грузоперевозки Хёндай Портером в #нас-пункт-пп#',
             'titleGallery' => 'Другие автомобили',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 77,
+            'carId' => 10,
         ),
         Constants::GAZEL_STANDART_CPU => array(
-            'pageType' => 'service',
+            'pageType' => 'service_with_car',
             'russianName' => Constants::GAZEL_STANDART,
             'reviewsServiceTitle' => Constants::GAZEL_STANDART,
             'adminPanelReviewsFormInput_usluga' => Constants::GAZEL_STANDART,
@@ -329,10 +333,11 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на грузоперевозки Газелью 3 метра в #нас-пункт-пп#',
             'titleGallery' => 'Другие автомобили',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 78,
+            'carId' => 11,
         ),
         Constants::GAZEL_UDLINYONNAYA_CPU => array(
-            'pageType' => 'service',
+            'pageType' => 'service_with_car',
             'russianName' => Constants::GAZEL_UDLINYONNAYA,
             'reviewsServiceTitle' => Constants::GAZEL_UDLINYONNAYA,
             'adminPanelReviewsFormInput_usluga' => Constants::GAZEL_UDLINYONNAYA,
@@ -343,10 +348,11 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на грузоперевозки удлинённой Газелью 4 метра в #нас-пункт-пп#',
             'titleGallery' => 'Другие автомобили',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 79,
+            'carId' => 12,
         ),
         Constants::ZIL_BYCHOK_CPU => array(
-            'pageType' => 'service',
+            'pageType' => 'service_with_car',
             'russianName' => Constants::ZIL_BYCHOK,
             'reviewsServiceTitle' => Constants::ZIL_BYCHOK,
             'adminPanelReviewsFormInput_usluga' => Constants::ZIL_BYCHOK,
@@ -357,10 +363,11 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на грузоперевозки ЗИЛом в #нас-пункт-пп#',
             'titleGallery' => 'Другие автомобили',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 80,
+            'carId' => 13,
         ),
         Constants::PYATITONNIK_CPU => array(
-            'pageType' => 'service',
+            'pageType' => 'service_with_car',
             'russianName' => Constants::PYATITONNIK,
             'reviewsServiceTitle' => Constants::PYATITONNIK,
             'adminPanelReviewsFormInput_usluga' => Constants::PYATITONNIK,
@@ -371,10 +378,11 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на грузоперевозки пятитонником в #нас-пункт-пп#',
             'titleGallery' => 'Другие автомобили',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 81,
+            'carId' => 14,
         ),
         Constants::SEMITONNIK_CPU => array(
-            'pageType' => 'service',
+            'pageType' => 'service_with_car',
             'russianName' => Constants::SEMITONNIK,
             'reviewsServiceTitle' => Constants::SEMITONNIK,
             'adminPanelReviewsFormInput_usluga' => Constants::SEMITONNIK,
@@ -385,14 +393,15 @@ class PageMskServices extends Page {
             'titlePrice' => 'Цены на грузоперевозки семитонником в #нас-пункт-пп#',
             'titleGallery' => 'Другие автомобили',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_2,
-            'galleryCategoryID' => 0
+            'galleryId' => 82,
+            'carId' => 15,
         ),
 
 
         'default' => array(
             'pageType' => 'town',
             'cpu' => '', // автогенерация
-            'galleryCategoryID' => 98,
+            'galleryId' => 62,
             'russianName' => '', // автозаполнение
             'metaTitle' => '! Недорогие грузоперевозки, переезды квартир, офисов и дач, вывоз мебели и техники на утилизацию, перевозка пианино в #нас-пункт-пп#',
             'metaDescription' => '! Компания &amp;quot;ДомПереездов&amp;quot; предлагает недорогие, но при этом качественные транспортные услуги в #нас-пункт-пп#. Кроме того к Вашим услугам бригады опытных грузчиков и такелажников.',
@@ -400,7 +409,7 @@ class PageMskServices extends Page {
             'titlePrice' => '',
             'titleSimilarServices' => Constants::SIMILAR_SERVICES_1,
             'titleGallery' => Constants::TITLE_GALLERY_1,
-            'titleMap' => 'Расчет стоимости перевозки по #нас-пункт-пд#',
+            //            'titleMap' => 'Расчет стоимости перевозки по #нас-пункт-пд#',
             'reviewsServiceTitle' => Constants::TRANSPORTNIE_USLUGI,
             'adminPanelReviewsFormInput_usluga' => Constants::TRANSPORTNIE_USLUGI
         ),
@@ -601,12 +610,7 @@ class PageMskServices extends Page {
                 p_da,
                 p_ve,
                 p_tv,
-                p_pr,
-                p_ro_with_type, 
-                p_da_with_type, 
-                p_ve_with_type, 
-                p_tv_with_type, 
-                p_pr_with_type
+                p_pr
             FROM 
                 pages 
             WHERE 
@@ -636,6 +640,7 @@ class PageMskServices extends Page {
      */
     private function replaceWordsInTextToNames($page) {
         foreach ($page as $key => $value) {
+            $page->$key = mb_str_replace('#нас-пункт-ип#', $page->name, $page->$key);
             $page->$key = mb_str_replace('#нас-пункт-пр#', $page->p_ro, $page->$key);
             $page->$key = mb_str_replace('#нас-пункт-пд#', $page->p_da, $page->$key);
             $page->$key = mb_str_replace('#нас-пункт-пв#', $page->p_ve, $page->$key);
@@ -738,6 +743,7 @@ class PageMskServices extends Page {
                 break;
 
             case 'service':
+            case 'service_with_type':
                 // Показываем отзывы привязанные к родителю (так как мы на услуге, а нам нужен нас. пункт)
                 $townId = $page->parent_id;
 
@@ -757,7 +763,8 @@ class PageMskServices extends Page {
 
 
                 switch (Core::getUrl()->lastUriPart) {
-                    case 'gruzoperevozki':
+                    // todo: Добавить сюда новые услуги. Переписать эту выборку
+                    case Constants::GRUZOPEREVOZKI_CPU:
                         // Грузоперевозки
                         // Если выбрана Москва отображаются на главной странице (+) https://dp.local/
                         //      + на всех районах и округах Москвы
@@ -769,9 +776,9 @@ class PageMskServices extends Page {
                         ));
                         break;
 
-                    case 'kvartirnyj-pereezd':
-                    case 'ofisnyj-pereezd':
-                    case 'dachnyj-pereezd':
+                    case Constants::KVARTIRNII_PEREEZD_CPU:
+                    case Constants::OFISNII_PEREEZD_CPU:
+                    case Constants::DACHNII_PEREEZD_CPU:
                         // Переезды (все услуги переездов)
                         // Если выбрана Москва отображаются на страницах контента: (+)
                         //      Квартирный переезд
@@ -786,7 +793,7 @@ class PageMskServices extends Page {
                         ));
                         break;
 
-                    case 'vyvoz-mebeli':
+                    case Constants::VIVOZ_MEBELI_CPU:
                         // Вывоз мебели
                         // Если выбрана Москва контент (+) Вывоз старой мебели
                         // + на всех районах и округах Москвы
@@ -798,7 +805,7 @@ class PageMskServices extends Page {
                         ));
                         break;
 
-                    case 'perevozka-pianino':
+                    case Constants::PEREVOZKA_PIANINO_CPU:
                         // Перевозка пианино
                         // Если выбрана Москва контент (+) Перевозка пианино
                         // + на всех районах и округах Москвы
@@ -810,7 +817,7 @@ class PageMskServices extends Page {
                         ));
                         break;
 
-                    case 'gruzovoe-taksi':
+                    case Constants::GRUZOVOE_TAKSI_CPU:
                         // Грузовое такси
                         // Если выбрана Москва, на всех районах и округах Москвы
                         //  Если выбран нас. пункт МО - то на его страницу
@@ -821,7 +828,7 @@ class PageMskServices extends Page {
                         ));
                         break;
 
-                    case 'perevozka-mebeli':
+                    case Constants::PEREVOZKA_MEBELI_CPU:
                         // Певозка мебели
                         // Если выбрана Москва, контент Перевозка мебели
                         // + на всех районах и округах Москвы
@@ -836,6 +843,22 @@ class PageMskServices extends Page {
                 break;
             default:
         }
+    }
+
+    private function prepareBreadcrumbs($page) {
+        // todo: fix it
+        $breadcrumbs = (object)Database::query("select 
+                breadcrumb_ids,
+                breadcrumb_paths,
+                breadcrumb_names 
+            from pages where id = $page->parent_id", 'fetch'); //
+
+        //        $breadcrumbs->breadcrumb_ids .= '*'.$page->id;
+
+        $breadcrumbs->breadcrumb_names = explode('*', $breadcrumbs->breadcrumb_names);
+        $breadcrumbs->breadcrumb_paths = explode('*', $breadcrumbs->breadcrumb_paths);
+
+        return (object)array_merge((array)$page, (array)$breadcrumbs);
     }
 
 
@@ -854,13 +877,15 @@ class PageMskServices extends Page {
         $page = (object)array_merge((array)$page, (array)$texts);
         $page = (object)array_merge((array)$page, (array)$additionalFilelds);
 
-        Core::getSmarty()->assign('carsForMap', Cars::getCarsJsonForYandexMap());
+        // 20.02.2020 Выключаем карты навседа
+        // Core::getSmarty()->assign('carsForMap', Cars::getCarsJsonForYandexMap());
 
-        if (!empty($page->galleryCategoryID)) {
-            Core::getSmarty()->assign('photogallery', Photogallery::getImages($page->galleryCategoryID));
+        if (!empty($page->galleryId)) {
+            Core::getSmarty()->assign('photogallery', Photogallery::getImagesByGallaryId($page->galleryId));
         }
 
         switch ($page->page_type) {
+            case 'service_with_car':
             case 'service':
                 // Так как это дочерняя страница - услуга, чтобы нам узнать имя этого населенного пункта,
                 // получаем родителя (так как нас. пункт это родитель страницы услуги в БД)
@@ -890,20 +915,95 @@ class PageMskServices extends Page {
         $page = $this->replaceWordsInTextOnLinks($page);
         $page = $this->setUCFirstInTexts($page);
 
+
+        // Эти свойства в шаблоне берутся из $page напрямую
+        //        if ($page->breadcrumb_names) {
+        ////            $page->breadcrumb_names = explode('*', $page->breadcrumb_names);
+        ////            $page->breadcrumb_paths = explode('*', $page->breadcrumb_paths);
+        ////            array_pop($page->breadcrumb_names);
+        ////            array_pop($page->breadcrumb_paths);
+        //        } else {
+        //            $page = $this->prepareBreadcrumbs($page);
+        //        }
+        $page = $this->prepareBreadcrumbs($page);
+
         // Обновляем хлебные крошки, добавляя название страницы в конец
         $this->updateBreadcrumb($page);
+
+
+        //        core::log($page->breadcrumb_ids);
+        //        core::log($page->breadcrumb_paths);
+        //        core::log($page->breadcrumb_names);
+
+        // Обязательно делаем это после Middleware
+        switch ($page->page_type) {
+            case 'service_with_car':
+                // Получаем вообще все машины
+                $cars = Cars::getCars();
+
+                // Добавляем название города в назавние всех машин
+                foreach ($cars as &$car) {
+                    $car->name = $car->name . ' в ' . $page->p_da;
+                }
+
+                // Это Id той машины, о которой страницы
+                $generalCarId = $page->carId;
+
+                // Фильтруем все машины и получаем машину, о которой страница
+                $generalCar = current(array_filter(
+                    $cars,
+                    function ($item) use ($generalCarId) {
+                        return $item->id == $generalCarId;
+                    }));
+
+
+                // Фильтруем все машины и получаем все остальные машины,
+                // без машины о которой страница
+                $carsWithoutGeneralCar = array_filter(
+                    $cars,
+                    function ($item) use ($generalCarId) {
+                        return ($item->id != $generalCarId);
+                    });
+
+                // Меняем ссылки у машин по умолчанию (в раздел Автопарк) на ссылки,
+                // которые принадлежат услугам текущего города
+                // Например: moskovskaya-oblast/balashiha/hyundai-porter/
+                //           moskovskaya-oblast/balashiha/semitonnik/
+                $carsWithoutGeneralCar = array_map(
+                    function ($item) use ($page) {
+                        $needService = null;
+
+                        // Нам нужно найти услугу с типом service_with_car
+                        // и carId = какой нибудь из этого массива машин
+                        foreach (self::$servicesTable as $key => $service) {
+                            if ($service->carId == $item->id && $service->pageType == 'service_with_car') {
+                                $needService = $service;
+                            }
+                        }
+
+                        // Начинаем собирать новую ссылку на машину
+                        // Получаем последний элемет массива ссылок города, он всегда без услуги в конце
+                        $left = end($page->breadcrumb_paths);
+                        // Услуга, которую мы нашли по совпадению id машины содержит нужный нам cpu
+                        // ВНИМАНИЕ! cpu машины и cpu усулуги могут не совпадать!
+                        $right = $needService->cpu;
+
+                        $item->cpu_path = $left . $right . '/';
+                        return $item;
+                    }, $carsWithoutGeneralCar);
+
+                Core::getSmarty()->assign('cars', $carsWithoutGeneralCar);
+                Core::getSmarty()->assign('generalCar', $generalCar);
+                break;
+            default:
+                break;
+        }
 
         // Формируем отзывы слева в блоке
         $this->setReviewsOnLeftBlock($page);
 
-        // Карты отключили навсегда
-        //        Core::getSmarty()->assign('mapPath', str_replace('*', ',', $page->breadcrumb_names));
-
-        // Эти свойства в шаблоне берутся из $page напрямую
-        $page->breadcrumb_names = explode('*', $page->breadcrumb_names);
-        $page->breadcrumb_paths = explode('*', $page->breadcrumb_paths);
-        array_pop($page->breadcrumb_names);
-        array_pop($page->breadcrumb_paths);
+        // 20.02.2020 Карты отключили навсегда
+        // Core::getSmarty()->assign('mapPath', str_replace('*', ',', $page->breadcrumb_names));
 
 
         Core::getSmarty()->assign('page', $page);
@@ -916,6 +1016,9 @@ class PageMskServices extends Page {
         switch ($page->page_type) {
             case 'service':
                 Core::getSmarty()->display('mskServicesPage__service.tpl');
+                break;
+            case 'service_with_car':
+                Core::getSmarty()->display('mskServicesPage__service_with_car.tpl');
                 break;
             case 'connected':
             case 'town':

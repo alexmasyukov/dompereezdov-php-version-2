@@ -271,30 +271,16 @@ include_once $root . '/configuration.php';
                 </a>
             </li>
 
-
-            <li id="my_works">
-                <a href="javascript:;">
+            <li class="start" id="car"> <!-- online_order_form_name_user -->
+                <a href="admin.php?link=my_works">
                     <i class="fa fa-briefcase"></i>
                     <span class="title">
-                        Галерея
-                    </span>
-                    <span class="arrow open">
+                        Фотогалерея
                     </span>
                 </a>
-                <ul class="sub-menu">
-                    <li id="menu_my_works_categories">
-                        <a href="admin.php?link=my_works_categories">
-                            Категории
-                        </a>
-                    </li>
-                    <li id="menu_my_works">
-                        <a href="admin.php?link=my_works">
-                            Фото
-                        </a>
-                    </li>
-
-                </ul>
             </li>
+
+
 
 
             <li class="" id="textImport"> <!-- online_order_form_name_user -->

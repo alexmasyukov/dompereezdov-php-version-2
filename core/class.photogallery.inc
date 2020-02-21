@@ -10,10 +10,49 @@
 class Photogallery {
     /**
      * Возвращает массив из изображений, поделенный на чанки по 4 изображения
+     * по идентификатору галереи
+     * @param $galleryId
+     * @return array
+     */
+    public static function getImagesByGallaryId($galleryId) {
+        $images = Database::query('
+            SELECT 
+                my_works.id,
+                my_works.name as names_work,
+                my_works_images.small_img,
+                my_works_images.big_img,
+                my_works_images.name as name,
+                my_works_images.id,
+                my_works_images.general
+            FROM 
+                my_works
+            INNER JOIN my_works_images ON
+                my_works_images.module_item_id = my_works.id
+            WHERE
+                my_works.id = ' . $galleryId . '
+            ORDER BY
+                my_works_images.id,
+                my_works_images.general DESC
+        ', 'withCount');
+
+        if ($images->rowCount > 0) {
+            foreach ($images->result as &$item) {
+                $item['small_img'] = str_replace('../../..//', '/', $item['small_img']);
+                $item['big_img'] = str_replace('../../..//', '/', $item['big_img']);
+            }
+            return array_chunk($images->result, 4);
+        }
+        return array();
+    }
+
+
+    /**
+     * Возвращает массив из изображений, поделенный на чанки по 4 изображения
+     * по идентификатору категории галереи
      * @param $galleryCategory
      * @return array
      */
-    public static function getImages($galleryCategory) {
+    public static function getImagesByCategoryId($galleryCategory) {
         $images = Database::query('
             SELECT 
                 my_works.id,

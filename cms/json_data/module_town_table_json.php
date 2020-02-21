@@ -8,26 +8,19 @@ $param_json = '
 					"span_class" : "id_span_table"
 				},
 				"f2":{
-				    "name": "admin_name",
-				    "edit_link": "yes"
-				},
-				"f3":{
-				    "name": "public"
-				}, 
-				"f4":{
 				    "name": "cpu_path"
 				}, 
-                "f5":{
+                "f3":{
                     "name": "type" 
 				},
-                "f6":{
+                "f4":{
 					"name": "public",
                     "visual_yes_no": "yes",
                     "visual_yes_value": "1",
                     "visual_yes_title": "Да",
                     "visual_no_title": "Нет"
 				},
-				"f7": {
+				"f5": {
 					"name": "button_edit",
 					"html_button": "<a class=\"btn default btn-xs purple\" %onclick%  %href%><i class=\"glyphicon glyphicon-pencil\"></i></a>",
 					"form": "town_edit_form",
@@ -35,7 +28,7 @@ $param_json = '
 					"hook": "button_delete",
 					"path": "&nbsp;&nbsp;"
 				},
-				"f8": {
+				"f6": {
 					"name": "button_delete",
 					"html_button": "<a class=\"btn btn-xs red \" %onclick%><i class=\"fa fa-trash-o\"></i></a>",
 					"form": "feedback_edit_form"
@@ -69,7 +62,21 @@ $param_json = '
   "fixed_lgd": "yes",
   "fixed_lgd_val": "60"
 
+"f2":{
+				    "name": "admin_name",
+				    "edit_link": "yes"
+				},
 
+"f2":{
+				    "name": "public",
+                    "visual_yes_no": "yes",
+                    "visual_yes_value": "1",
+                    "visual_yes_title": "Да",
+                    "visual_no_title": "Нет"
+				},
+				"f3":{
+				    "name": "public"
+				},
 
   Блоки Покащать и Скрыть (Сокращение)
   "add_view_text_full": "yes",

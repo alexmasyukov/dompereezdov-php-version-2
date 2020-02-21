@@ -212,22 +212,22 @@ $close_onclick = "
 <!--                                                    ></textarea>-->
 <!--                                                </div>-->
 
-                                                <label class="col-md-1 control-label">Имя в БД:
-                                                </label>
-                                                <div class="col-md-3">
-                                                    <textarea
-                                                            type="text"
-                                                            class="form-control"
-                                                            data-massive-element-type="textarea"
-                                                            data-default-value=""
-                                                            data-table-field="admin_name"
-                                                            id="admin_name"
-                                                            placeholder=""
-                                                            rows=1
-                                                            tabindex="1"
-                                                            disabled
-                                                    ></textarea>
-                                                </div>
+<!--                                                <label class="col-md-1 control-label">Имя в БД:-->
+<!--                                                </label>-->
+<!--                                                <div class="col-md-3">-->
+<!--                                                    <textarea-->
+<!--                                                            type="text"-->
+<!--                                                            class="form-control"-->
+<!--                                                            data-massive-element-type="textarea"-->
+<!--                                                            data-default-value=""-->
+<!--                                                            data-table-field="admin_name"-->
+<!--                                                            id="admin_name"-->
+<!--                                                            placeholder=""-->
+<!--                                                            rows=1-->
+<!--                                                            tabindex="1"-->
+<!--                                                            disabled-->
+<!--                                                    ></textarea>-->
+<!--                                                </div>-->
 
                                                 <label class="col-md-1 control-label">Тип:
                                                 </label>
