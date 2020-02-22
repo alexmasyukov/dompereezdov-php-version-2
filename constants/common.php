@@ -1,6 +1,17 @@
 <?php
 
 class Constants {
+    // Типы страниц
+    const PAGE_TYPE_CONNECTED = 'connected';
+    const PAGE_TYPE_TOWN = 'town';
+    const PAGE_TYPE_SERVICE = 'service';
+
+    // Разделы страниц
+    const PART_MO = 'mo';
+    const PART_MOSCOW = 'moscow';
+    const PART_MOSCOW_TO_B = 'moscowToB';
+
+    // Остальное
     const PEREEZDI = '! Переезды';
     const TRANSPORTNIE_USLUGI = '! Транспортные услуги';
 
