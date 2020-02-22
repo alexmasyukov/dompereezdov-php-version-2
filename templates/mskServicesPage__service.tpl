@@ -17,7 +17,9 @@
                         <div class="bl cars">
                             <h2>{$page->titlePrice}</h2>
                             {if $page->priceId}
-                                {$price->content}
+                                <div class="bl text">
+                                    {$price->content}
+                                </div>
                             {else}
                                 {if $page->cars_onlyId}
                                     {foreach $cars as $car}
@@ -99,6 +101,12 @@
 </div>
 
 <style>
+    table.price_table_1,
+    table.price_table_2 {
+        width: 100%;
+    }
+
+
     .td_left {
         text-align: center;
         width: 30%;

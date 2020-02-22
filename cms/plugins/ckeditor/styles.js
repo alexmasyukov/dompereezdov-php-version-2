@@ -92,13 +92,14 @@ CKEDITOR.stylesSet.add( 'default', [
 	},
 
 	{
-		name: 'Compact table',
+		name: 'Price table 1', //Таблица-прайс (Один заголовок)
 		element: 'table',
 		attributes: {
 			cellpadding: '5',
 			cellspacing: '0',
 			border: '1',
-			bordercolor: '#ccc'
+			// bordercolor: '#ccc',
+			'class': 'price_table_1',
 		},
 		styles: {
 			'border-collapse': 'collapse'

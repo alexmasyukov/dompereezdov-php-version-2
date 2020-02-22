@@ -6,7 +6,6 @@ class Constants {
 
     const TITLE_PRICE_1 = '! Цены на грузоперевозки';
     const TITLE_PRICE_2 = '! Цены на переезд';
-    const SIMILAR_SERVICES_1 = '! Похожие услуги';
     const SIMILAR_SERVICES_2 = '! Другие услуги';
     const TITLE_GALLERY_1 = '! Фото машин из нашего парка';
 
@@ -36,10 +35,6 @@ class Constants {
     const PEREVOZKA_PIANINO = '! Перевозка пианино';
 
     // Новые услуги 19.02.2020
-    const ADMIN_SERVICE_DEMONTAZHNYE_RABOTY = 'Демонтажные работы';
-    const SERVICE_DEMONTAZHNYE_RABOTY = 'Демонтажные работы';
-
-
     const VYVOZ_MUSORA_CPU = 'vyvoz-musora';
     const VYVOZ_MUSORA = 'Вывоз мусора';
 
