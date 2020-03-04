@@ -67,6 +67,10 @@ class Menu {
 
     }
 
+    /**
+     * Получает все страницы, кроме странц из Москвы в Б,
+     * так как их не нужно показывать в меню
+     */
     private static function getAllPages() {
         $sql = 'SELECT 
                     id, 
@@ -79,6 +83,8 @@ class Menu {
                     pages
                 WHERE 
                     public = 1
+                    AND (part_type <> trim("'.Constants::PART_MOSCOW_TO_B.'")
+                        OR part_type IS NULL)
                 ORDER BY 
                     type, 
                     name ';
@@ -91,8 +97,6 @@ class Menu {
             $return[$value->parent_id][] = $value;
             $category_names[$value->id] = $value;
         }
-
-//                Core::log($return);
 
         self::$_category_arr = $return;
         self::$_category_names = $category_names;

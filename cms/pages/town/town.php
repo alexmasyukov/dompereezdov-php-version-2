@@ -6,7 +6,7 @@
             .addClass('open')
     });
 
-    view_module('module_town_table_json', 3000, '<?php echo $filter;?>'); // Универсальная
+    view_module('module_town_table_json', 20000, '<?php echo $filter;?>'); // Универсальная
 </script>
 
 <?php

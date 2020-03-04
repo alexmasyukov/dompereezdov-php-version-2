@@ -21,33 +21,7 @@
                                     {$price->content}
                                 </div>
                             {else}
-                                {if $page->cars_onlyId}
-                                    {foreach $cars as $car}
-                                        <div class="text">
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-4 col-sm-3">
-                                                    <img src="{$car->big_img}" alt="{$car->name}"
-                                                         title="{$car->name}"
-                                                         class="img-responsive"/>
-                                                </div>
-                                                <div class="col-lg-9 col-md-8 col-sm-9">
-                                                    <p style="font-size: 16px">{$car->name|upper}</p>
-                                                    {$car->description}
-                                                </div>
-                                            </div>
-                                            <table>
-                                                {foreach $car->attributes as $attribute}
-                                                    <tr>
-                                                        <td class="td_left">{$attribute->title}</td>
-                                                        <td class="td_right">{$attribute->value}</td>
-                                                    </tr>
-                                                {/foreach}
-                                            </table>
-                                        </div>
-                                    {/foreach}
-                                {else}
-                                    {include '_carsPage__all_cars_page.tpl'}
-                                {/if}
+                                {include '_carsPage__all_cars_page.tpl'}
                             {/if}
                         </div>
 
@@ -77,19 +51,6 @@
                                 </div>
                             </div>
                         {/if}
-
-
-                        {if $page->breadcrumb_names}
-                            <div class="bl mini-breadcumb">
-                                {foreach from=$page->breadcrumb_names key=$k item=$item}
-                                    <a href="{$page->breadcrumb_paths[$k]}">{$item}</a>
-                                {/foreach}
-                            </div>
-                        {/if}
-
-                        {*{if $page->cpu != 'vyvoz-mebeli'}*}
-                        {*{include '_mskServicesPage__map.tpl'}*}
-                        {*{/if}*}
                     </div>
                 </div>
             </div>

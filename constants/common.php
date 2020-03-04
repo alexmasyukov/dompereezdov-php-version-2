@@ -1,12 +1,26 @@
 <?php
 
 class Constants {
+    // Типы таблиц для расчета цен на странице Переезды из Москвы в Б
+    const TYPE_PRICE_TABLE__ONLY_CAR_ID = 'TYPE_PRICE_TABLE__ONLY_CAR_ID';
+    const TYPE_PRICE_TABLE__CAR_ID_WITH_PRICE = 'TYPE_PRICE_TABLE__CAR_ID_WITH_PRICE';
+
     // Типы страниц
+    const TYPE_OKRUG = 'okrug';
+    const TYPE_RAION = 'raion';
+    const TYPE_TOWN = 'town';
+    const TYPE_SERVICE = 'service';
+
     const PAGE_TYPE_CONNECTED = 'connected';
     const PAGE_TYPE_TOWN = 'town';
     const PAGE_TYPE_SERVICE = 'service';
+    const PAGE_TYPE_SERVICE_WITH_CAR = 'service_with_car';
 
-    // Разделы страниц
+    const PAGE_TYPE_MOSCOW_TO_B_CONNECTED = 'moscow_to_b_connected';
+    const PAGE_TYPE_MOSCOW_TO_B_SERVICE = 'moscow_to_b_service';
+    const PAGE_TYPE_MOSCOW_TO_B_SERVICE_WITH_CAR = 'moscow_to_b_service_with_car';
+
+    // Типы разделов страниц
     const PART_MO = 'mo';
     const PART_MOSCOW = 'moscow';
     const PART_MOSCOW_TO_B = 'moscowToB';
@@ -100,4 +114,19 @@ class Constants {
     const SEMITONNIK_CPU = 'semitonnik';
     const SEMITONNIK = 'Грузоперевозки 7 тонн';
 
+    // Из Москвы в Б, связующие страницы
+    const GRUZOPEREVOZKI_IZ_MOSKVY_CPU = 'gruzoperevozki-iz-moskvy';
+    const GRUZOPEREVOZKI_IZ_MOSKVY = 'Грузоперевозки из Москвы';
+
+    const PEREEZDY_IZ_MOSKVY_CPU = 'pereezdy-iz-moskvy';
+    const PEREEZDY_IZ_MOSKVY = 'Переезды из Москвы';
+
+    // Из Москвы в Б, страницы услуг
+    // Проверяются по частичному вхождению в PageMskServices->getAdditionalFields()
+    //   потому что делать переписывать архитектуру не вариант
+    const GRUZOPEREVOZKI_MOSKVA_XXX_CPU = 'gruzoperevozki-moskva-';
+    const GRUZOPEREVOZKI_MOSKVA_XXX = 'Грузоперевозки из Москвы';
+
+    const PEREEZDY_MOSKVA_XXX_CPU = 'pereezdy-moskva-';
+    const PEREEZDY_MOSKVA_XXX = 'Переезды из Москвы';
 }
