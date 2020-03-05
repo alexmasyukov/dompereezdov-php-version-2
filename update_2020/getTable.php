@@ -171,6 +171,13 @@ function printRow($page) {
 }
 
 
+function printRowByKeys($page, $keys) {
+    foreach ($keys as $key) {
+        echo '<td>' . $page[$key] . '</td>';
+    }
+}
+
+
 function getPages() {
     $sql_columns = $GLOBALS['sql_columns'];
 
