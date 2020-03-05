@@ -17,6 +17,7 @@ class Constants {
     const PAGE_TYPE_SERVICE_WITH_CAR = 'service_with_car';
 
     const PAGE_TYPE_MOSCOW_TO_B_CONNECTED = 'moscow_to_b_connected';
+    const PAGE_TYPE_MOSCOW_TO_B_TOWN = self::TYPE_TOWN;
     const PAGE_TYPE_MOSCOW_TO_B_SERVICE = 'moscow_to_b_service';
     const PAGE_TYPE_MOSCOW_TO_B_SERVICE_WITH_CAR = 'moscow_to_b_service_with_car';
 

@@ -13,15 +13,26 @@ require $root . '/core/class.database.inc';
 require $root . '/core/class.core.inc';
 require $root . '/core/class.page.inc';
 require $root . '/core/functions.php';
+require $root . '/update_2020/data/new_m_towns.php';
 
 $log = true;
 
+
 $Mover = new Mover();
+//core::log(Mover::$pages_mo);
+//core::log(Mover::$pages_m);
+//core::log(Mover::$pages_m_to_b);
+$Mover->addNewConnectedTo__m_to_b();
+$Mover->addNewTownsTo__m_to_b();
+$Mover->addNewServicesTo__m_to_b();
+//core::log(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED]);
+//core::log(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_TOWN]);
+//core::log(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE]);
+
+
+//$Mover->setNewId();
 //core::log($Mover->pages);
-$Mover->showNames();
-$Mover->setNewId();
-//core::log($Mover->pages);
-$Mover->setNewParentId();
+//$Mover->setNewParentId();
 //core::log($Mover->pages);
 // Считать все тексты
 // Обновить page_id на всех текстах
@@ -33,27 +44,171 @@ $Mover->setNewParentId();
 // Добавить новые услуги в раздел PART_MOSCOW_TO_B
 
 
+//        $pages = array_merge($mo->result, $m->result);
+//
+//        $preparedPages = array();
+//        foreach ($pages as $page) {
+//            $id = $page['id'];
+//            // устанавливаем в ключ старый идентификатор для удобства
+//            $preparedPages[$id] = (object)$page;
+//        }
+
+//return $preparedPages;
+
 class Mover {
-    public $counts = array();
-    public $pages = array();
+    public static $counts = array();
+    public static $pages = array();
+    public static $pages_mo = array(
+        Constants::PAGE_TYPE_CONNECTED        => [],
+        Constants::PAGE_TYPE_TOWN             => [],
+        Constants::PAGE_TYPE_SERVICE          => [],
+        Constants::PAGE_TYPE_SERVICE_WITH_CAR => [],
+
+    );
+    public static $pages_m = array(
+        Constants::PAGE_TYPE_CONNECTED        => [],
+        Constants::PAGE_TYPE_TOWN             => [],
+        Constants::PAGE_TYPE_SERVICE          => [],
+        Constants::PAGE_TYPE_SERVICE_WITH_CAR => [],
+    );
+    public static $pages_m_to_b = array(
+        Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED        => [],
+        Constants::PAGE_TYPE_MOSCOW_TO_B_TOWN             => [],
+        Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE          => [],
+    );
+    private static $m_to_b__startId = 200000;
 
     /**
      * Mover constructor.
      */
     public function __construct() {
-        $this->pages = $this->getAllPages();
+        $this->getAllPages();
     }
 
-    public function showNames() {
-        echo '<table>';
-        foreach ($this->pages as $page) {
-            $this->startTr();
-            $this->printRowByKeys($page, ['id', 'parent_id', 'cpu_path', 'name', 'part_type', 'type', 'page_type']);
-            $this->endTr();
+    /**
+     * Добавляет новые города из Москвы в Б в self::$pages_m_to_b
+     */
+    public function addNewTownsTo__m_to_b() {
+        $new_m_towns = $GLOBALS['new_m_towns'];
+
+        foreach ($new_m_towns as $town) {
+            self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_TOWN][] =
+                self::prepareRow(
+                    $town,
+                    array(
+                        'id'                    => self::$m_to_b__startId++,
+                        'parent_id'             => 0, // Может Москва родитель?
+                        'part_type'             => Constants::PART_MOSCOW_TO_B,
+                        'cpu'                   => eng_name($town['name']),
+                        'cpu_path'              => eng_name($town['name']),
+                        'type'                  => Constants::PAGE_TYPE_TOWN,
+                        'page_type'             => Constants::PAGE_TYPE_TOWN,
+                        'public'                => 1,
+                        'town_start_admin_name' => '', // todo ????????
+                        'breadcrumb_ids'        => '' // todo ????????
+                    ));
         }
-        echo '</table>';
     }
 
+    /**
+     * Добавляет новые ДВЕ услуги к городам из Москвы в Б
+     */
+    public function addNewServicesTo__m_to_b() {
+        $towns = self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_TOWN];
+
+        foreach ($towns as $town) {
+            $newService = self::prepareRow(
+                array(),
+                array(
+                    'parent_id'             => $town->id,
+                    'part_type'             => Constants::PART_MOSCOW_TO_B,
+                    'type'                  => Constants::PAGE_TYPE_SERVICE,
+                    'public'                => 1,
+                    'town_start_admin_name' => '' // todo ????????
+                ));
+
+            $cpu = eng_name($town->name);
+
+            foreach ([Constants::GRUZOPEREVOZKI_MOSKVA_XXX_CPU, Constants::PEREEZDY_MOSKVA_XXX_CPU] as $link) {
+                $a = clone $newService;
+                $a->id = self::$m_to_b__startId++;
+                $a->cpu = $link . $cpu;
+                $a->cpu_path = '/moskva/' . $a->cpu . '/';
+                // Заметим, что у GRUZOPEREVOZKI_MOSKVA_XXX_CPU другой page_type
+                $a->page_type = $link == Constants::GRUZOPEREVOZKI_MOSKVA_XXX_CPU ? Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE_WITH_CAR : Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE;
+                self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE][] = $a;
+            }
+        }
+    }
+
+    /**
+     * Добавляет 2 связующие страницы в раздел Из Москвы в Б
+     */
+    public function addNewConnectedTo__m_to_b() {
+        $newConnected =
+            self::prepareRow(
+                array(),
+                array(
+                    'parent_id'             => 0,
+                    'part_type'             => Constants::PART_MOSCOW_TO_B,
+                    'type'                  => Constants::PAGE_TYPE_CONNECTED,
+                    'page_type'             => Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED,
+                    'public'                => 1,
+                    'town_start_admin_name' => '' // todo ????????
+                )
+            );
+
+        foreach ([Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU, Constants::PEREEZDY_IZ_MOSKVY_CPU] as $link) {
+            $a = clone $newConnected;
+            $a->id = self::$m_to_b__startId++;
+            $a->cpu = $link;
+            $a->cpu_path = $link;
+            self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED][] = $a;
+        }
+    }
+
+
+    private function prepareRow($object, $otherKeys) {
+        $result = array(
+            'id'                    => '',
+            'parent_id'             => '',
+            'part_type'             => '',
+            'name'                  => NULL,
+            'cpu_path'              => '',
+            'cpu'                   => '',
+            'sort'                  => '',
+            'public'                => '',
+            'type'                  => '',
+            'page_type'             => '',
+            'breadcrumb_ids'        => '',
+            'breadcrumb_paths'      => '',
+            'breadcrumb_names'      => '',
+            'town_start_admin_name' => '',
+            'level'                 => '',
+            'p_ro'                  => '',
+            'p_da'                  => '',
+            'p_ve'                  => '',
+            'p_tv'                  => '',
+            'p_pr'                  => '',
+            'etnohoronim_mn_p_da'   => '',
+            'zn_1'                  => '',
+            'zn_2'                  => '',
+            'zn_3'                  => '',
+            'zn_4'                  => '',
+            'zn_5'                  => '',
+            'zn_6'                  => '',
+            'zn_7'                  => '',
+            'distance_from_moscow'  => '',
+            'prenadlezhnost1'       => '',
+            'tip_np_iz_a_v_b'       => ''
+        );
+
+        foreach (array_keys($object) as $key) {
+            $result[$key] = $object[$key];
+        }
+        $result = array_merge($result, $otherKeys);
+        return (object)$result;
+    }
 
     /**
      * Создает новые страницы из старых с новым идентификтором
@@ -115,9 +270,9 @@ class Mover {
 
     /**
      * Возвращает все страницы по очереди Мо, М
-     * отсортированные порядку: connected, towns, services
-     * с установленным part_type
-     * @return array
+     * отсортированные порядку: connected, towns, services, service_with_car
+     * с установленным old_id, old_parent_id, part_type
+     * @return void
      */
     private function getAllPages() {
         $sql = "SELECT * FROM pages WHERE id < 10000 ORDER BY id";
@@ -126,80 +281,50 @@ class Mover {
         $sql = "SELECT * FROM pages WHERE id >= 10000 ORDER BY id";
         $m = Database::query($sql, 'withCount');
 
-        $this->counts = (object)array(
+        self::$counts = (object)array(
             Constants::PART_MO     => $mo->rowCount,
             Constants::PART_MOSCOW => $m->rowCount,
         );
 
-        // Сортируем $mo по порядку connected, towns, services
-        $connected = array_filter($mo->result, function($page) {
-            return $page['page_type'] == Constants::PAGE_TYPE_CONNECTED;
-        });
-        $towns = array_filter($mo->result, function($page) {
-            return $page['page_type'] == Constants::PAGE_TYPE_TOWN;
-        });
-        $services = array_filter($mo->result, function($page) {
-            return $page['page_type'] == Constants::PAGE_TYPE_SERVICE;
-        });
-        $mo->result = array_merge($connected, $towns, $services);
-
-
-        // Сортируем $m по порядку connected, towns, services
-        $connected = array_filter($m->result, function($page) {
-            return $page['page_type'] == Constants::PAGE_TYPE_CONNECTED;
-        });
-        $towns = array_filter($m->result, function($page) {
-            return $page['page_type'] == Constants::PAGE_TYPE_TOWN;
-        });
-        $services = array_filter($m->result, function($page) {
-            return $page['page_type'] == Constants::PAGE_TYPE_SERVICE;
-        });
-        $m->result = array_merge($connected, $towns, $services);
-
-
-        // Устанавливаем part_type
+        // Устанавливаем old_id, old_parent_id, part_type
         foreach ($mo->result as &$page) {
+            $page['old_id'] = $page['id'];
+            $page['old_parent_id'] = $page['parent_id'];
             $page['part_type'] = Constants::PART_MO;
         }
         foreach ($m->result as &$page) {
+            $page['old_id'] = $page['id'];
+            $page['old_parent_id'] = $page['parent_id'];
             $page['part_type'] = Constants::PART_MOSCOW;
         }
 
+        // Сортируем $mo по порядку connected, towns, services, service_with_car
+        self::$pages_mo[Constants::PAGE_TYPE_CONNECTED] = array_filter($mo->result, function ($page) {
+            return $page['page_type'] == Constants::PAGE_TYPE_CONNECTED;
+        });
+        self::$pages_mo[Constants::PAGE_TYPE_TOWN] = array_filter($mo->result, function ($page) {
+            return $page['page_type'] == Constants::PAGE_TYPE_TOWN;
+        });
+        self::$pages_mo[Constants::PAGE_TYPE_SERVICE] = array_filter($mo->result, function ($page) {
+            return $page['page_type'] == Constants::PAGE_TYPE_SERVICE;
+        });
+        self::$pages_mo[Constants::PAGE_TYPE_SERVICE_WITH_CAR] = array_filter($mo->result, function ($page) {
+            return $page['page_type'] == Constants::PAGE_TYPE_SERVICE_WITH_CAR;
+        });
 
-        $pages = array_merge($mo->result, $m->result);
-
-        $preparedPages = array();
-        foreach ($pages as $page) {
-            $id = $page['id'];
-            // устанавливаем в ключ старый идентификатор для удобства
-            $preparedPages[$id] = (object)$page;
-        }
-
-        return $preparedPages;
-    }
-
-
-    /**
-     * Возвращает все страницы по типу page_type
-     * @param $pageType
-     * @return array|mixed
-     */
-    private function getPages($pageType) {
-        $sql = "SELECT 
-                    *
-                FROM 
-                    pages 
-                WHERE
-                    page_type = '$pageType'
-                ORDER BY
-                    id
-                ";
-        return Database::query($sql, 'withCount');
-    }
-
-
-    public function movePagesToNewTable() {
-        core::log($this->newPages);
+        // Сортируем $m по порядку connected, towns, services, service_with_car
+        self::$pages_m[Constants::PAGE_TYPE_CONNECTED] = array_filter($m->result, function ($page) {
+            return $page['page_type'] == Constants::PAGE_TYPE_CONNECTED;
+        });
+        self::$pages_m[Constants::PAGE_TYPE_TOWN] = array_filter($m->result, function ($page) {
+            return $page['page_type'] == Constants::PAGE_TYPE_TOWN;
+        });
+        self::$pages_m[Constants::PAGE_TYPE_SERVICE] = array_filter($m->result, function ($page) {
+            return $page['page_type'] == Constants::PAGE_TYPE_SERVICE;
+        });
+        self::$pages_m[Constants::PAGE_TYPE_SERVICE_WITH_CAR] = array_filter($m->result, function ($page) {
+            return $page['page_type'] == Constants::PAGE_TYPE_SERVICE_WITH_CAR;
+        });
     }
 
 
@@ -232,6 +357,34 @@ class Mover {
     }
 
 
+    /** ------------------------------------------------------- */
+    /** ------------------------------------------------------- */
+    /** ------------------------------------------------------- */
+
+    /**
+     * Возвращает все страницы по типу page_type
+     * @param $pageType
+     * @return array|mixed
+     */
+    private function getPages($pageType) {
+        $sql = "SELECT 
+                    *
+                FROM 
+                    pages 
+                WHERE
+                    page_type = '$pageType'
+                ORDER BY
+                    id
+                ";
+        return Database::query($sql, 'withCount');
+    }
+
+
+    public function movePagesToNewTable() {
+        core::log($this->newPages);
+    }
+
+
     /**
      * Получает все страницы по 3-м типам и ставит типы друг за другом
      * @return array
@@ -257,6 +410,19 @@ class Mover {
         }
 
         return $preparedPages;
+    }
+
+    /**
+     *
+     */
+    public function showNames() {
+        echo '<table>';
+        foreach ($this->pages as $page) {
+            $this->startTr();
+            $this->printRowByKeys($page, ['id', 'parent_id', 'cpu_path', 'name', 'part_type', 'type', 'page_type']);
+            $this->endTr();
+        }
+        echo '</table>';
     }
 }
 
