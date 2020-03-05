@@ -151,7 +151,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото вывоза мусора',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 65,
-            'priceId'                           => 7
+            'priceId'                           => 7,
+            'isNew'                             => true
         ),
         Constants::ZAKAZAT_GAZEL_CPU             => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -166,7 +167,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото Газелей для перевозки',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 66,
-            'cars_onlyId'                       => [11, 12]
+            'cars_onlyId'                       => [11, 12],
+            'isNew'                             => true
         ),
         Constants::GRUZCHIKI_CPU                 => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -181,7 +183,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото грузчиков',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 67,
-            'priceId'                           => 8
+            'priceId'                           => 8,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZHNYE_RABOTY_CPU       => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -196,7 +199,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажных работ',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 68,
-            'priceId'                           => 9
+            'priceId'                           => 9,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZH_POLOV_CPU           => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -211,7 +215,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажа полов',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 69,
-            'priceId'                           => 10
+            'priceId'                           => 10,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZH_KVARTIRY_CPU        => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -226,7 +231,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажа квартиры',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 70,
-            'priceId'                           => 11
+            'priceId'                           => 11,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZH_DOMA_CPU            => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -241,7 +247,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажа дома',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 71,
-            'priceId'                           => 12
+            'priceId'                           => 12,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZH_DVEREY_CPU          => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -256,7 +263,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажа дверей',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 72,
-            'priceId'                           => 13
+            'priceId'                           => 13,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZH_STEN_CPU            => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -271,7 +279,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажа стен',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 73,
-            'priceId'                           => 14
+            'priceId'                           => 14,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZH_VANNOY_CPU          => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -286,7 +295,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажа ванной',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 74,
-            'priceId'                           => 15
+            'priceId'                           => 15,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZH_SANTEHKABINY_CPU    => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -301,7 +311,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажа сантехкабины',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 75,
-            'priceId'                           => 16
+            'priceId'                           => 16,
+            'isNew'                             => true
         ),
         Constants::DEMONTAZH_MEBELI_CPU          => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE,
@@ -316,7 +327,8 @@ class PageMskServices extends Page {
             'titleGallery'                      => 'Фото демонтажа мебели',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 76,
-            'priceId'                           => 17
+            'priceId'                           => 17,
+            'isNew'                             => true
         ),
         Constants::HYUNDAI_PORTER_CPU            => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE_WITH_CAR,
@@ -332,6 +344,7 @@ class PageMskServices extends Page {
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 77,
             'carId'                             => 10,
+            'isNew'                             => true
         ),
         Constants::GAZEL_STANDART_CPU            => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE_WITH_CAR,
@@ -347,6 +360,7 @@ class PageMskServices extends Page {
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 78,
             'carId'                             => 11,
+            'isNew'                             => true
         ),
         Constants::GAZEL_UDLINYONNAYA_CPU        => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE_WITH_CAR,
@@ -362,6 +376,7 @@ class PageMskServices extends Page {
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 79,
             'carId'                             => 12,
+            'isNew'                             => true
         ),
         Constants::ZIL_BYCHOK_CPU                => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE_WITH_CAR,
@@ -377,6 +392,7 @@ class PageMskServices extends Page {
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 80,
             'carId'                             => 13,
+            'isNew'                             => true
         ),
         Constants::PYATITONNIK_CPU               => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE_WITH_CAR,
@@ -392,6 +408,7 @@ class PageMskServices extends Page {
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 81,
             'carId'                             => 14,
+            'isNew'                             => true
         ),
         Constants::SEMITONNIK_CPU                => array(
             'pageType'                          => Constants::PAGE_TYPE_SERVICE_WITH_CAR,
@@ -407,6 +424,7 @@ class PageMskServices extends Page {
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'galleryId'                         => 82,
             'carId'                             => 15,
+            'isNew'                             => true
         ),
 
         // Из Москвы в Б
@@ -1257,7 +1275,7 @@ class PageMskServices extends Page {
                     $pop = array_pop($car->attributes);
 
                     $result = $page->distance_from_moscow * 2 * $carPrice_KM_outside_city + $carPrice;
-echo $result;
+                    echo $result;
                     $car->attributes['Цена']->intValue = $result;
                     $car->attributes['Цена']->value = number_format($result, 0, '', ' ') . ' руб';
                 }
