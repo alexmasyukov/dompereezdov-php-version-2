@@ -283,7 +283,7 @@ class Page {
         Core::getSmarty()->assign('subMenuMoskva', $this->menu->getMenuMoskva());
 
         // Список услуг для левого блока _left__service_block.tpl
-        Core::getSmarty()->assign('services', $this->getServices(Constants::START_ID__M));
+        Core::getSmarty()->assign('services', $this->getServices(10000));
 
         // Генерируем хлебные крошки
         Core::getSmarty()->assign('breadcrumb', $this->generateBreadcrumbHTML(Core::getUrl()));
