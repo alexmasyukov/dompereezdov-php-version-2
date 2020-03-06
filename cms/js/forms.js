@@ -1,8 +1,12 @@
 function load_data(sql_table_name, id, sql_images_table_name, sql_images_table_id_title, sql_features_table_name, sql_features_table_id_title, features_table_id) {
+
+    console.log('load data');
     if (id == '' || id == 'undefined') {
         return;
     }
 
+
+    
     $(document).ready(function () {
         $.ajax({
             type: "POST",
@@ -17,6 +21,7 @@ function load_data(sql_table_name, id, sql_images_table_name, sql_images_table_i
                 sql_features_table_id_title: sql_features_table_id_title
             },
             success: function (json) {
+                console.log(json);
                 // console.log(json.sql_fields);
                 // console.log(json.sql_values);
 

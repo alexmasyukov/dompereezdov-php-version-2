@@ -40,7 +40,6 @@ $Mover->join();
 $Mover->setNewParentId();
 //$Mover->showNames(Mover::$pages, $names, true);
 
-// готово без хлебных крошек
 $Mover->addNewConnectedTo__m_to_b();
 $Mover->addNewTownsTo__m_to_b();
 $Mover->addNewServicesTo__m_to_b();
@@ -55,18 +54,29 @@ $Mover->join__m_to_b();
 
 //$Mover->showNames(Mover::$pages, $names, true);
 
-$Mover->recordPages();
+//$Mover->recordPages();
 
-// Считать все тексты
-// Обновить page_id на всех текстах
-// Считать все отзывы
-// Обновить town_start_id на всех отзывах
+/** это работает и было сделано. Можно не выполнять постоянно */
+//$Mover->getReviews();
+//$Mover->setNew__town_start_id__reviews();
+//$Mover->updateReviews();
+//$Mover->showNames(Mover::$reviews, ['id', 'usluga', 'town_start_id', 'old_town_start_id'], true);
+
+/** это работает и было сделано. Можно не выполнять постоянно */
+//$Mover->getPagesTexts();
+//$Mover->setNew__page_id__pagesTexts();
+//$Mover->updatePagesTexts();
+//$Mover->showNames(Mover::$pagesTexts, ['id', 'page_id', 'old_page_id'], true);
+
 
 
 class Mover {
     public static $counts = array();
     public static $pages = array();
     public static $newServices = array();
+
+    public static $reviews = array();
+    public static $pagesTexts = array();
 
     public static $pages_mo = array(
         Constants::PAGE_TYPE_CONNECTED => [],
@@ -100,12 +110,92 @@ class Mover {
         });
     }
 
+    public function updatePagesTexts() {
+        foreach (self::$pagesTexts as $text) {
+            if ($text['page_id'] == 'NONE') continue;
+
+            $sql = 'UPDATE 
+                        pages_texts 
+                    SET 
+                        page_id = "' . $text['page_id'] . '" 
+                    WHERE 
+                        id = ' . $text['id'];
+            Database::query($sql, 'asResult');
+        }
+    }
+
+    /**
+     * Проставляет новый page_id в тексте
+     */
+    public function setNew__page_id__pagesTexts() {
+        foreach (self::$pagesTexts as &$text) {
+            $page_id = $text['old_page_id'];
+            $text['page_id'] = $this->getNewPageIdByOldId($page_id);
+        }
+    }
+
+    /**
+     *  Получает id, page_id из таблицы текстов для страниц pages_texts_before
+     */
+    public function getPagesTexts() {
+        $sql = "SELECT id, page_id FROM pages_texts_before";
+        $texts = Database::query($sql);
+
+        foreach ($texts as &$text) {
+            $text['old_page_id'] = $text['page_id'];
+        }
+
+        self::$pagesTexts = $texts;
+    }
+
+
+    /**
+     * Обновляет в отзывах town_start_id
+     */
+    public function updateReviews() {
+        foreach (self::$reviews as $review) {
+            $sql = 'UPDATE 
+                        feedback 
+                    SET 
+                        town_start_id = "' . $review['town_start_id'] . '" 
+                    WHERE id = ' . $review['id'];
+            Database::query($sql, 'asResult');
+        }
+    }
+
+    /**
+     * Проставляет новый town_start_id в отзыве
+     */
+    public function setNew__town_start_id__reviews() {
+        foreach (self::$reviews as &$review) {
+            $town_start_id = $review['old_town_start_id'];
+            $review['town_start_id'] = $this->getNewPageIdByOldId($town_start_id);
+        }
+    }
+
+    /**
+     * Получает все отзывы
+     */
+    public function getReviews() {
+        $sql = "SELECT * FROM feedback_before";
+        $reviews = Database::query($sql);
+
+        $prepare = [];
+        foreach ($reviews as $review) {
+            $id = $review['id'];
+            $prepare[$id] = $review;
+            $prepare[$id]['old_town_start_id'] = $review['town_start_id'];
+        }
+
+        self::$reviews = $prepare;
+    }
+
 
     /**
      * Объединяет массивы МО и М (уже с новыми услугами) и преобразует
      */
     public function join() {
-        $prepared = [];
+//        $prepared = [];
         $pages = array_merge(
             self::$pages_mo[Constants::PAGE_TYPE_CONNECTED],
             self::$pages_mo[Constants::PAGE_TYPE_TOWN],
@@ -115,18 +205,18 @@ class Mover {
             self::$pages_m[Constants::PAGE_TYPE_SERVICE]
         );
 
-        // для удобства проставления parent_id в дальшейшем
-        foreach ($pages as $page) {
-            if (!empty($page['old_id'])) {
-                $id = $page['old_id'];
-            } else {
-                $id = $page['id'];
-            }
+//        // для удобства проставления parent_id в дальшейшем
+//        foreach ($pages as $page) {
+//            if (!empty($page['old_id'])) {
+//                $id = $page['old_id'];
+//            } else {
+//                $id = $page['id'];
+//            }
+//
+//            $prepared[$id] = $page;
+//        }
 
-            $prepared[$id] = $page;
-        }
-
-        self::$pages = $prepared;
+        self::$pages = $pages;
     }
 
     /**
@@ -153,15 +243,22 @@ class Mover {
         //        array_splice(self::$pages, 10);
 
         foreach (self::$pages as $page) {
+//            echo $page['id'].'<br/>';
             if (empty($page['parent_id'])) $page['parent_id'] = 0;
             if (empty($page['sort'])) $page['sort'] = 0;
             if (empty($page['level'])) $page['level'] = -1;
             if (empty($page['old_id'])) $page['old_id'] = 0;
             if (empty($page['old_parent_id'])) $page['old_parent_id'] = 0;
 
+
+
             $sql = 'INSERT INTO pages (' . implode(',', array_keys($page)) . ') 
                         VALUES ("' . implode('","', array_values($page)) . '");';
             //            echo $sql;
+
+            if ($page['id'] == 1852) {
+                echo $sql;
+            }
             Database::query($sql, 'asResult');
         }
     }
@@ -268,8 +365,8 @@ class Mover {
                         'page_type'             => Constants::PAGE_TYPE_TOWN,
                         'public'                => 1,
                         'town_start_admin_name' => '', // todo ????????
-                        'breadcrumb_names'        => '', //'Москва*'.$town['name'],
-                        'breadcrumb_paths'        => '',//'/moskva/*/moskva/'.$cpu.'/'
+                        'breadcrumb_names'      => '', //'Москва*'.$town['name'],
+                        'breadcrumb_paths'      => '',//'/moskva/*/moskva/'.$cpu.'/'
                     ));
         }
     }
@@ -448,18 +545,21 @@ class Mover {
                 continue;
             }
 
-            $page['parent_id'] = $this->getNewIdByOldParentId($page['old_parent_id']);
+            $page['parent_id'] = $this->getNewPageIdByOldId($page['old_parent_id']);
         }
     }
 
-    /**
-     * Возвращает новый id при нахождении элемента по старому parent_id
-     * @param $oldParentId
-     * @return mixed
-     */
-    private function getNewIdByOldParentId($oldParentId) {
-        return self::$pages[$oldParentId]['id'];
-    }
+//    /**
+//     * Возвращает новый id при нахождении элемента по старому parent_id
+//     * @param $oldParentId
+//     * @return mixed
+//     */
+//    private function getNewIdByOldParentId($oldParentId) {
+//        foreach (self::$pages as $page) {
+//            if
+//        }
+//        return self::$pages[$oldParentId]['id'];
+//    }
 
 
     function startTr() {
@@ -513,6 +613,20 @@ class Mover {
         echo $isTable ? '</table>' : null;
     }
 
+    /**
+     *
+     * @param $old_id
+     * @return string
+     */
+    private function getNewPageIdByOldId($old_id) {
+        foreach (self::$pages as $page) {
+            if ($page['old_id'] == $old_id) {
+                return $page['id'];
+            }
+        }
+        return 'NONE';
+    }
+
     /** ------------------------------------------------------- */
     /** ------------------------------------------------------- */
     /** ------------------------------------------------------- */
@@ -533,11 +647,6 @@ class Mover {
                     id
                 ";
         return Database::query($sql, 'withCount');
-    }
-
-
-    public function movePagesToNewTable() {
-        core::log($this->newPages);
     }
 
 

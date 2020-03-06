@@ -28,7 +28,7 @@
 
 
 $(document).ready(function (){
-    $('#product_category_id').live("click", function(){
+    $('#product_category_id').on("click", function(){
             /*var allCheckboxes = $(".categories_check input:checkbox:enabled");
             var notChecked = allCheckboxes.not(':checked');
             allCheckboxes.removeAttr('checked');
@@ -42,7 +42,7 @@ $(document).ready(function (){
 
 
 
-    $('.save_sort_categories').live("click", function(){
+    $('.save_sort_categories').on("click", function(){
         save_sort_and_parents_categories('.categories_container', $(this).data('sql-table'))
     })
 
@@ -51,7 +51,7 @@ $(document).ready(function (){
     down_up_but_visible(); //Создаем стрелки для перетаскивания категорий
 
 
-    $('.visual_plus').live("click", function(){
+    $('.visual_plus').on("click", function(){
         visual_ul = $(this).parent().siblings('.down_box');
         if (visual_ul.css('display')=='none') {
             visual_ul.css('display', '');
@@ -65,7 +65,7 @@ $(document).ready(function (){
 
 
 
-    $('.visual_but .fa-arrow-circle-down').live("click", function(){
+    $('.visual_but .fa-arrow-circle-down').on("click", function(){
         this_li = $(this).closest('li');
         next_li = $(this_li).next('li');
 
@@ -87,7 +87,7 @@ $(document).ready(function (){
 
 
 
-    $('.visual_but .fa-arrow-circle-up').live("click", function(){
+    $('.visual_but .fa-arrow-circle-up').on("click", function(){
         this_li = $(this).closest('li');
         prev_li = $(this_li).prev('li');
 
@@ -248,7 +248,7 @@ $(document).ready(function (){
 
 
 //
-// $('.visual_but .fa-caret-down').live("click", function() {
+// $('.visual_but .fa-caret-down').on("click", function() {
 //        this_v_elem = $(this).closest('.v_elem'); //.
 //        this_li = $(this).closest('li');
 //

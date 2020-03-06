@@ -52,7 +52,7 @@
 <script src="..//cms/js/features.js"></script>
 <script src="..//cms/system/fileupload/ajaxfileupload.js"></script>
 <script src="..//cms/js/catalog_categories.js"></script>
-<script src="..//cms/js/documents.js"></script>
+<!--<script src="..//cms/js/documents.js"></script>-->
 
 
 

@@ -23,10 +23,10 @@ $exit_link = 'admin.php?link=feedback&filter=' . $filter;
 
 //Описание формы (Название сверху и путь на сером фоне)
 $form_info = array(
-    page_title => 'Редактирование отзыва',
-    module_title => 'отзывы',
+    page_title        => 'Редактирование отзыва',
+    module_title      => 'отзывы',
     where_you_title_1 => 'отзывы',
-    where_you_link_1 => $exit_link
+    where_you_link_1  => $exit_link
 );
 
 //Получаем категории для выбора родителя (с radio button)
@@ -398,7 +398,7 @@ $close_onclick = "
                                                             tabindex="11"
                                                     >
                                                         <?php
-
+                                                        include_once $root . '/constants/common.php';
                                                         include_once $root . '/core/class.page.inc';
                                                         include_once $root . '/core/class.pageMskServices.inc';
                                                         $services = array();
