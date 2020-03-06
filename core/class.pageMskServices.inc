@@ -1016,13 +1016,11 @@ class PageMskServices extends Page {
 
     private function prepareBreadcrumbs($page) {
         // todo: fix it
-        $breadcrumbs = (object)Database::query("select 
-                breadcrumb_ids,
+        $breadcrumbs = (object)Database::query("
+            select 
                 breadcrumb_paths,
                 breadcrumb_names 
             from pages where id = $page->parent_id", 'fetch'); //
-
-        //        $breadcrumbs->breadcrumb_ids .= '*'.$page->id;
 
         $breadcrumbs->breadcrumb_names = explode('*', $breadcrumbs->breadcrumb_names);
         $breadcrumbs->breadcrumb_paths = explode('*', $breadcrumbs->breadcrumb_paths);
@@ -1095,9 +1093,6 @@ class PageMskServices extends Page {
         $texts = $this->getTextsByPageID($page->id, 'pages_texts');
         $additionalFilelds = $this->getAdditionalFields();
 
-        core::log($page);
-        core::log($additionalFilelds);
-
         // Соединяем все подготовленное в общий объект
         $page = (object)array_merge((array)$page, (array)$texts);
         $page = (object)array_merge((array)$page, (array)$additionalFilelds);
@@ -1105,10 +1100,10 @@ class PageMskServices extends Page {
         // 20.02.2020 Выключаем карты навседа
         // Core::getSmarty()->assign('carsForMap', Cars::getCarsJsonForYandexMap());
 
+        // Если нужна фотогалерея
         if (!empty($page->galleryId)) {
             Core::getSmarty()->assign('photogallery', Photogallery::getImagesByGallaryId($page->galleryId));
         }
-
 
         // Если нам нужно показать прайс, получаем его из БД
         if ($page->priceId) {
@@ -1198,8 +1193,6 @@ class PageMskServices extends Page {
         // Обновляем хлебные крошки, добавляя название страницы в конец
         $this->updateBreadcrumb($page);
 
-
-        //        core::log($page->breadcrumb_ids);
         //        core::log($page->breadcrumb_paths);
         //        core::log($page->breadcrumb_names);
 
@@ -1332,6 +1325,16 @@ class PageMskServices extends Page {
                 break;
             case Constants::PAGE_TYPE_CONNECTED:
             case Constants::PAGE_TYPE_TOWN:
+                // На связующей странице /moskva/ добавляем две ссылки на разделы Из Москвы в Б
+                // ГРУЗОПЕРЕВОЗКИ ИЗ МОСКВЫ
+                // ПЕРЕЕЗДЫ ИЗ МОСКВЫ
+                if ($page->cpu_path == '/moskva/') {
+                    Core::getSmarty()->assign('links_to_part_moscowToB', (object)array(
+                        (object)['title' => Constants::GRUZOPEREVOZKI_IZ_MOSKVY, 'url' => '/moskva/'.Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU.'/'],
+                        (object)['title' => Constants::PEREEZDY_IZ_MOSKVY, 'url' => '/moskva/'.Constants::PEREEZDY_IZ_MOSKVY_CPU.'/'],
+                    ));
+                }
+
                 Core::getSmarty()->display('mskServicesPage__default.tpl');
                 break;
 

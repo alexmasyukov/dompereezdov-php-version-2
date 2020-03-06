@@ -35,6 +35,9 @@ class Page {
         header("HTTP/1.x 404 Not Found");
         $page = new Page();
         $page->view();
+        Core::getSmarty()->assign('metaTitle', '404 Страница не найдена');
+        Core::getSmarty()->assign('metaDescription', '404 Страница не найдена');
+        Core::getSmarty()->assign('metaKeywords', '');
         Core::getSmarty()->display('page404.tpl');
         exit;
     }

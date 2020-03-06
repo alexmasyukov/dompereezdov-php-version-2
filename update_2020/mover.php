@@ -6,8 +6,8 @@
  * Time: 18:39
  */
 
-ini_set("display_errors", 1);
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//ini_set("display_errors", 1);
+//error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 $root = realpath($_SERVER['DOCUMENT_ROOT']);
 require $root . '/constants/common.php';
@@ -20,11 +20,12 @@ require $root . '/core/functions.php';
 require $root . '/update_2020/data/new_m_towns.php';
 
 $log = true;
-$names = ['id', 'cpu_path', 'old_id', 'old_parent_id'];
+$names = ['id', 'parent_id', 'cpu_path', 'old_id', 'old_parent_id'];
 
+/** СОБЛЮДАЙ ТАКОЙ ПОРЯДОК ФУНКЦИЙ !!!!!! */
 $Mover = new Mover();
-$Mover->setNewId__mo();
 $Mover->addNewServicesTo__mo();
+$Mover->setNewId__mo();
 //$Mover->showNames(Mover::$pages_mo[Constants::PAGE_TYPE_CONNECTED], $names, true);
 //$Mover->showNames(Mover::$pages_mo[Constants::PAGE_TYPE_TOWN], $names, true);
 //$Mover->showNames(Mover::$pages_mo[Constants::PAGE_TYPE_SERVICE], $names, true);
@@ -35,30 +36,35 @@ $Mover->setNewId__m();
 //$Mover->showNames(Mover::$pages_m[Constants::PAGE_TYPE_TOWN], $names, true);
 //$Mover->showNames(Mover::$pages_m[Constants::PAGE_TYPE_SERVICE], $names, true);
 
+$Mover->join();
+$Mover->setNewParentId();
+//$Mover->showNames(Mover::$pages, $names, true);
 
-//$Mover->addNewConnectedTo__m_to_b();
-//$Mover->addNewTownsTo__m_to_b();
-//$Mover->addNewServicesTo__m_to_b();
+// готово без хлебных крошек
+$Mover->addNewConnectedTo__m_to_b();
+$Mover->addNewTownsTo__m_to_b();
+$Mover->addNewServicesTo__m_to_b();
+//$Mover->showNames(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED], $names, true);
+//$Mover->showNames(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_TOWN], $names, true);
+//$Mover->showNames(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE], $names, true);
+
+$Mover->join__m_to_b();
 //core::log(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED]);
 //core::log(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_TOWN]);
 //core::log(Mover::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE]);
 
+//$Mover->showNames(Mover::$pages, $names, true);
 
-//core::log($Mover->pages);
-//$Mover->setNewParentId();
-//core::log($Mover->pages);
+
+$Mover->recordPages();
+
 // Считать все тексты
 // Обновить page_id на всех текстах
 // Считать все отзывы
 // Обновить town_start_id на всех отзывах
-// Установить раздел у страниц PART_
-// Добавляем новые города
-// Добавить новые услуги в разделы PART_MO, PART_MOSCOW
-// Добавить новые услуги в раздел PART_MOSCOW_TO_B
 
 
 //        $pages = array_merge($mo->result, $m->result);
-//
 //        $preparedPages = array();
 //        foreach ($pages as $page) {
 //            $id = $page['id'];
@@ -103,6 +109,72 @@ class Mover {
         self::$newServices = array_filter(PageMskServices::$servicesTable, function ($service) {
             return !empty($service['isNew']) && $service['isNew'] == true;
         });
+    }
+
+
+    /**
+     * Объединяет массивы МО и М (уже с новыми услугами) и преобразует
+     */
+    public function join() {
+        $prepared = [];
+        $pages = array_merge(
+            self::$pages_mo[Constants::PAGE_TYPE_CONNECTED],
+            self::$pages_mo[Constants::PAGE_TYPE_TOWN],
+            self::$pages_mo[Constants::PAGE_TYPE_SERVICE],
+            self::$pages_m[Constants::PAGE_TYPE_CONNECTED],
+            self::$pages_m[Constants::PAGE_TYPE_TOWN],
+            self::$pages_m[Constants::PAGE_TYPE_SERVICE]
+        );
+
+        // для удобства проставления parent_id в дальшейшем
+        foreach ($pages as $page) {
+            if (!empty($page['old_id'])) {
+                $id = $page['old_id'];
+            } else {
+                $id = $page['id'];
+            }
+
+            $prepared[$id] = $page;
+        }
+
+        self::$pages = $prepared;
+    }
+
+    /**
+     * Объединяем страница M и МО в self::$pages
+     */
+    public function join__m_to_b() {
+        $pages__m_to_b = array_merge(
+            self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED],
+            self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_TOWN],
+            self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE]
+        );
+
+        self::$pages = array_merge(self::$pages, $pages__m_to_b);
+    }
+
+
+    /**
+     * Записывает страницы в БД
+     */
+    public function recordPages() {
+        $sql = "TRUNCATE pages";
+        Database::query($sql, 'asResult');
+
+        //        array_splice(self::$pages, 10);
+
+        foreach (self::$pages as $page) {
+            if (empty($page['parent_id'])) $page['parent_id'] = 0;
+            if (empty($page['sort'])) $page['sort'] = 0;
+            if (empty($page['level'])) $page['level'] = -1;
+            if (empty($page['old_id'])) $page['old_id'] = 0;
+            if (empty($page['old_parent_id'])) $page['old_parent_id'] = 0;
+
+            $sql = 'INSERT INTO pages (' . implode(',', array_keys($page)) . ') 
+                        VALUES ("' . implode('","', array_values($page)) . '");';
+            //            echo $sql;
+            Database::query($sql, 'asResult');
+        }
     }
 
 
@@ -263,7 +335,7 @@ class Mover {
             $a = $newConnected;
             $a['id'] = self::$m_to_b__startId++;
             $a['cpu'] = $link;
-            $a['cpu_path'] = $link;
+            $a['cpu_path'] = '/moskva/' . $link . '/';
             self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED][] = $a;
         }
     }
@@ -321,10 +393,10 @@ class Mover {
      * @return void
      */
     private function getAllPages() {
-        $sql = "SELECT * FROM pages WHERE id < 10000 ORDER BY id";
+        $sql = "SELECT * FROM pages_clean WHERE id < 10000 ORDER BY id";
         $mo = Database::query($sql, 'withCount');
 
-        $sql = "SELECT * FROM pages WHERE id >= 10000 ORDER BY id";
+        $sql = "SELECT * FROM pages_clean WHERE id >= 10000 ORDER BY id";
         $m = Database::query($sql, 'withCount');
 
         self::$counts = (object)array(
@@ -379,13 +451,13 @@ class Mover {
      * $this->pages[NUMBER]   NUMBER - это старый id
      */
     public function setNewParentId() {
-        foreach ($this->pages as &$page) {
-            if ($page->old_parent_id == 0) {
-                $page->parent_id = 0;
+        foreach (self::$pages as &$page) {
+            if ($page['old_parent_id'] == 0) {
+                $page['parent_id'] = 0;
                 continue;
             }
 
-            $page->parent_id = $this->getNewIdByOldParentId($page->old_parent_id);
+            $page['parent_id'] = $this->getNewIdByOldParentId($page['old_parent_id']);
         }
     }
 
@@ -395,7 +467,7 @@ class Mover {
      * @return mixed
      */
     private function getNewIdByOldParentId($oldParentId) {
-        return $this->pages[$oldParentId]->id;
+        return self::$pages[$oldParentId]['id'];
     }
 
 
@@ -423,6 +495,7 @@ class Mover {
 
     function printRowByKeys($page, $keys) {
         foreach ($keys as $key) {
+            if ($key == 'id') $page[$key] = '*' . $page[$key] . '*';
             echo '<td>' . $page[$key] . '</td>';
         }
     }
@@ -462,7 +535,7 @@ class Mover {
         $sql = "SELECT 
                     *
                 FROM 
-                    pages 
+                    pages_clean 
                 WHERE
                     page_type = '$pageType'
                 ORDER BY

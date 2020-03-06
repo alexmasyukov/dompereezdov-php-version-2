@@ -14,6 +14,18 @@
                             {$page->top_text}
                         </div>
 
+                        {if $links_to_part_moscowToB}
+                            <div class="bl uslugi-list">
+                                <ul class="uslugi-ul">
+                                    {foreach $links_to_part_moscowToB as $link}
+                                        <li>
+                                            <a href="{$protocol}://{$HTTP_HOST}{$link->url}">{$link->title}</a>
+                                        </li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                        {/if}
+
                         {if $similarServices}
                             <div class="bl uslugi-list">
                                 <ul class="uslugi-ul">

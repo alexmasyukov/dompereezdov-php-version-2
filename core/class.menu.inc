@@ -63,7 +63,7 @@ class Menu {
      * Получаем элементы выпадающего меню Москва
      */
     public static function getMenuMoskva() {
-        return self::outTree(10000, 1);
+        return self::outTree(50000, 1);
 
     }
 
@@ -83,7 +83,7 @@ class Menu {
                     pages
                 WHERE 
                     public = 1
-                    AND (part_type <> trim("'.Constants::PART_MOSCOW_TO_B.'")
+                    AND (part_type <> trim("' . Constants::PART_MOSCOW_TO_B . '")
                         OR part_type IS NULL)
                 ORDER BY 
                     type, 
@@ -168,7 +168,7 @@ class Menu {
 
 
                     $value_name = $value->name;
-//                    Core::log($value);
+                    //                    Core::log($value);
                     if (strpos($value_name, "       ") !== false || $value_name == 'services' ||
                         $value->page_type == 'service') {
                         continue;

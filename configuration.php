@@ -7,14 +7,16 @@ $protocol = 'https';
 $db_server = 'localhost';
 $db_login = 'root';
 $db_password = 'root';
-$db_name = 'dp';
+$db_name = 'dp_last';
 
 $databaseConfig = (object)array(
     'server' => 'localhost',
-    'name' => 'dp',
+    'name' => 'dp_last',
     'login' => 'root',
     'password' => 'root'
 );
+
+
 
 
 /** PRODUCTION **/
