@@ -720,6 +720,8 @@ class PageMskServices extends Page {
         $sql = "
             SELECT 
                 name,
+                breadcrumb_paths,
+                breadcrumb_names,   
                 p_ro,
                 p_da,
                 p_ve,
@@ -1014,20 +1016,6 @@ class PageMskServices extends Page {
         }
     }
 
-    private function prepareBreadcrumbs($page) {
-        // todo: fix it
-        $breadcrumbs = (object)Database::query("
-            select 
-                breadcrumb_paths,
-                breadcrumb_names 
-            from pages where id = $page->parent_id", 'fetch'); //
-
-        $breadcrumbs->breadcrumb_names = explode('*', $breadcrumbs->breadcrumb_names);
-        $breadcrumbs->breadcrumb_paths = explode('*', $breadcrumbs->breadcrumb_paths);
-
-        return (object)array_merge((array)$page, (array)$breadcrumbs);
-    }
-
     /**
      * Возвращает html таблицы с посчитанными ценами в таблицах для
      * страницы Переезды из Москвы в Б
@@ -1178,23 +1166,8 @@ class PageMskServices extends Page {
         $page = $this->replaceWordsInTextOnLinks($page);
         $page = $this->setUCFirstInTexts($page);
 
-
-        // Эти свойства в шаблоне берутся из $page напрямую
-        //        if ($page->breadcrumb_names) {
-        ////            $page->breadcrumb_names = explode('*', $page->breadcrumb_names);
-        ////            $page->breadcrumb_paths = explode('*', $page->breadcrumb_paths);
-        ////            array_pop($page->breadcrumb_names);
-        ////            array_pop($page->breadcrumb_paths);
-        //        } else {
-        //            $page = $this->prepareBreadcrumbs($page);
-        //        }
-        $page = $this->prepareBreadcrumbs($page);
-
-        // Обновляем хлебные крошки, добавляя название страницы в конец
+        // Обновляем хлебные крошки
         $this->updateBreadcrumb($page);
-
-        //        core::log($page->breadcrumb_paths);
-        //        core::log($page->breadcrumb_names);
 
         // Обязательно делаем это после Middleware
         switch ($page->page_type) {
@@ -1244,7 +1217,7 @@ class PageMskServices extends Page {
 
                         // Начинаем собирать новую ссылку на машину
                         // Получаем последний элемет массива ссылок города, он всегда без услуги в конце
-                        $left = end($page->breadcrumb_paths);
+                        $left = end(explode('*', $page->breadcrumb_paths));
                         // Услуга, которую мы нашли по совпадению id машины содержит нужный нам cpu
                         // ВНИМАНИЕ! cpu машины и cpu усулуги могут не совпадать!
                         $right = $needService->cpu;
@@ -1268,7 +1241,6 @@ class PageMskServices extends Page {
                     $pop = array_pop($car->attributes);
 
                     $result = $page->distance_from_moscow * 2 * $carPrice_KM_outside_city + $carPrice;
-                    echo $result;
                     $car->attributes['Цена']->intValue = $result;
                     $car->attributes['Цена']->value = number_format($result, 0, '', ' ') . ' руб';
                 }
@@ -1315,6 +1287,7 @@ class PageMskServices extends Page {
         Core::getSmarty()->assign('metaDescription', $page->metaDescription);
         Core::getSmarty()->assign('metaKeywords', $page->metaKeywords);
         // end Middleware
+
 
         switch ($page->page_type) {
             case Constants::PAGE_TYPE_SERVICE:

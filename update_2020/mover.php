@@ -55,7 +55,6 @@ $Mover->join__m_to_b();
 
 //$Mover->showNames(Mover::$pages, $names, true);
 
-
 $Mover->recordPages();
 
 // Считать все тексты
@@ -63,16 +62,6 @@ $Mover->recordPages();
 // Считать все отзывы
 // Обновить town_start_id на всех отзывах
 
-
-//        $pages = array_merge($mo->result, $m->result);
-//        $preparedPages = array();
-//        foreach ($pages as $page) {
-//            $id = $page['id'];
-//            // устанавливаем в ключ старый идентификатор для удобства
-//            $preparedPages[$id] = (object)$page;
-//        }
-
-//return $preparedPages;
 
 class Mover {
     public static $counts = array();
@@ -265,6 +254,7 @@ class Mover {
         $new_m_towns = $GLOBALS['new_m_towns'];
 
         foreach ($new_m_towns as $town) {
+            $cpu = eng_name($town['name']);
             self::$pages_m_to_b[Constants::PAGE_TYPE_MOSCOW_TO_B_TOWN][] =
                 self::prepareRow(
                     $town,
@@ -272,13 +262,14 @@ class Mover {
                         'id'                    => self::$m_to_b__startId++,
                         'parent_id'             => 0, // Может Москва родитель?
                         'part_type'             => Constants::PART_MOSCOW_TO_B,
-                        'cpu'                   => eng_name($town['name']),
-                        'cpu_path'              => eng_name($town['name']),
+                        'cpu'                   => $cpu,
+                        'cpu_path'              => $cpu,
                         'type'                  => Constants::PAGE_TYPE_TOWN,
                         'page_type'             => Constants::PAGE_TYPE_TOWN,
                         'public'                => 1,
                         'town_start_admin_name' => '', // todo ????????
-                        'breadcrumb_ids'        => '' // todo ????????
+                        'breadcrumb_names'        => '', //'Москва*'.$town['name'],
+                        'breadcrumb_paths'        => '',//'/moskva/*/moskva/'.$cpu.'/'
                     ));
         }
     }

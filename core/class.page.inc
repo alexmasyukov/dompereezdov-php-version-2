@@ -163,46 +163,45 @@ class Page {
                 break;
             case 'moskovskaya-oblast':
             case 'moskva':
+                // Связующая страница Из Москвы в Б и страница услуги из Москвы в Б
+                if ($page->cpu == Constants::GRUZOPEREVOZKI_MOSKVA_XXX_CPU ||
+                    $page->cpu == Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU) {
+                    $breadcrumb .= ' » ' . Constants::GRUZOPEREVOZKI_MOSKVA_XXX;
+                }
+                if ($page->cpu == Constants::PEREEZDY_MOSKVA_XXX_CPU ||
+                    $page->cpu == Constants::   PEREEZDY_IZ_MOSKVY_CPU) {
+                    $breadcrumb .= ' » ' . Constants::PEREEZDY_MOSKVA_XXX;
+                }
+
+
                 if (empty($page->breadcrumb_names)) break;
 
-                //                $names = explode('*', $page->breadcrumb_names);
-                //                $paths = explode('*', $page->breadcrumb_paths);
+                $names = explode('*', $page->breadcrumb_names);
+                $paths = explode('*', $page->breadcrumb_paths);
 
-                $names = $page->breadcrumb_names;
-                $paths = breadcrumb_paths;
+                // Главная » Московская область
+                if (count($names) == 1) {
+                    $breadcrumb .= ' » ' . array_pop($names);
+                }
 
-                //                core::log($names);
-                //                core::log($paths);
-                //
-                //                if (count($names) == 1) {
-                //                    $lastName = $names[0];
-                //                }
-                //
-                //                if (count($names) > 1) {
-                //                    $lastName = array_pop($names);
-                //                    $middleTitle = implode(', ', $names);
-                //                    $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
-                //                }
-
-                $lastName = end($names);
-                $middleTitle = implode(', ', $names);
-                $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
-
-                //                        $lastName = array_pop($names);
-
-
-                //
-                //                core::log($lastName);
-                //                core::log($middleTitle);
-                //                core::log($breadcrumb);
-                //                core::log($page->russianName);
-
-                if (empty($page->russianName)) {
-                    if (!empty($lastName)) {
-                        $breadcrumb .= ' » ' . $lastName;
+                // Главная » Московская область » Волоколамский район
+                // Главная » Московская область, Волоколамский район, Волоколамск » Грузоперевозки
+                if (count($names) > 1) {
+                    if (empty($page->russianName)) {
+                        // Главная » Московская область, Волоколамский район » Волоколамск
+                        // Значит мы сейчас на услуге PageMskServices::$servicesTable->default а у нее нет russianName
+                        // Удаляем послеждний элемент, чтобы он не попал в середину
+                        $lastTitle = array_pop($names);
+                        // Удаляем последний элемент и у путей
+                        array_pop($paths);
+                    } else {
+                        // Главная » Московская область, Волоколамский район, Волоколамск » Грузоперевозки
+                        $lastTitle = $page->russianName;
                     }
-                } else {
-                    $breadcrumb .= ' » ' . $page->russianName;
+
+                    $middleTitle = implode(', ', $names);
+                    $breadcrumb .= '<a href="' . $paths[count($paths) - 1] . '">' . $middleTitle . '</a>';
+                    $breadcrumb .= ' » ' . $lastTitle;
                 }
                 break;
             case 'otzyvy':
