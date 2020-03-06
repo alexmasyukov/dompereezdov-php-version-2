@@ -96,7 +96,7 @@ class Mover {
         Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE   => [],
     );
     private static $mo__startId = 1;
-    private static $m__startId = 50000;
+    private static $m__startId = Constants::START_ID__M;
     private static $m_to_b__startId = 100000;
 
     /**

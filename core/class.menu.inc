@@ -63,7 +63,7 @@ class Menu {
      * Получаем элементы выпадающего меню Москва
      */
     public static function getMenuMoskva() {
-        return self::outTree(50000, 1);
+        return self::outTree(Constants::START_ID__M, 1);
 
     }
 

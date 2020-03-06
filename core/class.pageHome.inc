@@ -100,7 +100,7 @@ class PageHome extends Page {
 
         // Формируем отзывы слева
         $this->buildReviewsOnLeftBlock(array(
-            'townId' => 10000, // Если выбрана Москва (id 10000) отображаются на главной странице https://dp.local/
+            'townId' => Constants::START_ID__M, // Если выбрана Москва (id Constants::START_ID__M) отображаются на главной странице https://dp.local/
             'service' => 'Грузоперевозки'
         ));
 

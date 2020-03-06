@@ -492,9 +492,9 @@ class PageMskServices extends Page {
             'cpu'                               => '', // автогенерация
             'galleryId'                         => 62,
             'russianName'                       => '', // автозаполнение
-            'metaTitle'                         => '! Недорогие грузоперевозки, переезды квартир, офисов и дач, вывоз мебели и техники на утилизацию, перевозка пианино в #нас-пункт-пп#',
-            'metaDescription'                   => '! Компания «ДомПереездов» предлагает недорогие, но при этом качественные транспортные услуги в #нас-пункт-пп#. Кроме того к Вашим услугам бригады опытных грузчиков и такелажников.',
-            'h1'                                => '! Недорогие транспортные услуги в #нас-пункт-пп#',
+            'metaTitle'                         => 'Недорогие грузоперевозки, переезды квартир, офисов и дач, вывоз мебели и техники на утилизацию, перевозка пианино в #нас-пункт-пп#',
+            'metaDescription'                   => 'Компания «ДомПереездов» предлагает недорогие, но при этом качественные транспортные услуги в #нас-пункт-пп#. Кроме того к Вашим услугам бригады опытных грузчиков и такелажников.',
+            'h1'                                => 'Недорогие транспортные услуги в #нас-пункт-пп#',
             'titlePrice'                        => '',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
             'titleGallery'                      => Constants::TITLE_GALLERY_1,
@@ -869,13 +869,13 @@ class PageMskServices extends Page {
                 // В МОСКВЕ ВООБЩН ВСЕ С ТИПОМ town, сделано было для удобства,
                 // чтобы показывать сразу услуги
                 // ведь у элементов МОСКВЫ нет дочерних элементов
-                if ($page->id >= 10000) {
+                if ($page->id >= Constants::START_ID__M) {
                     switch ($page->type) {
                         // ДЛЯ ЦАО и РАЙОНОВ
                         case 'okrug':
                         case 'raion':
                             $this->buildReviewsOnLeftBlock(array(
-                                'townId'                     => 10000,
+                                'townId'                     => Constants::START_ID__M,
                                 Constants::PAGE_TYPE_SERVICE => Constants::TRANSPORTNIE_USLUGI
                             ));
                             break;
@@ -890,7 +890,7 @@ class PageMskServices extends Page {
                 }
 
                 // ЭТО РАБОТАЕТ ТОЛЬКО НА МОСКОВСКОЙ ОБЛАСТИ
-                if ($page->id < 10000) {
+                if ($page->id < Constants::START_ID__M) {
                     $this->buildReviewsOnLeftBlock(array(
                         'townId'                     => $page->id,
                         Constants::PAGE_TYPE_SERVICE => Constants::TRANSPORTNIE_USLUGI
@@ -918,9 +918,9 @@ class PageMskServices extends Page {
 
                 // ЭТО РАБОТАЕТ ТОЛЬКО ДЛЯ МОСКВЫ
                 // Если это страница услуги любого населенного пункта Москвы
-                if ($page->parent_id >= 10000) {
+                if ($page->parent_id >= Constants::START_ID__M) {
                     // значит показываем в этой услуги отзывы со ВСЕЙ Москвы
-                    $townId = 10000;
+                    $townId = Constants::START_ID__M;
 
                     // НО!
                     // Если это города Москвы (их всего 4), показываем отзывы именно этих городов

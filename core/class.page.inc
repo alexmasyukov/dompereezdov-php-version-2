@@ -149,7 +149,7 @@ class Page {
 
     /**
      * Генерирует HMTL хлебных крошек
-     * @param $coreUrlObj
+     * @param      $coreUrlObj
      * @param bool $page
      * @return string
      */
@@ -165,37 +165,37 @@ class Page {
             case 'moskva':
                 if (empty($page->breadcrumb_names)) break;
 
-//                $names = explode('*', $page->breadcrumb_names);
-//                $paths = explode('*', $page->breadcrumb_paths);
+                //                $names = explode('*', $page->breadcrumb_names);
+                //                $paths = explode('*', $page->breadcrumb_paths);
 
                 $names = $page->breadcrumb_names;
                 $paths = breadcrumb_paths;
 
-//                core::log($names);
-//                core::log($paths);
-//
-//                if (count($names) == 1) {
-//                    $lastName = $names[0];
-//                }
-//
-//                if (count($names) > 1) {
-//                    $lastName = array_pop($names);
-//                    $middleTitle = implode(', ', $names);
-//                    $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
-//                }
+                //                core::log($names);
+                //                core::log($paths);
+                //
+                //                if (count($names) == 1) {
+                //                    $lastName = $names[0];
+                //                }
+                //
+                //                if (count($names) > 1) {
+                //                    $lastName = array_pop($names);
+                //                    $middleTitle = implode(', ', $names);
+                //                    $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
+                //                }
 
-            $lastName = end($names);
-            $middleTitle = implode(', ', $names);
-            $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
+                $lastName = end($names);
+                $middleTitle = implode(', ', $names);
+                $breadcrumb .= '<a href="' . $paths[count($names) - 1] . '">' . $middleTitle . '</a>';
 
-            //                        $lastName = array_pop($names);
+                //                        $lastName = array_pop($names);
 
 
-//
-//                core::log($lastName);
-//                core::log($middleTitle);
-//                core::log($breadcrumb);
-//                core::log($page->russianName);
+                //
+                //                core::log($lastName);
+                //                core::log($middleTitle);
+                //                core::log($breadcrumb);
+                //                core::log($page->russianName);
 
                 if (empty($page->russianName)) {
                     if (!empty($lastName)) {
@@ -265,7 +265,7 @@ class Page {
         // id города по умолчанию в форме добавления отзыва в скрытом поле,
         // для того, чтобы город отзыва определилися в панеле управления
         // ставим ВСЕГДА Москву
-        Core::getSmarty()->assign('review_form_town_start_id', 10000);
+        Core::getSmarty()->assign('review_form_town_start_id', Constants::START_ID__M);
 
 
         // Контакты для _header.tpl
@@ -284,7 +284,7 @@ class Page {
         Core::getSmarty()->assign('subMenuMoskva', $this->menu->getMenuMoskva());
 
         // Список услуг для левого блока _left__service_block.tpl
-        Core::getSmarty()->assign('services', $this->getServices(10000));
+        Core::getSmarty()->assign('services', $this->getServices(Constants::START_ID__M));
 
         // Генерируем хлебные крошки
         Core::getSmarty()->assign('breadcrumb', $this->generateBreadcrumbHTML(Core::getUrl()));

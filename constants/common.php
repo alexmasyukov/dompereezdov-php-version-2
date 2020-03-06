@@ -1,9 +1,11 @@
 <?php
-
 class Constants {
     // Типы таблиц для расчета цен на странице Переезды из Москвы в Б
     const TYPE_PRICE_TABLE__ONLY_CAR_ID = 'TYPE_PRICE_TABLE__ONLY_CAR_ID';
     const TYPE_PRICE_TABLE__CAR_ID_WITH_PRICE = 'TYPE_PRICE_TABLE__CAR_ID_WITH_PRICE';
+
+
+    const START_ID__M = 50000;
 
     // Типы страниц
     const TYPE_OKRUG = 'okrug';
@@ -27,38 +29,38 @@ class Constants {
     const PART_MOSCOW_TO_B = 'moscowToB';
 
     // Остальное
-    const PEREEZDI = '! Переезды';
-    const TRANSPORTNIE_USLUGI = '! Транспортные услуги';
+    const PEREEZDI = 'Переезды';
+    const TRANSPORTNIE_USLUGI = 'Транспортные услуги';
 
-    const TITLE_PRICE_1 = '! Цены на грузоперевозки';
-    const TITLE_PRICE_2 = '! Цены на переезд';
-    const SIMILAR_SERVICES_2 = '! Другие услуги';
-    const TITLE_GALLERY_1 = '! Фото машин из нашего парка';
+    const TITLE_PRICE_1 = 'Цены на грузоперевозки';
+    const TITLE_PRICE_2 = 'Цены на переезд';
+    const SIMILAR_SERVICES_2 = 'Другие услуги';
+    const TITLE_GALLERY_1 = 'Фото машин из нашего парка';
 
     // Услуги
     const GRUZOPEREVOZKI_CPU = 'gruzoperevozki';
-    const GRUZOPEREVOZKI = '! Грузоперевозки';
+    const GRUZOPEREVOZKI = 'Грузоперевозки';
 
     const VIVOZ_MEBELI_CPU = 'vyvoz-mebeli';
-    const VIVOZ_MEBELI = '! Вывоз мебели ';
+    const VIVOZ_MEBELI = 'Вывоз мебели ';
 
     const GRUZOVOE_TAKSI_CPU = 'gruzovoe-taksi';
-    const GRUZOVOE_TAKSI = '! Грузовое такси';
+    const GRUZOVOE_TAKSI = 'Грузовое такси';
 
     const KVARTIRNII_PEREEZD_CPU = 'kvartirnyj-pereezd';
-    const KVARTIRNII_PEREEZD = '! Квартирный переезд';
+    const KVARTIRNII_PEREEZD = 'Квартирный переезд';
 
     const DACHNII_PEREEZD_CPU = 'dachnyj-pereezd';
-    const DACHNII_PEREEZD = '! Дачный переезд';
+    const DACHNII_PEREEZD = 'Дачный переезд';
 
     const OFISNII_PEREEZD_CPU = 'ofisnyj-pereezd';
-    const OFISNII_PEREEZD = '! Офисный переезд';
+    const OFISNII_PEREEZD = 'Офисный переезд';
 
     const PEREVOZKA_MEBELI_CPU = 'perevozka-mebeli';
-    const PEREVOZKA_MEBELI = '! Перевозка мебели';
+    const PEREVOZKA_MEBELI = 'Перевозка мебели';
 
     const PEREVOZKA_PIANINO_CPU = 'perevozka-pianino';
-    const PEREVOZKA_PIANINO = '! Перевозка пианино';
+    const PEREVOZKA_PIANINO = 'Перевозка пианино';
 
     // Новые услуги 19.02.2020
     const VYVOZ_MUSORA_CPU = 'vyvoz-musora';
