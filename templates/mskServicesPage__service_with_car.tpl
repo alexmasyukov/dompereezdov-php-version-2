@@ -34,6 +34,10 @@
                             </table>
                         </div>
 
+                        <div class="bl text text-bottom">
+                            {$page->bottom_text}
+                        </div>
+
                         <div class="bl cars">
                             <h2>{$page->titleGallery}</h2>
                             {include '_carsPage__all_cars_page.tpl'}
@@ -42,6 +46,8 @@
                         {if $photogallery}
                             {include '_mskServicePage__photogallery.tpl'}
                         {/if}
+
+
                     </div>
                 </div>
             </div>

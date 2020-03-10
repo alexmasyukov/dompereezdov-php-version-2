@@ -440,7 +440,7 @@ class PageMskServices extends Page {
             'titlePrice'                        => '',
             'titleGallery'                      => '',
             'titleSimilarServices'              => Constants::SIMILAR_SERVICES_2,
-            'serviceLink'                       => '/moskva/gruzoperevozki-moskva-'
+            'serviceLink'                       => '/moskva/gruzoperevozki-moskva-' // используется для создания ссылки в списке городов на связующей странице
         ),
         Constants::PEREEZDY_IZ_MOSKVY_CPU        => array(
             'pageType'                          => Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED,
@@ -1139,7 +1139,7 @@ class PageMskServices extends Page {
                 Core::getSmarty()->assign('cars', $cars);
                 break;
 
-            // Todo какого хуя я так сделал? Все равно проверяется page_type!
+            // Todo какого я так сделал? Все равно проверяется page_type!
             //  Нарушение принципов чистого кода!
             //  Разнести условия на case
             case Constants::PAGE_TYPE_CONNECTED:
@@ -1177,7 +1177,7 @@ class PageMskServices extends Page {
 
                 // Добавляем название города в назавние всех машин
                 foreach ($cars as &$car) {
-                    $car->name = $car->name . ' в ' . $page->p_da;
+                    $car->name = $car->name . ' в ' . $page->p_pr;
                 }
 
                 // Это Id той машины, о которой страницы

@@ -2,6 +2,7 @@
 
 // Вместо заказ газели сделать Грузовое такси
 require $root . '/core/class.database.inc';
+include_once $root . '/cms/pages/textImport/textDirections.php';
 
 ?>
 <script>
@@ -69,20 +70,53 @@ require $root . '/core/class.database.inc';
                                 <span class="required">*</span>
                             </label>
                             <div class="col-md-9">
-                                <select class="table-group-action-input form-control input-medium" type="select"
-                                        data-massive-element-type="select" data-necessarily="true"
+                                <select class="table-group-action-input form-control input-medium"
+                                        type="select"
+                                        data-massive-element-type="select"
+                                        data-necessarily="true"
                                         data-table-field="public"
-                                        data-select-of-type="value" id="textDirection" tabindex="13" style="width: 100% !important;">
+                                        data-select-of-type="value"
+                                        id="textDirection"
+                                        tabindex="13"
+                                        style="width: 100% !important;">
                                     <option value=""></option>
                                     <?php
-                                    include_once $root . '/cms/pages/textImport/textDirections.php';
-                                    foreach ($textDirections as $key => $value) {
-                                        $optionValue = $key;
+                                    foreach ($directions as $key => $value) {
                                         if (strpos($key, 'end') !== false) {
                                             $key = '----';
-                                            $optionValue = '';
                                         }
-                                        echo '<option value="' . $optionValue . '">' . $key . '</option>';
+
+                                        echo '<option value="' . $key . '">' . $key . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">Услуга:
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-9">
+                                <select
+                                        class="table-group-action-input form-control input-medium"
+                                        type="select"
+                                        data-massive-element-type="select"
+                                        data-necessarily="true"
+                                        data-table-field="public"
+                                        data-select-of-type="value"
+                                        id="service"
+                                        tabindex="14"
+                                        style="width: 100% !important;">
+                                    <option value=""></option>
+                                    <?php
+                                    foreach ($services as $service) {
+                                        if (
+                                            $service->title == '' ||
+                                            $service->cpu == Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU ||
+                                            $service->cpu == Constants::PEREEZDY_IZ_MOSKVY_CPU
+                                        ) continue;
+                                        echo '<option value="' . $service->cpu . '">' . $service->title . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -100,7 +134,7 @@ require $root . '/core/class.database.inc';
                                         data-table-field="public"
                                         data-select-of-type="value" id="textPosititon" tabindex="13">
                                     <?php
-                                    foreach ($textPostition as $key => $value) {
+                                    foreach ($textPositions as $key => $value) {
                                         echo '<option value="' . $key . '">' . $value . '</option>';
                                     }
                                     ?>
@@ -120,7 +154,8 @@ require $root . '/core/class.database.inc';
 
 
                                     <a id="tab_images_uploader_uploadfiles" class="btn yellow" style=" width: 100%;">
-                                        <input type="file" ACCEPT=".txt" name="fileupload" id="fileupload" style="width: 100%;"
+                                        <input type="file" ACCEPT=".txt" name="fileupload" id="fileupload"
+                                               style="width: 100%;"
                                                onchange="return ajaxFileUpload_file('fileupload', '/uploads/');"/>
                                     </a>
 
@@ -132,11 +167,12 @@ require $root . '/core/class.database.inc';
                                 <div class="file_info" style="display: none;">
                                     <h5><b>Загруженный файл:</b> <span class="file_name"></span></h5>
                                     <h5><b>Количество записей:</b> <span class="excel_num"></span></h5>
-
-                                    <br/>
                                     <a class="btn purple big" onclick="startTextSync();"> Начать синхронизацию <i
                                                 class="m-icon-big-swapright m-icon-white"></i></a>
+
+                                    <br/>
                                 </div>
+
 
 
                             </div>
@@ -145,6 +181,7 @@ require $root . '/core/class.database.inc';
 
                         <script>
                             function startTextSync() {
+                                console.log('startTextSync');
                                 $.ajax({
                                         type: "POST",
                                         url: "/cms/pages/textImport/syncText.php",
@@ -153,10 +190,12 @@ require $root . '/core/class.database.inc';
                                             file: $('.file_name').text(),
                                             textDirection: $.trim($('#textDirection option:selected').text()),
                                             textPosition: $.trim($('#textPosititon option:selected').val()),
+                                            service: $.trim($('#service option:selected').val()),
                                         },
                                         success: function (result) {
+                                            console.log(result);
                                             $('.result_sync').html(result);
-                                        }, // success
+                                        },
                                         error: function (jqxhr, textStatus, error) {
                                             $('.load_div').fadeOut(200);
                                             var err = textStatus + ", " + error + ' ';
@@ -185,12 +224,38 @@ require $root . '/core/class.database.inc';
 
                             <script>
 
-                                $(document).on('change', '#textPosititon, #textDirection', function () {
+                                $(document).on('change', '#service, #textPosititon, #textDirection', function () {
                                     $('.result_sync').html('');
                                     $('.file_name').html('');
                                     $('.file_info').hide();
                                     $('.excel_num').html('');
                                     $("#fileupload").val('');
+
+
+                                    $.ajax({
+                                            type: "POST",
+                                            url: "/cms/pages/textImport/syncText.php",
+                                            dataType: '',
+                                            data: {
+                                                action: 'SHOW_INFORMATION',
+                                                textDirection: $.trim($('#textDirection option:selected').text()),
+                                                service: $.trim($('#service option:selected').val()),
+                                            },
+                                            success: function (result) {
+                                                $('.result_sync').html(result);
+                                            },
+                                            error: function (jqxhr, textStatus, error) {
+                                                $('.load_div').fadeOut(200);
+                                                var err = textStatus + ", " + error + ' ';
+                                                console.log("Ошибка: " + err + ' Данные: ' + jqxhr.responseText);
+
+                                                $('#error_modal').find('.modal-body').empty();
+                                                $('#error_modal').find('.modal-body').append("Ошибка: " + err);
+                                                $('#error_modal').find('.modal-body').append(jqxhr.responseText);
+                                                $('#error_modal').modal();
+                                            } // error
+                                        }
+                                    )
                                 });
 
                                 function ajaxFileUpload_file(file_id, images_path_text) {
@@ -263,3 +328,35 @@ require $root . '/core/class.database.inc';
     </div>
 </div>
 
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    thead {
+        text-align: left;
+    }
+
+    .mysql {
+        position: relative;
+        color: rebeccapurple;
+        width: 100%;
+        height: 53px;
+        overflow: hidden;
+    }
+
+    p.mysql:after {
+        position: absolute;
+        content: '...';
+        right: 0;
+        bottom: -1px;
+        background: #ffffff;
+        padding: 0px 10px 0 3px;
+    }
+</style>

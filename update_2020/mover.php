@@ -23,7 +23,7 @@ $log = true;
 $names = ['id', 'parent_id', 'cpu_path', 'old_id', 'old_parent_id'];
 
 /** СОБЛЮДАЙ ТАКОЙ ПОРЯДОК ФУНКЦИЙ !!!!!! */
-$Mover = new Mover();
+//$Mover = new Mover();
 //$Mover->addNewServicesTo__mo();
 //$Mover->setNewId__mo();
 //$Mover->showNames(Mover::$pages_mo[Constants::PAGE_TYPE_CONNECTED], $names, true);
@@ -56,25 +56,27 @@ $Mover = new Mover();
 
 //$Mover->recordPages();
 
-/** это работает и было сделано. Можно не выполнять постоянно */
+/** это работает и было сделано. Можно не выполнять постоянно. Протестировано 8 марта */
+//$Mover = new Mover();
 //$Mover->getReviews();
+//$Mover->getPages__without_splitting();
 //$Mover->setNew__town_start_id__reviews();
 //$Mover->updateReviews();
 //$Mover->showNames(Mover::$reviews, ['id', 'usluga', 'town_start_id', 'old_town_start_id'], true);
 
 
-/** это работает и было сделано. Можно не выполнять постоянно */
-$Mover = new Mover();
-$Mover->getPages__without_splitting();
-$Mover->getPagesTexts_before__without_processing();
-$Mover->deletePagesTexts__whichNotFoundInPages();
-$Mover->setNewPageIdPagesTexts();
+/** это работает и было сделано. Можно не выполнять постоянно. Протестировано 8 марта */
+//$Mover = new Mover();
+//$Mover->getPages__without_splitting();
+//$Mover->getPagesTexts_before__without_processing();
+//$Mover->deletePagesTexts__whichNotFoundInPages();
+//$Mover->setNewPageIdPagesTexts();
+//$Mover->recordPagesTexts();
 //$Mover->showNames(Mover::$pagesTexts, ['id', 'page_id', 'old_page_id'], true);
-$Mover->recordPagesTexts();
 
-//$Mover->createEmptyTextWhereTheyNone();
-
-
+//Mover::setUnpublicPagesWhereTextsNotFound();
+Mover::setPublicPagesWhereTextsNotFound();
+//Mover::removeTestText();
 
 class Mover {
     public static $counts = array();
@@ -114,6 +116,12 @@ class Mover {
         self::$newServices = array_filter(PageMskServices::$servicesTable, function ($service) {
             return !empty($service['isNew']) && $service['isNew'] == true;
         });
+    }
+
+    public static function setPublicPagesWhereTextsNotFound() {
+        $sql = "UPDATE pages SET public = 1 where id NOT IN (select distinct page_id from pages_texts)";
+        Database::query($sql, 'asResult');
+//        SELECT id, name, cpu_path, public from pages where id NOT IN (select distinct page_id from pages_texts)
     }
 
     /**
