@@ -80,6 +80,12 @@
         font-family: 'Open Sans';
         font-weight: 400 !important
     }
+
+    .car_name_span {
+        min-height: 43px;
+        display: block;
+        width: 84%;
+    }
 </style>
 
 

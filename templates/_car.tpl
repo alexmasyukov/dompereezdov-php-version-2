@@ -4,7 +4,7 @@
         <img src="{$car->small_img}" alt="{$car->name}" title="{$car->name}" style="margin-bottom: 10px;"/>
     {else}
         <a href="{$protocol}://{$HTTP_HOST}{$car->cpu_path}">
-            {$car->name}
+            <span class="car_name_span">{$car->name}</span>
             <img src="{$car->small_img}" alt="{$car->name}" title="{$car->name}"/>
         </a>
     {/if}
@@ -19,4 +19,3 @@
         {/foreach}
     </table>
 </div>
-

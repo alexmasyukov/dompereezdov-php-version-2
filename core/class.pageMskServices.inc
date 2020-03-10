@@ -865,6 +865,9 @@ class PageMskServices extends Page {
         //          Все районы
         //          все нас пункты (иерархически)
 
+
+//        echo '$page->page_type = ' . $page->page_type . '<br>';
+
         switch ($page->page_type) {
             case Constants::PAGE_TYPE_TOWN:
                 // ЭТО РАБОТАЕТ ТОЛЬКО ДЛЯ МОСКВЫ
@@ -914,13 +917,13 @@ class PageMskServices extends Page {
                 break;
 
             case Constants::PAGE_TYPE_SERVICE:
-            case 'service_with_type':
+            case Constants::PAGE_TYPE_SERVICE_WITH_CAR:
                 // Показываем отзывы привязанные к родителю (так как мы на услуге, а нам нужен нас. пункт)
                 $townId = $page->parent_id;
 
                 // ЭТО РАБОТАЕТ ТОЛЬКО ДЛЯ МОСКВЫ
                 // Если это страница услуги любого населенного пункта Москвы
-                if ($page->parent_id >= Constants::START_ID__M) {
+                if ($page->part_type == Constants::PART_MOSCOW) {
                     // значит показываем в этой услуги отзывы со ВСЕЙ Москвы
                     $townId = Constants::START_ID__M;
 
@@ -934,8 +937,14 @@ class PageMskServices extends Page {
 
 
                 switch (Core::getUrl()->lastUriPart) {
-                    // todo: Добавить сюда новые услуги. Переписать эту выборку
                     case Constants::GRUZOPEREVOZKI_CPU:
+                    case Constants::HYUNDAI_PORTER_CPU:
+                    case Constants::GAZEL_STANDART_CPU:
+                    case Constants::GAZEL_UDLINYONNAYA_CPU:
+                    case Constants::ZIL_BYCHOK_CPU:
+                    case Constants::PYATITONNIK_CPU:
+                    case Constants::SEMITONNIK_CPU:
+                        //                        echo 'Грузоперевозки';
                         // Грузоперевозки
                         // Если выбрана Москва отображаются на главной странице (+) https://dp.local/
                         //      + на всех районах и округах Москвы
@@ -950,6 +959,7 @@ class PageMskServices extends Page {
                     case Constants::KVARTIRNII_PEREEZD_CPU:
                     case Constants::OFISNII_PEREEZD_CPU:
                     case Constants::DACHNII_PEREEZD_CPU:
+                        //                        echo 'Переезды';
                         // Переезды (все услуги переездов)
                         // Если выбрана Москва отображаются на страницах контента: (+)
                         //      Квартирный переезд
@@ -965,53 +975,71 @@ class PageMskServices extends Page {
                         break;
 
                     case Constants::VIVOZ_MEBELI_CPU:
+                    case Constants::PEREVOZKA_MEBELI_CPU:
+                    case Constants::PEREVOZKA_PIANINO_CPU:
+                    case Constants::VYVOZ_MUSORA_CPU:
+                    case Constants::GRUZCHIKI_CPU:
+                        //                        echo 'Точное';
                         // Вывоз мебели
                         // Если выбрана Москва контент (+) Вывоз старой мебели
                         // + на всех районах и округах Москвы
                         //  Если выбран нас. пункт МО - то на его страницу
                         //  Если выбран район МО - то на его страницу
+                        $pageType = Core::getUrl()->lastUriPart;
                         $this->buildReviewsOnLeftBlock(array(
                             'townId'                     => $townId, // (+ на всех районах и округах Москвы)
-                            Constants::PAGE_TYPE_SERVICE => Constants::VIVOZ_MEBELI
+                            Constants::PAGE_TYPE_SERVICE => self::$servicesTable->$pageType->reviewsServiceTitle
                         ));
                         break;
 
-                    case Constants::PEREVOZKA_PIANINO_CPU:
-                        // Перевозка пианино
-                        // Если выбрана Москва контент (+) Перевозка пианино
-                        // + на всех районах и округах Москвы
-                        //  Если выбран нас. пункт МО - то на его страницу
-                        //  Если выбран район МО - то на его страницу
-                        $this->buildReviewsOnLeftBlock(array(
-                            'townId'                     => $townId, // (+ на всех районах и округах Москвы)
-                            Constants::PAGE_TYPE_SERVICE => Constants::PEREVOZKA_PIANINO
-                        ));
-                        break;
 
                     case Constants::GRUZOVOE_TAKSI_CPU:
-                        // Грузовое такси
-                        // Если выбрана Москва, на всех районах и округах Москвы
-                        //  Если выбран нас. пункт МО - то на его страницу
-                        //  Если выбран район МО - то на его страницу
+                    case Constants::ZAKAZAT_GAZEL_CPU:
+                        //                        echo 'Грузовое такси и заказать газель';
                         $this->buildReviewsOnLeftBlock(array(
                             'townId'                     => $townId, // (+ на всех районах и округах Москвы)
                             Constants::PAGE_TYPE_SERVICE => Constants::GRUZOVOE_TAKSI
                         ));
                         break;
 
-                    case Constants::PEREVOZKA_MEBELI_CPU:
-                        // Певозка мебели
-                        // Если выбрана Москва, контент Перевозка мебели
-                        // + на всех районах и округах Москвы
-                        //  Если выбран нас. пункт МО - то на его страницу
-                        //  Если выбран район МО - то на его страницу
+
+                    case Constants::DEMONTAZHNYE_RABOTY_CPU:
+                    case Constants::DEMONTAZH_POLOV_CPU:
+                    case Constants::DEMONTAZH_KVARTIRY_CPU:
+                    case Constants::DEMONTAZH_DOMA_CPU:
+                    case Constants::DEMONTAZH_DVEREY_CPU:
+                    case Constants::DEMONTAZH_STEN_CPU:
+                    case Constants::DEMONTAZH_VANNOY_CPU:
+                    case Constants::DEMONTAZH_SANTEHKABINY_CPU:
+                    case Constants::DEMONTAZH_MEBELI_CPU:
+                        //                        echo 'Демонтажные работы';
                         $this->buildReviewsOnLeftBlock(array(
                             'townId'                     => $townId, // (+ на всех районах и округах Москвы)
-                            Constants::PAGE_TYPE_SERVICE => Constants::PEREVOZKA_MEBELI
+                            Constants::PAGE_TYPE_SERVICE => Constants::DEMONTAZHNYE_RABOTY
                         ));
                         break;
                 }
                 break;
+
+            // Из Москвы в Б
+            case Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE:
+                // Переезды из Москвы в Б
+                // Показываем отзывы привязанные к родителю (так как мы на услуге, а нам нужен нас. пункт)
+                $this->buildReviewsOnLeftBlock(array(
+                    'townId'                     => Constants::START_ID__M, //$page->parent_id, // (+)
+                    Constants::PAGE_TYPE_SERVICE => Constants::PEREEZDI
+                ));
+                break;
+
+            case Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE_WITH_CAR:
+                // Грузоперевозки из Москвы в Б
+                // Показываем отзывы привязанные к родителю (так как мы на услуге, а нам нужен нас. пункт)
+                $this->buildReviewsOnLeftBlock(array(
+                    'townId'                     => Constants::START_ID__M, //$page->parent_id, // (+)
+                    Constants::PAGE_TYPE_SERVICE => Constants::GRUZOPEREVOZKI
+                ));
+                break;
+
             default:
         }
     }
@@ -1166,6 +1194,9 @@ class PageMskServices extends Page {
         $page = $this->replaceWordsInTextOnLinks($page);
         $page = $this->setUCFirstInTexts($page);
 
+        $page->breadcrumb_names = explode('*', $page->breadcrumb_names);
+        $page->breadcrumb_paths = explode('*', $page->breadcrumb_paths);
+
         // Обновляем хлебные крошки
         $this->updateBreadcrumb($page);
 
@@ -1217,7 +1248,7 @@ class PageMskServices extends Page {
 
                         // Начинаем собирать новую ссылку на машину
                         // Получаем последний элемет массива ссылок города, он всегда без услуги в конце
-                        $left = end(explode('*', $page->breadcrumb_paths));
+                        $left = end($page->breadcrumb_paths);
                         // Услуга, которую мы нашли по совпадению id машины содержит нужный нам cpu
                         // ВНИМАНИЕ! cpu машины и cpu усулуги могут не совпадать!
                         $right = $needService->cpu;
@@ -1303,8 +1334,8 @@ class PageMskServices extends Page {
                 // ПЕРЕЕЗДЫ ИЗ МОСКВЫ
                 if ($page->cpu_path == '/moskva/') {
                     Core::getSmarty()->assign('links_to_part_moscowToB', (object)array(
-                        (object)['title' => Constants::GRUZOPEREVOZKI_IZ_MOSKVY, 'url' => '/moskva/'.Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU.'/'],
-                        (object)['title' => Constants::PEREEZDY_IZ_MOSKVY, 'url' => '/moskva/'.Constants::PEREEZDY_IZ_MOSKVY_CPU.'/'],
+                        (object)['title' => Constants::GRUZOPEREVOZKI_IZ_MOSKVY, 'url' => '/moskva/' . Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU . '/'],
+                        (object)['title' => Constants::PEREEZDY_IZ_MOSKVY, 'url' => '/moskva/' . Constants::PEREEZDY_IZ_MOSKVY_CPU . '/'],
                     ));
                 }
 

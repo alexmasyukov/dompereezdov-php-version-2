@@ -176,8 +176,8 @@ class Page {
 
                 if (empty($page->breadcrumb_names)) break;
 
-                $names = explode('*', $page->breadcrumb_names);
-                $paths = explode('*', $page->breadcrumb_paths);
+                $names = $page->breadcrumb_names;
+                $paths = $page->breadcrumb_paths;
 
                 // Главная » Московская область
                 if (count($names) == 1) {

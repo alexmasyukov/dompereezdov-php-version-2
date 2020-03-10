@@ -403,6 +403,39 @@ $close_onclick = "
                                                         include_once $root . '/core/class.pageMskServices.inc';
                                                         $services = array();
                                                         foreach (PageMskServices::$servicesTable as $service) {
+                                                            if (
+                                                                $service['cpu'] == Constants::HYUNDAI_PORTER_CPU
+                                                                || $service['cpu'] == Constants::GAZEL_STANDART_CPU
+                                                                || $service['cpu'] == Constants::GAZEL_UDLINYONNAYA_CPU
+                                                                || $service['cpu'] == Constants::ZIL_BYCHOK_CPU
+                                                                || $service['cpu'] == Constants::PYATITONNIK_CPU
+                                                                || $service['cpu'] == Constants::SEMITONNIK_CPU
+
+                                                                || $service['cpu'] == Constants::DEMONTAZH_POLOV_CPU
+                                                                || $service['cpu'] == Constants::DEMONTAZH_KVARTIRY_CPU
+                                                                || $service['cpu'] == Constants::DEMONTAZH_DOMA_CPU
+                                                                || $service['cpu'] == Constants::DEMONTAZH_DVEREY_CPU
+                                                                || $service['cpu'] == Constants::DEMONTAZH_STEN_CPU
+                                                                || $service['cpu'] == Constants::DEMONTAZH_VANNOY_CPU
+                                                                || $service['cpu'] == Constants::DEMONTAZH_SANTEHKABINY_CPU
+                                                                || $service['cpu'] == Constants::DEMONTAZH_MEBELI_CPU
+
+                                                                || $service['cpu'] == Constants::ZAKAZAT_GAZEL_CPU
+
+                                                                // Вместо них в файле в функции setReviewsOnLeftBlock
+                                                                // в выборе case Constants::PAGE_TYPE_MOSCOW_TO_B_SERVICE:
+                                                                // используются названия обычные GRUZOPEREVOZKI и PEREEZDY
+                                                                || $service['cpu'] == Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU
+                                                                || $service['cpu'] == Constants::PEREEZDY_IZ_MOSKVY_CPU
+                                                            ) continue;
+
+
+                                                            // Для правильной работы нужно сравнивать вхождение в строку,
+                                                            // так как полноценного cpu нет, он обрезан до gruzoperevozki-moskva-
+                                                            if (substr_count($service['cpu'], Constants::GRUZOPEREVOZKI_MOSKVA_XXX_CPU) == 1
+                                                                || substr_count($service['cpu'], Constants::PEREEZDY_MOSKVA_XXX_CPU) == 1) continue;
+
+
                                                             $services[] = $service['adminPanelReviewsFormInput_usluga'];
                                                         }
 

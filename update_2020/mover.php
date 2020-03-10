@@ -74,9 +74,9 @@ $names = ['id', 'parent_id', 'cpu_path', 'old_id', 'old_parent_id'];
 //$Mover->recordPagesTexts();
 //$Mover->showNames(Mover::$pagesTexts, ['id', 'page_id', 'old_page_id'], true);
 
-//Mover::setUnpublicPagesWhereTextsNotFound();
-Mover::setPublicPagesWhereTextsNotFound();
 //Mover::removeTestText();
+//Mover::setUnpublicPagesWhereTextsNotFound();
+//Mover::setPublicPagesWhereTextsNotFound();
 
 class Mover {
     public static $counts = array();
@@ -118,10 +118,20 @@ class Mover {
         });
     }
 
+    public static function removeTestText() {
+        $sql = "delete from pages_texts where id >= 3036";
+        Database::query($sql, 'asResult');
+    }
+
     public static function setPublicPagesWhereTextsNotFound() {
         $sql = "UPDATE pages SET public = 1 where id NOT IN (select distinct page_id from pages_texts)";
         Database::query($sql, 'asResult');
 //        SELECT id, name, cpu_path, public from pages where id NOT IN (select distinct page_id from pages_texts)
+    }
+
+    public static function setUnpublicPagesWhereTextsNotFound() {
+        $sql = "UPDATE pages SET public = 0 where id NOT IN (select distinct page_id from pages_texts)";
+        Database::query($sql, 'asResult');
     }
 
     /**
@@ -436,7 +446,7 @@ class Mover {
                         'type'                  => Constants::PAGE_TYPE_TOWN,
                         'page_type'             => Constants::PAGE_TYPE_TOWN,
                         'public'                => 1,
-                        'town_start_admin_name' => '', // todo ????????
+                        'town_start_admin_name' => $town['name'].' (из Москвы в Б)',
                         'breadcrumb_names'      => '', //'Москва*'.$town['name'],
                         'breadcrumb_paths'      => '',//'/moskva/*/moskva/'.$cpu.'/'
                     ));
@@ -457,7 +467,7 @@ class Mover {
                     'part_type'             => Constants::PART_MOSCOW_TO_B,
                     'type'                  => Constants::PAGE_TYPE_SERVICE,
                     'public'                => 1,
-                    'town_start_admin_name' => '' // todo ????????
+                    'town_start_admin_name' => ''
                 ));
 
             $cpu = eng_name($town['name']);
@@ -487,7 +497,7 @@ class Mover {
                     'type'                  => Constants::PAGE_TYPE_CONNECTED,
                     'page_type'             => Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED,
                     'public'                => 1,
-                    'town_start_admin_name' => '' // todo ????????
+                    'town_start_admin_name' => ''
                 )
             );
 
