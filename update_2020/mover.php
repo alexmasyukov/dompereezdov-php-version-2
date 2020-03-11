@@ -66,12 +66,12 @@ $names = ['id', 'parent_id', 'cpu_path', 'old_id', 'old_parent_id'];
 
 
 /** это работает и было сделано. Можно не выполнять постоянно. Протестировано 8 марта */
-//$Mover = new Mover();
-//$Mover->getPages__without_splitting();
-//$Mover->getPagesTexts_before__without_processing();
-//$Mover->deletePagesTexts__whichNotFoundInPages();
-//$Mover->setNewPageIdPagesTexts();
-//$Mover->recordPagesTexts();
+$Mover = new Mover();
+$Mover->getPages__without_splitting();
+$Mover->getPagesTexts_before__without_processing();
+$Mover->deletePagesTexts__whichNotFoundInPages();
+$Mover->setNewPageIdPagesTexts();
+$Mover->recordPagesTexts();
 //$Mover->showNames(Mover::$pagesTexts, ['id', 'page_id', 'old_page_id'], true);
 
 //Mover::removeTestText();
@@ -174,7 +174,7 @@ class Mover {
             $text['bottom_text'] = strip_tags($text['bottom_text']);
 
             $text['top_text'] = str_replace(['+7(926)792-01-05', '&nbsp;'], ['#phone1#', ' '], $text['top_text']);
-            $text['bottom_text'] = str_replace(['+7(926)792-01-05', '&nbsp;'], ['#phone1#', ' '], $text['top_text']);
+            $text['bottom_text'] = str_replace(['+7(926)792-01-05', '&nbsp;'], ['#phone1#', ' '], $text['bottom_text']);
 
             $sql = 'INSERT INTO pages_texts (page_id, top_text, bottom_text)
                         VALUES ('.$text['page_id'].', "'.Core::charsEncode($text['top_text']).'",
