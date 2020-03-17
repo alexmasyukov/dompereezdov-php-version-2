@@ -33,6 +33,7 @@ class Sitemap {
         $links = array_merge(self::getContentPages(), self::getPages(), self::getCars(), self::getReviews());
         Core::getSmarty()->assign('links', $links);
         Core::getSmarty()->assign('host', Core::getUrl()->host);
+        Core::getSmarty()->assign('protocol', $GLOBALS['protocol']);
         Core::getSmarty()->display('sitemap.tpl');
     }
 }

@@ -22,6 +22,8 @@ require $root . '/update_2020/data/new_m_towns.php';
 $log = true;
 $names = ['id', 'parent_id', 'cpu_path', 'old_id', 'old_parent_id'];
 
+echo 'НЕЛЬЗЯ ИСПОЛЬЗОВАТЬ ПОСЛЕ 16 МАРТА !!!!!!!!';
+
 /** СОБЛЮДАЙ ТАКОЙ ПОРЯДОК ФУНКЦИЙ !!!!!! */
 //$Mover = new Mover();
 //$Mover->addNewServicesTo__mo();
@@ -66,12 +68,12 @@ $names = ['id', 'parent_id', 'cpu_path', 'old_id', 'old_parent_id'];
 
 
 /** это работает и было сделано. Можно не выполнять постоянно. Протестировано 8 марта */
-$Mover = new Mover();
-$Mover->getPages__without_splitting();
-$Mover->getPagesTexts_before__without_processing();
-$Mover->deletePagesTexts__whichNotFoundInPages();
-$Mover->setNewPageIdPagesTexts();
-$Mover->recordPagesTexts();
+//$Mover = new Mover();
+//$Mover->getPages__without_splitting();
+//$Mover->getPagesTexts_before__without_processing();
+//$Mover->deletePagesTexts__whichNotFoundInPages();
+//$Mover->setNewPageIdPagesTexts();
+//$Mover->recordPagesTexts();
 //$Mover->showNames(Mover::$pagesTexts, ['id', 'page_id', 'old_page_id'], true);
 
 //Mover::removeTestText();

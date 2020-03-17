@@ -557,6 +557,25 @@ class PageMskServices extends Page {
             $page->$key = mb_str_replace('сотнями отзывов наших клиентов', '<a href="/otzyvy/">сотнями отзывов наших клиентов</a>', $page->$key);
             $page->$key = mb_str_replace('многочисленными отзывами', '<a href="/otzyvy/">многочисленными отзывами</a>', $page->$key);
 
+            $page->$key = mb_str_replace('сотни отзывов реальных клиентов', '<a href="/otzyvy/">сотни отзывов реальных клиентов</a>', $page->$key);
+            $page->$key = mb_str_replace('сотни реальных отзывов наших клиентов', '<a href="/otzyvy/">сотни реальных отзывов наших клиентов</a>', $page->$key);
+            $page->$key = mb_str_replace('написали в отзывах', '<a href="/otzyvy/">написали в отзывах</a>', $page->$key);
+            $page->$key = mb_str_replace('рассказали в отзывах', '<a href="/otzyvy/">рассказали в отзывах</a>', $page->$key);
+            $page->$key = mb_str_replace('многочисленными отзывами', '<a href="/otzyvy/">многочисленными отзывами</a>', $page->$key);
+            $page->$key = mb_str_replace('сотни отзывов реальных заказчиков', '<a href="/otzyvy/">сотни отзывов реальных заказчиков</a>', $page->$key);
+            $page->$key = mb_str_replace('сотни заказчиков, оставивших отзыв', '<a href="/otzyvy/">сотни заказчиков, оставивших отзыв</a>', $page->$key);
+            $page->$key = mb_str_replace('сотни клиентов, оставивших отзыв', '<a href="/otzyvy/">сотни клиентов, оставивших отзыв</a>', $page->$key);
+            $page->$key = mb_str_replace('сотни клиентов, написавших отзыв', '<a href="/otzyvy/">сотни клиентов, написавших отзыв</a>', $page->$key);
+            $page->$key = mb_str_replace('пишут в отзывах сотни наших заказчиков', '<a href="/otzyvy/">пишут в отзывах сотни наших заказчиков</a>', $page->$key);
+            $page->$key = mb_str_replace('сотнями отзывов наших клиентов', '<a href="/otzyvy/">сотнями отзывов наших клиентов</a>', $page->$key);
+            $page->$key = mb_str_replace('сотнями отзывов реальных заказчиков', '<a href="/otzyvy/">сотнями отзывов реальных заказчиков</a>', $page->$key);
+            $page->$key = mb_str_replace('отзывах реальных заказчиков', '<a href="/otzyvy/">отзывах реальных заказчиков</a>', $page->$key);
+            $page->$key = mb_str_replace('отзывах реальных клиентов', '<a href="/otzyvy/">отзывах реальных клиентов</a>', $page->$key);
+            $page->$key = mb_str_replace('отзывах наших клиентов', '<a href="/otzyvy/">отзывах наших клиентов</a>', $page->$key);
+            $page->$key = mb_str_replace('отзывах наших заказчиков', '<a href="/otzyvy/">отзывах наших заказчиков</a>', $page->$key);
+            $page->$key = mb_str_replace('сотням реальных отзывов клиентов', '<a href="/otzyvy/">сотням реальных отзывов клиентов</a>', $page->$key);
+            $page->$key = mb_str_replace('сотням реальных отзывов наших заказчиков', '<a href="/otzyvy/">сотням реальных отзывов наших заказчиков</a>', $page->$key);
+
             // 04.03.2020 Добавляем новые якоря
             $page->$key = mb_str_replace('пишут об этом в отзывах', '<a href="/otzyvy/">пишут об этом в отзывах</a>', $page->$key);
             $page->$key = mb_str_replace('сотни реальных отзывов наших заказчиков', '<a href="/otzyvy/">сотни реальных отзывов наших заказчиков</a>', $page->$key);
@@ -752,21 +771,32 @@ class PageMskServices extends Page {
 
     /**
      * Возвращает населенные пункты для списка Москва в Б
-     * @param $partType
+     * @param $serviceCpu
      * @return array|mixed
      */
-    function getTownsByPart_moscowToB($partType) {
+    function getTownsByPart_moscowToB($serviceCpu) {
         $sql = "
             SELECT 
                 id, name, cpu
             FROM 
                 pages 
             WHERE 
-                part_type = '" . $partType . "'
-                AND type = '" . Constants::TYPE_TOWN . "'
+                part_type = '".Constants::PART_MOSCOW_TO_B."'
+                AND type = '".Constants::TYPE_TOWN."'
                 AND public = 1
+                AND id IN (
+                    SELECT 
+                        parent_id 
+                    FROM 
+                        pages 
+                    WHERE 
+                        type = '".Constants::TYPE_SERVICE."'
+                        AND public = 1
+                        AND cpu LIKE '$serviceCpu%'
+                )
             ORDER BY
                 name";
+
         $towns = Database::query($sql);
 
         if ($towns) {
@@ -866,7 +896,7 @@ class PageMskServices extends Page {
         //          все нас пункты (иерархически)
 
 
-//        echo '$page->page_type = ' . $page->page_type . '<br>';
+        //        echo '$page->page_type = ' . $page->page_type . '<br>';
 
         switch ($page->page_type) {
             case Constants::PAGE_TYPE_TOWN:
@@ -1073,7 +1103,7 @@ class PageMskServices extends Page {
                     $carPrice = reset($cars[$carId]->attributes)->intValue;
 
                     $result = $distance_from_moscow * 2 * $carPrice_KM_outside_city + $carPrice;
-                    $tableHtmlContent = str_replace($labels[$key], number_format($result, 0, '', ' ') . ' руб.', $tableHtmlContent);
+                    $tableHtmlContent = str_replace($labels[$key], number_format($result, 0, '', ' ').' руб.', $tableHtmlContent);
                 }
                 break;
 
@@ -1089,7 +1119,7 @@ class PageMskServices extends Page {
                     $price = $prices[$key]; // Грузчики
 
                     $result = $distance_from_moscow * 2 * $carPrice_KM_outside_city + $carPrice + $price;
-                    $tableHtmlContent = str_replace($labels[$key], number_format($result, 0, '', ' ') . ' руб.', $tableHtmlContent);
+                    $tableHtmlContent = str_replace($labels[$key], number_format($result, 0, '', ' ').' руб.', $tableHtmlContent);
                 }
                 break;
         }
@@ -1181,12 +1211,26 @@ class PageMskServices extends Page {
                 }
                 break;
             case Constants::PAGE_TYPE_MOSCOW_TO_B_CONNECTED:
+                $towns = [];
+
+                switch ($page->cpu) {
+                    case Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU:
+                        $towns = $this->getTownsByPart_moscowToB(Constants::GRUZOPEREVOZKI_MOSKVA_XXX_CPU);
+                        break;
+                    case Constants::PEREEZDY_IZ_MOSKVY_CPU:
+                        $towns = $this->getTownsByPart_moscowToB(Constants::PEREEZDY_MOSKVA_XXX_CPU);
+                        break;
+                }
+
+                if (!$towns) {
+                    Page::view404();
+                }
+
                 // Устанавливаем ссылку для города (так как страницы connected могут быть разных услуг)
                 // serviceLink указана прямо в self::serviceTable и встраивается в $page через функцию
                 Core::getSmarty()->assign('serviceLink', $page->serviceLink);
-                Core::getSmarty()->assign('towns', $this->getTownsByPart_moscowToB(Constants::PART_MOSCOW_TO_B));
+                Core::getSmarty()->assign('towns', $towns);
                 break;
-
         }
 
         // Middleware
@@ -1208,7 +1252,7 @@ class PageMskServices extends Page {
 
                 // Добавляем название города в назавние всех машин
                 foreach ($cars as &$car) {
-                    $car->name = $car->name . ' в ' . $page->p_pr;
+                    $car->name = $car->name.' в '.$page->p_pr;
                 }
 
                 // Это Id той машины, о которой страницы
@@ -1253,7 +1297,7 @@ class PageMskServices extends Page {
                         // ВНИМАНИЕ! cpu машины и cpu усулуги могут не совпадать!
                         $right = $needService->cpu;
 
-                        $item->cpu_path = $left . $right . '/';
+                        $item->cpu_path = $left.$right.'/';
                         return $item;
                     }, $carsWithoutGeneralCar);
 
@@ -1273,7 +1317,7 @@ class PageMskServices extends Page {
 
                     $result = $page->distance_from_moscow * 2 * $carPrice_KM_outside_city + $carPrice;
                     $car->attributes['Цена']->intValue = $result;
-                    $car->attributes['Цена']->value = number_format($result, 0, '', ' ') . ' руб';
+                    $car->attributes['Цена']->value = number_format($result, 0, '', ' ').' руб';
                 }
 
                 Core::getSmarty()->assign('cars', $cars);
@@ -1334,8 +1378,8 @@ class PageMskServices extends Page {
                 // ПЕРЕЕЗДЫ ИЗ МОСКВЫ
                 if ($page->cpu_path == '/moskva/') {
                     Core::getSmarty()->assign('links_to_part_moscowToB', (object)array(
-                        (object)['title' => Constants::GRUZOPEREVOZKI_IZ_MOSKVY, 'url' => '/moskva/' . Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU . '/'],
-                        (object)['title' => Constants::PEREEZDY_IZ_MOSKVY, 'url' => '/moskva/' . Constants::PEREEZDY_IZ_MOSKVY_CPU . '/'],
+                        (object)['title' => Constants::GRUZOPEREVOZKI_IZ_MOSKVY, 'url' => '/moskva/'.Constants::GRUZOPEREVOZKI_IZ_MOSKVY_CPU.'/'],
+                        (object)['title' => Constants::PEREEZDY_IZ_MOSKVY, 'url' => '/moskva/'.Constants::PEREEZDY_IZ_MOSKVY_CPU.'/'],
                     ));
                 }
 

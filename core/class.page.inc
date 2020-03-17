@@ -290,6 +290,8 @@ class Page {
 
         if ($this->psk2Check()) {
             Core::getSmarty()->assign('canonical', 'https://' . Core::getUrl()->host . Core::getUrl()->urlPath);
+        } else {
+            Core::getSmarty()->assign('canonical', 'https://' . Core::getUrl()->host . Core::getUrl()->urlPath);
         }
 
         Core::getSmarty()->assign('countAllReviews', Reviews::getInstance()->getReviewsAllCount()); //$reviews->count);
