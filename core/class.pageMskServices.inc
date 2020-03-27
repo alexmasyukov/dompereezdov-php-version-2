@@ -847,7 +847,8 @@ class PageMskServices extends Page {
 
             $page->$key = mb_str_replace('#name#', $page->name, $page->$key);
 
-            $page->$key = mb_str_replace('#prenadlezhnost1#', $page->prenadlezhnost1, $page->$key);
+            // Делаем так, чтобы небыло пробела, если не заполнена переменная
+            $page->$key = mb_str_replace(' #prenadlezhnost1#', !empty($page->prenadlezhnost1) ? ' '.$page->prenadlezhnost1 : '', $page->$key);
             $page->$key = mb_str_replace('#tip_np_iz_a_v_b#', $page->tip_np_iz_a_v_b, $page->$key);
 
             $page->$key = mb_str_replace('#p_ro#', $page->p_ro, $page->$key);

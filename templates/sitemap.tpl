@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     {foreach $links as $link}
         <url>
-            <loc>{$protocol}://www.{$host}{$link}</loc>
+            <loc>{$protocol}://{$host}{$link}</loc>
             <priority>0.8</priority>
         </url>
     {/foreach}
