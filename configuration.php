@@ -2,38 +2,38 @@
 /* ---------- Конфигурация ------------- */
 /** LOCAL **/
 
-$protocol = 'https';
-
-$db_server = 'localhost';
-$db_login = 'root';
-$db_password = 'root';
-$db_name = 'dp_last';
-
-$databaseConfig = (object)array(
-    'server' => 'localhost',
-    'name' => 'dp_last',
-    'login' => 'root',
-    'password' => 'root'
-);
+//$protocol = 'https';
+//
+//$db_server = 'localhost';
+//$db_login = 'root';
+//$db_password = 'root';
+//$db_name = 'dp_last';
+//
+//$databaseConfig = (object)array(
+//    'server' => 'localhost',
+//    'name' => 'dp_last',
+//    'login' => 'root',
+//    'password' => 'root'
+//);
 
 
 
 
 /** PRODUCTION **/
 
-//$protocol = 'https';
-//
-//$db_server = 'localhost';
-//$db_login = 'u0339017_default';
-//$db_password = '6d3!K8jk';
-//$db_name = 'u0339017_default';
-//
-//$databaseConfig = (object)array(
-//    'server' => 'localhost',
-//    'name' => 'u0339017_default',
-//    'login' => 'u0339017_default',
-//    'password' => '6d3!K8jk'
-//);
+$protocol = 'https';
+
+$db_server = 'localhost';
+$db_login = 'u0339017_default';
+$db_password = '6d3!K8jk';
+$db_name = 'u0339017_default';
+
+$databaseConfig = (object)array(
+    'server' => 'localhost',
+    'name' => 'u0339017_default',
+    'login' => 'u0339017_default',
+    'password' => '6d3!K8jk'
+);
 
 
 
@@ -68,6 +68,10 @@ $phones = (object)array(
     'phone4' => (object)array(
         'text' => '+7 (926) 792-01-05',
         'number' => '+79267920105'
+    ),
+    'phone5' => (object)array(
+        'text' => '+7 (977) 834-49-68',
+        'number' => '+79778344968'
     ),
 );
 

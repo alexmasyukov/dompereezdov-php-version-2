@@ -144,6 +144,7 @@ class Page {
         $text = mb_str_replace('#phone2#', $GLOBALS['phones']->phone2->text, $text);
         $text = mb_str_replace('#phone3#', $GLOBALS['phones']->phone3->text, $text);
         $text = mb_str_replace('#phone4#', $GLOBALS['phones']->phone4->text, $text);
+        $text = mb_str_replace('#phone5#', $GLOBALS['phones']->phone5->text, $text);
         return $text;
     }
 

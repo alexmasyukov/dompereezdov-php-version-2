@@ -39,11 +39,11 @@
                                 <div class="bl uslugi-list">
                                     <ul class="uslugi-ul">
                                         {foreach $similarServices as $service}
-                                            {* Исключаем в списке услуг текущую услугу (мы итак на ее странице,
+                                            {* Исключаем в списке услуг текущую услугу (мы и так на ее странице,
                                             зачем показывать ее в списке *}
                                             {if $service->cpu_path neq $page->cpu_path}
                                                 <li>
-                                                    <a href="{$service->link}">{$service->title} в {$page->p_pr}</a>
+                                                    <a href="{$service->link}">{$service->title} в {$page->p_ve}</a>
                                                 </li>
                                             {/if}
                                         {/foreach}
