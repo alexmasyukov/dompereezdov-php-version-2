@@ -252,7 +252,7 @@ $close_onclick = "
                                                 <label class="col-md-1 control-label">Верхний текст:</label>
                                                 <div class="col-md-11">
                                                     <textarea
-                                                        class="form-control ckeditor"
+                                                        class="form-control myckeditor"
                                                         name="top_text"
                                                         data-massive-element-type="ckeditor"
                                                         data-default-value=""
@@ -277,7 +277,7 @@ $close_onclick = "
                                                 <label class="col-md-1 control-label">Нижний текст:</label>
                                                 <div class="col-md-11">
                                                     <textarea
-                                                            class="form-control ckeditor"
+                                                            class="form-control myckeditor"
                                                             name="bottom_text"
                                                             data-massive-element-type="ckeditor"
                                                             data-default-value=""

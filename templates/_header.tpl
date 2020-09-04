@@ -304,14 +304,16 @@
                     </li>
                     <li>
                         <a href="{$protocol}://{$HTTP_HOST}/moskva/">Москва</a>
-                        <ul class="sub-menu">
-                            {$subMenuMoskva}
+                        <ul id="subMenuMoskva" class="sub-menu">
+                            {*{$subMenuMoskva}*}
                         </ul>
                     </li>
                     <li>
                         <a href="{$protocol}://{$HTTP_HOST}/moskovskaya-oblast/">Московская область</a>
-                        <ul class="sub-menu">
-                            {$subMenuMoskovskayaOblast}
+                        <ul id="subMenuMoskovskayaOblast" class="sub-menu">
+                            {*{$subMenuMoskovskayaOblast}*}
+                            {**}
+                            {*id="subMenuMoskovskayaOblast"*}
                         </ul>
                     </li>
                 </ul>

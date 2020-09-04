@@ -1,7 +1,7 @@
 <?php
 $root = realpath($_SERVER['DOCUMENT_ROOT']);
-include_once $root . "/cms/system/base_connect.php";
-include_once $root . "/cms/system/functions.php";
+include_once $root."/cms/system/base_connect.php";
+include_once $root."/cms/system/functions.php";
 
 $sql_table_name = $_POST['sql_table_name'];
 $sql_values = $_POST['sql_values'];
@@ -40,35 +40,35 @@ foreach ($sql_fields as $corrent_field) {
 # Автоматически проставляем cpu_path
 # Получаем все категории и делаем поиск по ним
 if ($sql_table_name == 'content') {
-    $mysql_string = "select id, cpu, parent_id FROM content_category";
-    $categories_get = mysql_query($mysql_string);
+    $query_result = $db->query("select id, cpu, parent_id FROM content_category");
+    $categoriesData = $query_result->fetchAll(PDO::FETCH_ASSOC);
+
     $categories = array();
-    while ($value = mysql_fetch_array($categories_get)) {
-        $categories[$value['id']] = $value;
+    foreach ($categoriesData as $category) {
+        $categories[$category['id']] = $category;
     }
+
     $path = outTree_cpu_path($corrent_category_id, $categories);
     $sql_fields[] = 'cpu_path';
     $sql_values[] = $path.'/'.$corrent_cpu.'/';
 }
 
 
-
-
 # Автоматически проставляем cpu_path
 # Получаем все категории и делаем поиск по ним
 if ($sql_table_name == 'cars') {
-    $mysql_string = "select id, cpu, parent_id FROM cars_category";
-    $categories_get = mysql_query($mysql_string);
+    $query_result = $db->query("select id, cpu, parent_id FROM cars_category");
+    $categoriesData = $query_result->fetchAll(PDO::FETCH_ASSOC);
+
     $categories = array();
-    while ($value = mysql_fetch_array($categories_get)) {
-        $categories[$value['id']] = $value;
+    foreach ($categoriesData as $category) {
+        $categories[$category['id']] = $category;
     }
+
     $path = outTree_cpu_path($corrent_category_id, $categories);
     $sql_fields[] = 'cpu_path';
     $sql_values[] = '/cars'.$path.'/'.$corrent_cpu.'/';
 }
-
-
 
 
 # Автоматически проставляем cpu_path
@@ -85,30 +85,27 @@ if ($sql_table_name == 'content_category') {
         $number_corrent_field++;
     }
 
+    $query_result = $db->query("select id, cpu, parent_id FROM content_category");
+    $categoriesData = $query_result->fetchAll(PDO::FETCH_ASSOC);
 
-    $mysql_string = "select id, cpu, parent_id FROM content_category";
-    $categories_get = mysql_query($mysql_string);
     $categories = array();
-    while ($value = mysql_fetch_array($categories_get)) {
-        $categories[$value['id']] = $value;
+    foreach ($categoriesData as $category) {
+        $categories[$category['id']] = $category;
     }
 
-//    echo '<pre>';
-//    print_r($sql_fields);
     $path = outTree_cpu_path($corrent_parent_id, $categories);
     $sql_fields[] = 'cpu_path';
     $sql_values[] = $path.'/'.$corrent_cpu.'/';
 }
 
 
-function outTree_cpu_path($id, $array)
-{
+function outTree_cpu_path($id, $array) {
     $cpu = $array[$id]['cpu'];
     $parent_id = $array[$id]['parent_id'];
     if ($parent_id != '' && $cpu != '') {
         $find_child = outTree_cpu_path($parent_id, $array);
         if ($find_child != '') {
-            $cpu_path = $find_child . '/' . $cpu;
+            $cpu_path = $find_child.'/'.$cpu;
         } else {
             $cpu_path = '/'.$cpu;
         }
@@ -117,69 +114,67 @@ function outTree_cpu_path($id, $array)
 }
 
 
-
-
 $SQL_query_fileds = '';
 
-$SQL_query_fileds = $sql_fields[0] . ', ';
+$SQL_query_fileds = $sql_fields[0].', ';
 $SQL_query_fileds .= $sql_fields[1];
 
 $x = 1;
 while ($x++ < count($sql_fields) - 1) {
-    $SQL_query_fileds .= ', ' . $sql_fields[$x];
+    $SQL_query_fileds .= ', '.$sql_fields[$x];
 }
 
 
-$SQL_query_values = '\'' . htmlentities(addslashes(htmlspecialchars($sql_values[0])), ENT_QUOTES, 'UTF-8') . '\', ';
-$SQL_query_values .= '\'' . htmlentities(addslashes(htmlspecialchars($sql_values[1])), ENT_QUOTES, 'UTF-8') . '\'';
+$SQL_query_values = '\''.htmlentities(addslashes(htmlspecialchars($sql_values[0])), ENT_QUOTES, 'UTF-8').'\', ';
+$SQL_query_values .= '\''.htmlentities(addslashes(htmlspecialchars($sql_values[1])), ENT_QUOTES, 'UTF-8').'\'';
 
 $x = 1;
 while ($x++ < count($sql_values) - 1) {
-    $SQL_query_values .= ', \'' . htmlentities(addslashes(htmlspecialchars($sql_values[$x])), ENT_QUOTES, 'UTF-8') . '\'';
+    $SQL_query_values .= ', \''.htmlentities(addslashes(htmlspecialchars($sql_values[$x])), ENT_QUOTES, 'UTF-8').'\'';
 }
 
 if ($id == '') {
-    $mysql_string = "INSERT INTO $sql_table_name (" . $SQL_query_fileds . ") VALUES (" . $SQL_query_values . ")";
-    $get = mysql_query($mysql_string);
+    $query = "INSERT INTO $sql_table_name (".$SQL_query_fileds.") VALUES (".$SQL_query_values.")";
+    $query_result = $db->query($query);
 
     // Получаем id олько-что добавленного элемента
-    $id = mysql_insert_id();
-
-//                echo '{
-//			"result":"'.$mysql_string.'"
-//		}';
-//                exit;
+    $id = $db->lastInsertId();
+    $get = $id;
 
 } else {
-
     $SQL_query_update = '';
 
-    $SQL_query_update = $sql_fields[0] . ' = \'' . htmlentities(addslashes(htmlspecialchars($sql_values[0])), ENT_QUOTES, 'UTF-8') . '\',';
-    $SQL_query_update .= $sql_fields[1] . ' = \'' . htmlentities(addslashes(htmlspecialchars($sql_values[1])), ENT_QUOTES, 'UTF-8') . '\'';
+    $SQL_query_update = $sql_fields[0].' = \''.htmlentities(addslashes(htmlspecialchars($sql_values[0])), ENT_QUOTES, 'UTF-8').'\',';
+    $SQL_query_update .= $sql_fields[1].' = \''.htmlentities(addslashes(htmlspecialchars($sql_values[1])), ENT_QUOTES, 'UTF-8').'\'';
 
     $x = 1;
     while ($x++ < count($sql_fields) - 1) {
-        $SQL_query_update .= ', ' . $sql_fields[$x] . ' = \'' . htmlentities(addslashes(htmlspecialchars($sql_values[$x])), ENT_QUOTES, 'UTF-8') . '\'';
+        $SQL_query_update .= ', '.$sql_fields[$x].' = \''.htmlentities(addslashes(htmlspecialchars($sql_values[$x])), ENT_QUOTES, 'UTF-8').'\'';
     }
 
-    if (strpos($sql_table_name, 'category')) { //Если найдено, т.е если идет сохранение редактирования категории
-        $get_parent_id = mysql_query("SELECT parent_id FROM $sql_table_name WHERE id = " . $id . ";");
+//    if (strpos($sql_table_name, 'category')) { //Если найдено, т.е если идет сохранение редактирования категории
+//        $query_result = $db->query("SELECT parent_id FROM $sql_table_name WHERE id = ".$id);
+//        $items = $query_result->fetchAll(PDO::FETCH_ASSOC);
+//
+//        foreach ($items as $item) {
+//            $real_parent_id = $item['parent_id'];
+//        }
+//
+////        while ($array = mysql_fetch_array($get_parent_id)) {
+////            $real_parent_id = $array['parent_id'];
+////        }
+//        //$get = ("UPDATE contacts_category SET parent_id=$real_parent_id WHERE parent_id=$id;");
+//    }
 
-        while ($array = mysql_fetch_array($get_parent_id)) {
-            $real_parent_id = $array['parent_id'];
-        }
+    $mysql_string = "UPDATE $sql_table_name SET ".$SQL_query_update." WHERE id = ".$id.";";
 
-        //$get = mysql_query("UPDATE contacts_category SET parent_id=$real_parent_id WHERE parent_id=$id;");
-    }
+//                    echo '{
+//    			"result":"'.$mysql_string.'"
+//    		}';
+//                    exit;
 
-    $mysql_string = "UPDATE $sql_table_name SET " . $SQL_query_update . " WHERE id = " . $id . ";";
-
-//                echo '{
-//			"result":"'.$mysql_string.'"
-//		}';
-//                exit;
-
-    $get = mysql_query($mysql_string);
+    $set = $db->query($mysql_string);
+    $get = $set->rowCount();
 }
 
 
@@ -189,20 +184,20 @@ if ($sql_images_table_name != 'none' && $sql_images_table_name != '') {
         if ($images_matrix[$el][5] == 'add') {
             // добавляем элемент в БД
             $SQL_images_query = "INSERT INTO $sql_images_table_name (
-                                                                                        $sql_images_table_id_title,
-                                                                                        big_img ,
-                                                                                        small_img ,
-                                                                                        general,
-                                                                                        name,
-                                                                                        sort
-                                                                                ) VALUES (
-                                                                                        $id,  
-                                                                                        '" . $images_matrix[$el][2] . "', 
-                                                                                        '" . $images_matrix[$el][3] . "',  
-                                                                                        '" . $images_matrix[$el][4] . "',
-                                                                                        '" . $images_matrix[$el][6] . "',
-                                                                                        '" . $images_matrix[$el][7] . "'
-                                                                                );"; // mysql_query
+                                        $sql_images_table_id_title,
+                                        big_img ,
+                                        small_img ,
+                                        general,
+                                        name,
+                                        sort
+                                ) VALUES (
+                                        $id,  
+                                        '".$images_matrix[$el][2]."', 
+                                        '".$images_matrix[$el][3]."',  
+                                        '".$images_matrix[$el][4]."',
+                                        '".$images_matrix[$el][6]."',
+                                        '".$images_matrix[$el][7]."'
+                                );";
         } // if =add
 
 
@@ -210,28 +205,28 @@ if ($sql_images_table_name != 'none' && $sql_images_table_name != '') {
         if ($images_matrix[$el][5] == 'update') {
             // добавляем элемент в БД
             $SQL_images_query = "UPDATE $sql_images_table_name SET  
-                                                                                    $sql_images_table_id_title =  '" . $images_matrix[$el][1] . "',
-                                                                                    big_img =  '" . $images_matrix[$el][2] . "',
-                                                                                    small_img =  '" . $images_matrix[$el][3] . "',
-                                                                                    general =  '" . $images_matrix[$el][4] . "', 
-                                                                                    name = '" . $images_matrix[$el][6] . "', 
-                                                                                    sort = " . $images_matrix[$el][7] . "
-                                                                            WHERE  
-                                                                                    id = '" . $images_matrix[$el][0] . "';";
+                                        $sql_images_table_id_title =  '".$images_matrix[$el][1]."',
+                                        big_img =  '".$images_matrix[$el][2]."',
+                                        small_img =  '".$images_matrix[$el][3]."',
+                                        general =  '".$images_matrix[$el][4]."', 
+                                        name = '".$images_matrix[$el][6]."', 
+                                        sort = ".$images_matrix[$el][7]."
+                                WHERE  
+                                        id = '".$images_matrix[$el][0]."';";
         } // if update
 
 
         // Проверяем метку delete
         if ($images_matrix[$el][5] == 'delete') {
             // Удаляем связанные файлы
-            @unlink($root . str_replace('../../../', '/', $images_matrix[$el][2]));
-            @unlink($root . str_replace('../../../', '/', $images_matrix[$el][3]));
+            @unlink($root.str_replace('../../../', '/', $images_matrix[$el][2]));
+            @unlink($root.str_replace('../../../', '/', $images_matrix[$el][3]));
             // Удаляем элемент из БД
-            $SQL_images_query = "DELETE FROM $sql_images_table_name WHERE id = " . $images_matrix[$el][0] . ";";
+            $SQL_images_query = "DELETE FROM $sql_images_table_name WHERE id = ".$images_matrix[$el][0].";";
         } // if delete
 
 
-        $image_get = mysql_query($SQL_images_query);
+        $query_result = $db->query($SQL_images_query);
     } // for $images_matrix
 }
 
@@ -240,24 +235,23 @@ if ($sql_features_table_name != 'none' && $sql_features_table_name != '') {
     if (count($features_matrix) > 0) {
         // Сначала удаляем все старые поля из таблицы
         $SQL_features_query = "DELETE FROM $sql_features_table_name WHERE $sql_features_table_id_title = $id;";
-        $features_get = mysql_query($SQL_features_query);
+        $features_get = $db->query($SQL_features_query);
 
         for ($el = 0; $el <= count($features_matrix) - 1; $el++) {
             // добавляем элемент в БД
             $SQL_features_query = "INSERT INTO $sql_features_table_name (
-                                                                                        $sql_features_table_id_title,
-                                                                                        features_id,
-                                                                                        value,
-                                                                                        sort
-                                                                                ) VALUES (
-                                                                                        '$id',
-                                                                                        '" . $features_matrix[$el][1] . "',
-                                                                                        '" . htmlentities(addslashes(htmlspecialchars($features_matrix[$el][2])), ENT_QUOTES, 'UTF-8') . "',
-                                                                                        '" . $features_matrix[$el][3] . "'
-                                                                                ); "; // mysql_query
+                                            $sql_features_table_id_title,
+                                            features_id,
+                                            value,
+                                            sort
+                                    ) VALUES (
+                                            '$id',
+                                            '".$features_matrix[$el][1]."',
+                                            '".htmlentities(addslashes(htmlspecialchars($features_matrix[$el][2])), ENT_QUOTES, 'UTF-8')."',
+                                            '".$features_matrix[$el][3]."'
+                                    ); ";
 
-            $features_get = mysql_query($SQL_features_query);
-
+            $features_get = $db->query($SQL_features_query);
         }
     };
 
@@ -265,7 +259,7 @@ if ($sql_features_table_name != 'none' && $sql_features_table_name != '') {
     if (count($features_matrix) == 0) {
         // удаляем все старые поля из таблицы
         $SQL_features_query = "DELETE FROM $sql_features_table_name WHERE $sql_features_table_id_title = $id;";
-        $features_get = mysql_query($SQL_features_query);
+        $features_get = $db->query($SQL_features_query);
     }
 
     if ($features_get == '') {
@@ -276,7 +270,8 @@ if ($sql_features_table_name != 'none' && $sql_features_table_name != '') {
 
 if ($sql_table_name == 'content') {
     $SQL_query = "DELETE FROM content_documents WHERE id_content = $id;";
-    $get = mysql_query($SQL_query);
+    $set = $db->query($SQL_query);
+    $get = $db->rowCount();
 
     if (count($documents_matrix) > 0) {
         for ($el = 0; $el <= count($documents_matrix) - 1; $el++) {
@@ -286,11 +281,13 @@ if ($sql_table_name == 'content') {
                                                     sort
                                             ) VALUES (
                                                     $id,  
-                                                    '" . $documents_matrix[$el][0] . "', 
-                                                    '" . $documents_matrix[$el][1] . "'
-                                            );"; // mysql_query
+                                                    '".$documents_matrix[$el][0]."', 
+                                                    '".$documents_matrix[$el][1]."'
+                                            );";
 
-            $get = mysql_query($SQL_query);
+            $set = $db->query($SQL_query);
+            $get = $set->rowCount();
+
         } // for $documents_matrix
     }
 }
@@ -298,25 +295,26 @@ if ($sql_table_name == 'content') {
 
 if ($sql_images_table_name != '' && $sql_images_table_name != 'undefined' && $sql_images_table_name != 'none') {
     // Считываем данные зображений из БД
-    $images_get = mysql_query("select * from $sql_images_table_name WHERE $sql_images_table_id_title=" . $id . "");
-    while ($images = mysql_fetch_array($images_get)) {
-        // Формируем данные
-        //$key = 'point'.(++$i);
+    $query_result = $db->query("select * from $sql_images_table_name WHERE $sql_images_table_id_title=".$id."");
+    $images = $query_result->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $image_data = '';
+    foreach ($images as $image) {
         $image_data .=
-            $images['id'] . ';' .
-            $images[$sql_images_table_id_title] . ';' .
-            $images['big_img'] . ';' .
-            $images['small_img'] . ';' .
-            $images['general'] . ';' .
-            ';' .
-            $images['name'] . ';' .
-            $images['sort'] . ';';
+            $image['id'].';'.
+            $image[$sql_images_table_id_title].';'.
+            $image['big_img'].';'.
+            $image['small_img'].';'.
+            $image['general'].';'.
+            ';'.
+            $image['name'].';'.
+            $image['sort'].';';
     }
 };
 
 
 echo '{
-                "result":"' . $get . '",
-                "image_data": "' . $image_data . '"
-            }';
-?>
+    "result":"'.($get ? 1 : 0).'",
+    "image_data": "'.$image_data.'"
+}';

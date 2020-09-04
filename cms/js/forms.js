@@ -6,7 +6,6 @@ function load_data(sql_table_name, id, sql_images_table_name, sql_images_table_i
     }
 
 
-    
     $(document).ready(function () {
         $.ajax({
             type: "POST",
@@ -105,10 +104,11 @@ function load_data(sql_table_name, id, sql_images_table_name, sql_images_table_i
                             // Проходим по всем option выпадающего списка (скрытого, который является настоящим)
                             $('#' + id_element + ' option').each(function (index) {
                                 if ($(this).attr('value') == town_id) {
-                                    change(chosen, index)
+                                    change(chosen, index);
                                 }
                                 //console.log(index + ' ' + $(this).attr('value'));
                             });
+
                             function change(chosen, index) {
                                 $(chosen)
                                     .prop('selectedIndex', index)
@@ -125,7 +125,7 @@ function load_data(sql_table_name, id, sql_images_table_name, sql_images_table_i
                                 if (table_field_element == sql_fields[index]) {
                                     multiple_array = sql_values[index].split(',');
                                 }
-                            })
+                            });
 
                             // Примерно как работает смотрим выше
                             $('#' + id_element + ' option').each(function (index) {
@@ -134,7 +134,7 @@ function load_data(sql_table_name, id, sql_images_table_name, sql_images_table_i
                                     if ($(this_option).attr('value') == multiple_array[text_index]) {
                                         $(this_option).prop('selected', true);
                                     }
-                                })
+                                });
                             });
 
                             $(chosen_multiple).trigger("chosen:updated");
@@ -259,8 +259,52 @@ function load_data(sql_table_name, id, sql_images_table_name, sql_images_table_i
                         }
                         case 'ckeditor': {
                             for (var mas_el = 0; mas_el < sql_fields.length; mas_el++) {
-                                if (table_field_element == sql_fields[mas_el]) {
-                                    $('#' + id_element).val(sql_values[mas_el]);
+                                if (table_field_element === sql_fields[mas_el]) {
+                                    var ckeditor_data = sql_values[mas_el];
+                                    // console.log(sql_values[mas_el])
+                                    $('#' + id_element).val(ckeditor_data);
+
+                                    // CKEDITOR.instances[id_element].setData(ckeditor_data);
+
+                                    if ($('body').find('.myckeditor').length > 0) {
+                                        //     console.log('ckeditor find', CKEDITOR);
+                                        // //     // АКТИВИРЕМ РЕДАКТОР
+                                        CKEDITOR.replaceAll('myckeditor', {
+                                            'filebrowserBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=files',
+                                            'filebrowserImageBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=images',
+                                            'filebrowserFlashBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=flash',
+                                            'filebrowserUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=files',
+                                            'filebrowserImageUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=images',
+                                            'filebrowserFlashUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=flash'
+                                        });
+
+                                        if (typeof CKEDITOR !== 'undefined') {
+                                            CKEDITOR.on('instanceReady', function (ev) {
+                                                // console.log('ev', ev);
+                                                // Output paragraphs as <p>Text</p>.
+                                                ev.editor.dataProcessor.writer.setRules('*', {
+                                                    indent: false,
+                                                    breakBeforeOpen: true,
+                                                    breakAfterOpen: false,
+                                                    breakBeforeClose: false,
+                                                    breakAfterClose: true
+                                                });
+                                            });
+                                        }
+
+                                        //
+                                        //     if (typeof CKEDITOR !== 'undefined') {
+                                        //         // console.log(CKEDITOR.editor)
+                                        //         // CKEDITOR.editor.setData(ckeditor_data);
+                                        //         CKEDITOR.on('instanceReady', function(ev) {
+                                        //             console.log('ev instanceReady', ev);
+                                        //             console.log(ev.editor.setData);
+                                        //             ev.editor.setData(ckeditor_data);
+                                        //         });
+                                        //     }
+                                    }
+
+
                                 }
                             } //for
                             break;
@@ -270,6 +314,7 @@ function load_data(sql_table_name, id, sql_images_table_name, sql_images_table_i
                 } //forJSON.stringify(
             }, // success	
             error: function (jqxhr, textStatus, error) {
+                console.log(jqxhr.responseText)
                 var err = textStatus + ", " + error + ' ';
                 console.log("Ошибка: " + err + ' Данные: ' + jqxhr.responseText);
 
@@ -648,19 +693,22 @@ function delete_element(id,
 
 function delete_category(sql_table_name, id) {
     if (confirm("Удалить?")) {
-        $.getJSON("/cms/php/delete_element.php", {
-            sql_table_name: sql_table_name,
-            id: id,
-            type: 'category'
-        })
-            .done(function (json) {
-                //console.log(json);
+        $.ajax({
+            type: "POST",
+            url: "/cms/php/delete_element.php",
+            dataType: 'json',
+            data: {
+                sql_table_name: sql_table_name,
+                id: id,
+                type: 'category'
+            },
+            success: function (json) {
+                console.log('success', json);
                 if (json.result == '1') {
                     location.href = location.href;
                 }
-
-            })
-            .fail(function (jqxhr, textStatus, error) {
+            },
+            error: function (jqxhr, textStatus, error) {
                 var err = textStatus + ", " + error + ' ';
                 console.log("Ошибка: " + err + ' Данные: ' + jqxhr.responseText);
 
@@ -668,7 +716,8 @@ function delete_category(sql_table_name, id) {
                 $('#error_modal').find('.modal-body').append("Ошибка: " + err);
                 $('#error_modal').find('.modal-body').append(jqxhr.responseText);
                 $('#error_modal').modal();
-            });
+            } // error
+        });
     }
 }
 
@@ -916,30 +965,31 @@ $(document).ready(function () {
         $('#modal_menu_module2').modal();
     });
 
-    if ($('body').find('.ckeditor').length > 0) {
-        // АКТИВИРЕМ РЕДАКТОР
-        CKEDITOR.replaceAll('ckeditor', {
-            'filebrowserBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=files',
-            'filebrowserImageBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=images',
-            'filebrowserFlashBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=flash',
-            'filebrowserUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=files',
-            'filebrowserImageUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=images',
-            'filebrowserFlashUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=flash'
-        });
-
-        if (typeof CKEDITOR !== 'undefined') {
-            CKEDITOR.on('instanceReady', function (ev) {
-                // Output paragraphs as <p>Text</p>.
-                ev.editor.dataProcessor.writer.setRules('*', {
-                    indent: false,
-                    breakBeforeOpen: true,
-                    breakAfterOpen: false,
-                    breakBeforeClose: false,
-                    breakAfterClose: true
-                });
-            });
-        }
-    }
+    // if ($('body').find('.ckeditor').length > 0) {
+    //     // АКТИВИРЕМ РЕДАКТОР
+    //     CKEDITOR.replaceAll('ckeditor', {
+    //         'filebrowserBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=files',
+    //         'filebrowserImageBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=images',
+    //         'filebrowserFlashBrowseUrl': 'plugins/ckeditor/kcfinder/browse.php?type=flash',
+    //         'filebrowserUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=files',
+    //         'filebrowserImageUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=images',
+    //         'filebrowserFlashUploadUrl': 'plugins/ckeditor/kcfinder/upload.php?type=flash'
+    //     });
+    //
+    //     if (typeof CKEDITOR !== 'undefined') {
+    //         CKEDITOR.on('instanceReady', function (ev) {
+    //             console.log('ev', ev);
+    //             // Output paragraphs as <p>Text</p>.
+    //             ev.editor.dataProcessor.writer.setRules('*', {
+    //                 indent: false,
+    //                 breakBeforeOpen: true,
+    //                 breakAfterOpen: false,
+    //                 breakBeforeClose: false,
+    //                 breakAfterClose: true
+    //             });
+    //         });
+    //     }
+    // }
 
 
 });
@@ -996,6 +1046,7 @@ function translit(my_text) {
     result = TrimStr(result);
     return result;
 }
+
 function TrimStr(s) {
     s = s.replace(/^-/, '');
     return s.replace(/-$/, '');

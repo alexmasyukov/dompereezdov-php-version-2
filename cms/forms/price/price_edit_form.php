@@ -7,17 +7,17 @@
 </script>
 
 <?php
-include_once $root . '/cms/php/get_select_sql_data.php';
+include_once $root.'/cms/php/get_select_sql_data.php';
 
 //Сссылка на кнопки Сохранить и закрыть, Закрыть
-$exit_link = 'admin.php?link=prices&filter=' . $filter;
+$exit_link = 'admin.php?link=prices&filter='.$filter;
 
 //Описание формы (Название сверху и путь на сером фоне)
 $form_info = array(
-    page_title => 'Редактирование таблицы с прайсом',
-    module_title => 'Прайсы',
+    page_title        => 'Редактирование таблицы с прайсом',
+    module_title      => 'Прайсы',
     where_you_title_1 => 'Таблицы прайсов',
-    where_you_link_1 => $exit_link
+    where_you_link_1  => $exit_link
 );
 
 //Получаем категории для выбора родителя (с radio button)
@@ -77,7 +77,7 @@ $save_and_close_onclick = "
 
 $close_onclick = "
 		close_page(
-			'" . $exit_link . "'
+			'".$exit_link."'
 		);";
 ?>
 
@@ -85,7 +85,7 @@ $close_onclick = "
 <div class="page-content-wrapper">
     <div class="page-content">
 
-        <?php include_once $root . '/cms/pages/load_save_modal.php'; ?>
+        <?php include_once $root.'/cms/pages/load_save_modal.php'; ?>
 
         <textarea id="images_data"></textarea>
         <input id="sql_id_elemet" value="<?php echo $id; ?>"></input>
@@ -174,11 +174,11 @@ $close_onclick = "
                                         <?php
                                     };
                                     ?>
-<!--                                    <li>-->
-<!--                                        <a href="#tab_meta" data-toggle="tab">-->
-<!--                                            Метаданные-->
-<!--                                        </a>-->
-<!--                                    </li>-->
+                                    <!--                                    <li>-->
+                                    <!--                                        <a href="#tab_meta" data-toggle="tab">-->
+                                    <!--                                            Метаданные-->
+                                    <!--                                        </a>-->
+                                    <!--                                    </li>-->
 
                                 </ul>
                                 <div class="tab-content no-space">
@@ -213,7 +213,7 @@ $close_onclick = "
                                             </label>
                                             <div class="col-md-11">
                                                     <textarea
-                                                            class="form-control ckeditor"
+                                                            class="form-control myckeditor"
                                                             data-massive-element-type="ckeditor"
                                                             data-default-value=""
                                                             data-necessarily="true"
@@ -239,7 +239,7 @@ $close_onclick = "
                                                         data-necessarily="true"
                                                         data-table-field="public"
                                                         data-select-of-type="value"
-                                                        id = "price_public"
+                                                        id="price_public"
                                                 >
                                                     <option value="1" selected>Опубликовано</option>
                                                     <option value="0">Не опубликовано</option>

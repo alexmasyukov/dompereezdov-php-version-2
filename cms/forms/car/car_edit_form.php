@@ -8,8 +8,11 @@
 </script>
 
 <?php
-include_once $root . '/cms/php/get_select_sql_data.php';
-include_once $root . '/cms/php/get_categories_json_data.php';
+ini_set("display_errors", 1);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
+include_once $root.'/cms/php/get_select_sql_data.php';
+include_once $root.'/cms/php/get_categories_json_data.php';
 
 $features = get_select_html_plus_data(
     'cars_features', // таблица МОДУЛЬ_features
@@ -19,25 +22,25 @@ $features = get_select_html_plus_data(
     '1', //$select
     'cars_features_prefix', // таблица МОДУЛЬ_features_prefix
     array(// Таблица
-        'id',
-        'title',
-        'default_value', // data-
-        'prefix_id', // data-
-        'type',
-        'icon'
+          'id',
+          'title',
+          'default_value', // data-
+          'prefix_id', // data-
+          'type',
+          'icon'
     )
 );
 
 
 //Сссылка на кнопки Сохранить и закрыть, Закрыть
-$exit_link = 'admin.php?link=car&filter=' . $filter;
+$exit_link = 'admin.php?link=car&filter='.$filter;
 
 //Описание формы (Название сверху и путь на сером фоне)
 $form_info = array(
-    page_title => 'Редактирование машины',
-    module_title => 'Машины',
-    where_you_title_1 => 'Машины',
-    where_you_link_1 => $exit_link
+    'page_title'        => 'Редактирование машины',
+    'module_title'      => 'Машины',
+    'where_you_title_1' => 'Машины',
+    'where_you_link_1'  => $exit_link
 );
 
 //Получаем категории для выбора родителя (с radio button)
@@ -97,7 +100,7 @@ $save_and_close_onclick = "
 
 $close_onclick = "
 		close_page(
-			'" . $exit_link . "'
+			'".$exit_link."'
 		);";
 ?>
 
@@ -105,7 +108,7 @@ $close_onclick = "
 <div class="page-content-wrapper">
     <div class="page-content">
 
-        <?php include_once $root . '/cms/pages/load_save_modal.php'; ?>
+        <?php include_once $root.'/cms/pages/load_save_modal.php'; ?>
 
         <textarea id="images_data"></textarea>
         <input id="sql_id_elemet" value="<?php echo $id; ?>"></input>
@@ -226,14 +229,14 @@ $close_onclick = "
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-1 control-label">Содержиние:
+                                            <label class="col-md-1 control-label">Содержание:
                                                 <span class="required">
                                                         *
                                                     </span>
                                             </label>
                                             <div class="col-md-11">
                                                     <textarea
-                                                            class="form-control ckeditor"
+                                                            class="form-control myckeditor"
                                                             data-massive-element-type="ckeditor"
                                                             data-default-value=""
                                                             data-necessarily="true"
@@ -447,7 +450,7 @@ $close_onclick = "
                                                             data-default-value=""
                                                             data-necessarily=""
                                                             data-table-field="meta_title"
-                                                            id = "product_meta_title"
+                                                            id="product_meta_title"
                                                             maxlength="100"
                                                             placeholder=""
                                                     >
@@ -457,7 +460,7 @@ $close_onclick = "
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">Мета <br />ключевые слова:</label>
+                                                <label class="col-md-2 control-label">Мета <br/>ключевые слова:</label>
                                                 <div class="col-md-10">
                                                     <textarea
                                                             type="textarea"
@@ -466,7 +469,7 @@ $close_onclick = "
                                                             data-default-value=""
                                                             data-necessarily=""
                                                             data-table-field="meta_keywords"
-                                                            id = "product_meta_keywords"
+                                                            id="product_meta_keywords"
                                                             maxlength="1000"
                                                             placeholder=""
                                                             rows="8"
@@ -486,7 +489,7 @@ $close_onclick = "
                                                             data-default-value=""
                                                             data-necessarily=""
                                                             data-table-field="meta_description"
-                                                            id = "product_meta_description"
+                                                            id="product_meta_description"
                                                             maxlength="255"
                                                             placeholder=""
                                                             rows="8"

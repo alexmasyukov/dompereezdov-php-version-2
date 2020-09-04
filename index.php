@@ -1,7 +1,7 @@
 <?php
-//ini_set("display_errors", 1);
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-$log = true;
+ini_set("display_errors", 0);
+//error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//$log = true;
 
 // Создать класс с константами и вынести туда все названия услуги и cpu к ним
 // Добавить новые услуги в объект $servicesTable из генерации Google таблицы
@@ -171,7 +171,7 @@ switch (Core::getUrl()->module) {
 
 
 // end html compressed
-ob_end_flush();
+//ob_end_flush();
 
 
 /**

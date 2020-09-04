@@ -8,8 +8,8 @@
 </script>
 
 <?php
-include_once $root . '/cms/php/get_select_sql_data.php';
-include_once $root . '/cms/php/get_categories_json_data.php';
+include_once $root.'/cms/php/get_select_sql_data.php';
+include_once $root.'/cms/php/get_categories_json_data.php';
 
 //$features = get_select_html_plus_data(
 //    'homeblockss_features', // таблица МОДУЛЬ_features
@@ -30,14 +30,14 @@ include_once $root . '/cms/php/get_categories_json_data.php';
 //
 
 //Сссылка на кнопки Сохранить и закрыть, Закрыть
-$exit_link = 'admin.php?link=homeblock&filter=' . $filter;
+$exit_link = 'admin.php?link=homeblock&filter='.$filter;
 
 //Описание формы (Название сверху и путь на сером фоне)
 $form_info = array(
-    page_title => 'Редактирование блока на глвной',
-    module_title => 'Блоки на главной',
+    page_title        => 'Редактирование блока на глвной',
+    module_title      => 'Блоки на главной',
     where_you_title_1 => 'Блоки на главной',
-    where_you_link_1 => $exit_link
+    where_you_link_1  => $exit_link
 );
 
 //Получаем категории для выбора родителя (с radio button)
@@ -97,7 +97,7 @@ $save_and_close_onclick = "
 
 $close_onclick = "
 		close_page(
-			'" . $exit_link . "'
+			'".$exit_link."'
 		);";
 ?>
 
@@ -105,7 +105,7 @@ $close_onclick = "
 <div class="page-content-wrapper">
     <div class="page-content">
 
-        <?php include_once $root . '/cms/pages/load_save_modal.php'; ?>
+        <?php include_once $root.'/cms/pages/load_save_modal.php'; ?>
 
         <textarea id="images_data"></textarea>
         <input id="sql_id_elemet" value="<?php echo $id; ?>"></input>
@@ -225,40 +225,40 @@ $close_onclick = "
                                                             class="required">*</span></label>
                                                 <div class="col-md-11">
                                                      <textarea
-                                                             class="form-control ckeditor"
+                                                             class="form-control myckeditor"
                                                              data-massive-element-type="ckeditor"
                                                              data-default-value=""
                                                              data-necessarily="true"
                                                              data-table-field="description"
-                                                             id = "description"
+                                                             id="description"
                                                              placeholder=""
-                                                             rows = 10
+                                                             rows=10
                                                              tabindex="2"
                                                      ></textarea>
 
                                                 </div>
                                             </div>
 
-<!--                                            <div class="form-group">-->
-<!--                                                <label class="col-md-1 control-label">Ссылка <br> (на заголовке):-->
-<!--                                                    <span class="required">-->
-<!--                                                        *-->
-<!--                                                    </span>-->
-<!--                                                </label>-->
-<!--                                                <div class="col-md-11">-->
-<!--                                                    <input-->
-<!--                                                            type="text"-->
-<!--                                                            class="form-control"-->
-<!--                                                            data-massive-element-type="input"-->
-<!--                                                            data-default-value=""-->
-<!--                                                            data-necessarily="true"-->
-<!--                                                            data-table-field="link"-->
-<!--                                                            id="link"-->
-<!--                                                            placeholder=""-->
-<!--                                                            tabindex="3"-->
-<!--                                                    >-->
-<!--                                                </div>-->
-<!--                                            </div>-->
+                                            <!--                                            <div class="form-group">-->
+                                            <!--                                                <label class="col-md-1 control-label">Ссылка <br> (на заголовке):-->
+                                            <!--                                                    <span class="required">-->
+                                            <!--                                                        *-->
+                                            <!--                                                    </span>-->
+                                            <!--                                                </label>-->
+                                            <!--                                                <div class="col-md-11">-->
+                                            <!--                                                    <input-->
+                                            <!--                                                            type="text"-->
+                                            <!--                                                            class="form-control"-->
+                                            <!--                                                            data-massive-element-type="input"-->
+                                            <!--                                                            data-default-value=""-->
+                                            <!--                                                            data-necessarily="true"-->
+                                            <!--                                                            data-table-field="link"-->
+                                            <!--                                                            id="link"-->
+                                            <!--                                                            placeholder=""-->
+                                            <!--                                                            tabindex="3"-->
+                                            <!--                                                    >-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </div>-->
 
                                             <div class="form-group">
                                                 <label class="col-md-1 control-label">Статус:

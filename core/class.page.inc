@@ -278,10 +278,12 @@ class Page {
         Core::getSmarty()->assign('generalMenu', $this->menu->getGeneralMenu());
 
         // Московская область меню _header.tpl
-        Core::getSmarty()->assign('subMenuMoskovskayaOblast', $this->menu->getMenuMoskovskayaOblast());
+//        Core::getSmarty()->assign('subMenuMoskovskayaOblast', $this->menu->getMenuMoskovskayaOblast());
+        Core::getSmarty()->assign('subMenuMoskovskayaOblast', '');
 
         // Москва меню _header.tpl
-        Core::getSmarty()->assign('subMenuMoskva', $this->menu->getMenuMoskva());
+//        Core::getSmarty()->assign('subMenuMoskva', $this->menu->getMenuMoskva());
+        Core::getSmarty()->assign('subMenuMoskva', '');
 
         // Список услуг для левого блока _left__service_block.tpl
         Core::getSmarty()->assign('services', $this->getServices(10000));
@@ -296,6 +298,12 @@ class Page {
         }
 
         Core::getSmarty()->assign('countAllReviews', Reviews::getInstance()->getReviewsAllCount()); //$reviews->count);
+
+        if(strpos($_SERVER['HTTP_USER_AGENT'],'Chrome-Lighthouse')) {
+            Core::getSmarty()->assign('isGooglePageInsights', true);
+        } else {
+            Core::getSmarty()->assign('isGooglePageInsights', false);
+        }
 
         // todo Так работать правильно не будет, у нас отзывы постраничные
         // Если есть параметры в запросе, выводим в шаблоне <link rel="canonical" href="" />

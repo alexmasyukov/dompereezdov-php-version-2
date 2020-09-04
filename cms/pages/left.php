@@ -1,5 +1,5 @@
 <?php
-include_once $root . '/configuration.php';
+include_once $root.'/configuration.php';
 ?>
 
 <!-- BEGIN SIDEBAR -->
@@ -55,6 +55,13 @@ include_once $root . '/configuration.php';
                     </span>
                 </a>
                 <ul class="sub-menu" style="">
+                    <li id="feedback_all">
+                        <a href="admin.php?link=feedback&count=20">
+                            <span class="title">
+                                Последние отзывы
+                            </span>
+                        </a>
+                    </li>
                     <li id="feedback_all">
                         <a href="admin.php?link=feedback">
                             <span class="title">

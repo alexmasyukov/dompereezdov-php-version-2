@@ -1,4 +1,6 @@
 <script>
+    var count = '<?php echo $_REQUEST['count'] ?>' || 3000;
+
     jQuery(document).ready(function () {
         jQuery('body #feedback')
             .addClass('open, active')
@@ -12,26 +14,26 @@
             .addClass('active');
     });
 
-    view_module('module_feedback_table_json', 8000, '<?php echo $filter;?>'); // Универсальная
+    view_module('module_feedback_table_json', count, '<?php echo $filter;?>'); // Универсальная
 </script>
 
 <?php
 
 
 $module_info = array(
-    link => 'feedback_edit_form', // Форма редактирования
-    id => '',
-    sql_table => 'feedback',
-    sql_images_table_name => '', //feedback_images
-    sql_images_table_id_title => '', //module_item_id
-    sql_features_table_name => '', //feedback_features_values
+    link                        => 'feedback_edit_form', // Форма редактирования
+    id                          => '',
+    sql_table                   => 'feedback',
+    sql_images_table_name       => '', //feedback_images
+    sql_images_table_id_title   => '', //module_item_id
+    sql_features_table_name     => '', //feedback_features_values
     sql_features_table_id_title => '', //module_item_id
 
-    page_title => 'Отзывы',
-    module_title => '',
+    page_title        => 'Отзывы',
+    module_title      => '',
     where_you_title_1 => 'Отзывы',
-    where_you_link_1 => 'admin.php?link=feedback',
-    where_you_title_2  => '',
+    where_you_link_1  => 'admin.php?link=feedback',
+    where_you_title_2 => '',
     where_you_link_2  => ''
 );
 
@@ -39,7 +41,7 @@ $module_info = array(
 
 <div class="page-content-wrapper">
     <div class="page-content">
-        <?php include_once $root . '/cms/pages/load_save_modal.php'; ?>
+        <?php include_once $root.'/cms/pages/load_save_modal.php'; ?>
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
         <!-- /.modal -->
@@ -52,11 +54,13 @@ $module_info = array(
             <div class="col-md-12">
                 <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                 <h3 class="page-title">
-                    <?php echo $module_info['page_title']; ?> <small><?php echo $module_info['module_title']; ?></small>
+                    <?php echo $module_info['page_title']; ?>
+                    <small><?php echo $module_info['module_title']; ?></small>
                 </h3>
                 <ul class="page-breadcrumb breadcrumb">
                     <li class="btn-group">
-                        <button type="button" class="btn blue" onclick="location.href = 'admin.php?link=<?php echo $module_info['link']; ?>&id=<?php echo $module_info['id']; ?>&sql_table=<?php echo $module_info['sql_table']; ?>&sql_images_table_name=<?php echo $module_info['sql_images_table_name']; ?>&sql_images_table_id_title=<?php echo $module_info['sql_images_table_id_title']; ?>&sql_features_table_name=<?php echo $module_info['sql_features_table_name']; ?>&sql_features_table_id_title=<?php echo $module_info['sql_features_table_id_title']; ?> '">
+                        <button type="button" class="btn blue"
+                                onclick="location.href = 'admin.php?link=<?php echo $module_info['link']; ?>&id=<?php echo $module_info['id']; ?>&sql_table=<?php echo $module_info['sql_table']; ?>&sql_images_table_name=<?php echo $module_info['sql_images_table_name']; ?>&sql_images_table_id_title=<?php echo $module_info['sql_images_table_id_title']; ?>&sql_features_table_name=<?php echo $module_info['sql_features_table_name']; ?>&sql_features_table_id_title=<?php echo $module_info['sql_features_table_id_title']; ?> '">
                             <span>
                                 Добавить
                             </span>
@@ -90,18 +94,11 @@ $module_info = array(
             <div class="col-md-12">
 
 
-
-
-
-
-
-
-
-
                 <div class="portlet">
 
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover table-full-width" id="catalog_products_table">
+                        <table class="table table-striped table-bordered table-hover table-full-width"
+                               id="catalog_products_table">
                             <thead>
                             <tr>
                                 <th>
@@ -139,17 +136,6 @@ $module_info = array(
                         </table>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
             </div>
